@@ -5,14 +5,13 @@ import com.katekozlova.cargo.data.entity.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -38,7 +37,7 @@ public class DriversController {
         return "redirect:/drivers/list";
     }
 
-    @GetMapping(value = {"/edit"})
+    @GetMapping(value = {"/create"})
     public String newDriver(ModelMap model) {
         Driver driver = new Driver();
         model.addAttribute("driver", driver);
@@ -46,7 +45,7 @@ public class DriversController {
         return "drivers/edit";
     }
 
-    @PostMapping(value = "/edit")
+    @PostMapping(value = "/create")
     public String createDriver(Driver driver) {
         driversService.createAndUpdate(driver);
         return "redirect:/drivers/list";
