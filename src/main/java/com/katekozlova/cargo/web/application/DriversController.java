@@ -16,7 +16,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/drivers")
 public class DriversController {
 
     private final DriversService driversService;
@@ -26,14 +26,13 @@ public class DriversController {
         this.driversService = driversService;
     }
 
-    @GetMapping
+    @GetMapping(value = "/list")
     public ModelAndView list() {
         List<Driver> drivers = driversService.getAllDrivers();
-        System.out.println("drivers = " + drivers);
         return new ModelAndView("drivers/list", "drivers", drivers);
     }
 
-    @GetMapping(value = "/drivers/delete/{id}")
+    @GetMapping(value = "/delete/{id}")
     public String deleteDriver(@PathVariable("id") long id) {
         driversService.deleteDriver(id);
         return "redirect:/";
@@ -53,7 +52,7 @@ public class DriversController {
         return "redirect:/";
     }
 
-    @GetMapping(value = {"/drivers/edit/{id}"})
+    @GetMapping(value = {"/edit/{id}"})
     public String editDriver(@PathVariable("id") long id,ModelMap model) {
         Optional<Driver> driver = driversService.findById(id);
         model.addAttribute("driver", driver);
@@ -61,7 +60,7 @@ public class DriversController {
         return "drivers/edit";
     }
 
-    @PostMapping(value = "/drivers/edit/{id}")
+    @PostMapping(value = "/edit/{id}")
     public String updateDriver(Driver driver) {
         driversService.createAndUpdate(driver);
         return "redirect:/";

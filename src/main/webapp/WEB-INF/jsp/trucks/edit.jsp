@@ -14,7 +14,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Create New Driver</title>
+    <title>Create New Truck</title>
 
     <style>
 
@@ -27,27 +27,27 @@
 
 <body>
 
-<h2>New Driver</h2>
+<h2>New Truck</h2>
 
-<form:form method="POST" modelAttribute="driver">
+<form:form method="POST" modelAttribute="truck">
     <%--<form:input type="hidden" path="id" id="id"/>--%>
     <table>
         <tr>
-            <td><label for="personalNumber">Personal Number: </label></td>
-            <td><form:input path="personalNumber" id="personalNumber"/></td>
-            <td><form:errors path="personalNumber" cssClass="error"/></td>
+            <td><label for="regNumber">Регистрационный номер: </label></td>
+            <td><form:input path="regNumber" id="regNumber"/></td>
+            <td><form:errors path="regNumber" cssClass="error"/></td>
         </tr>
 
         <tr>
-            <td><label for="firstName">First Name: </label></td>
-            <td><form:input path="firstName" id="firstName"/></td>
-            <td><form:errors path="firstName" cssClass="error"/></td>
+            <td><label for="shiftSize">Размер смены: </label></td>
+            <td><form:input path="shiftSize" id="shiftSize"/></td>
+            <td><form:errors path="shiftSize" cssClass="error"/></td>
         </tr>
 
         <tr>
-            <td><label for="lastName">Last Name: </label></td>
-            <td><form:input path="lastName" id="lastName"/></td>
-            <td><form:errors path="lastName" cssClass="error"/></td>
+            <td><label for="capacity">Вместимость: </label></td>
+            <td><form:input path="capacity" id="capacity"/></td>
+            <td><form:errors path="capacity" cssClass="error"/></td>
         </tr>
 
         <tr>
@@ -66,6 +66,6 @@
 </form:form>
 <br/>
 <br/>
-Go back to <a href="<c:url value='/drivers/list' />">Drivers List</a>
+Go back to <a href="<c:url value='/trucks/list' />">Trucks List</a>
 </body>
 </html>

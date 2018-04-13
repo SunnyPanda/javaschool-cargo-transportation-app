@@ -7,12 +7,15 @@ import javax.persistence.*;
 public class Truck {
     @Id
     @Column(name = "TRUCK_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name = "REG_NUMBER")
     private String regNumber;
+
     @Column(name = "SHIFT_SIZE")
     private String shiftSize;
+
     @Column(name = "CAPACITY")
     private String capacity;
 

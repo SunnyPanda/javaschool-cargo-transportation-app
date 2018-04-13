@@ -1,27 +1,66 @@
 package com.katekozlova.cargo.web.application;
 
 import com.katekozlova.cargo.business.service.TrucksService;
+import com.katekozlova.cargo.data.entity.Driver;
+import com.katekozlova.cargo.data.entity.Truck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/trucks")
 public class TrucksController {
 
-    @Autowired
     private TrucksService trucksService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String getDrivers(Model model) {
+    @Autowired
+    public TrucksController(TrucksService trucksService) {
+        this.trucksService = trucksService;
+    }
 
-//        List<ListOfTrucks> listOfTrucksList = this.trucksService.getAllDrivers();
-//        model.addAttribute("listOfTrucks", listOfTrucksList);
+    @GetMapping(value = "/list")
+    public ModelAndView list() {
+        List<Truck> trucks = trucksService.getAllTrucks();
+        return new ModelAndView("trucks/list", "trucks", trucks);
+    }
 
-        return "trucks";
+    @GetMapping(value = "/delete/{id}")
+    public String deleteTruck(@PathVariable("id") long id) {
+        trucksService.deleteTruck(id);
+        return "redirect:/trucks";
+    }
+
+    @GetMapping(value = {"/edit"})
+    public String newTruck(ModelMap model) {
+        Truck truck = new Truck();
+        model.addAttribute("truck", truck);
+        model.addAttribute("edit", true);
+        return "trucks/edit";
+    }
+
+    @PostMapping(value = "/edit")
+    public String createTruck(Truck truck) {
+        trucksService.createAndUpdate(truck);
+        return "redirect:/trucks";
+    }
+
+    @GetMapping(value = {"/edit/{id}"})
+    public String editTruck(@PathVariable("id") long id, ModelMap model) {
+        Optional<Truck> truck = trucksService.findById(id);
+        model.addAttribute("driver", truck);
+        model.addAttribute("edit", true);
+        return "trucks/edit";
+    }
+
+    @PostMapping(value = "/edit/{id}")
+    public String updateTruck(Truck truck) {
+        trucksService.createAndUpdate(truck);
+        return "redirect:/trucks";
     }
 }
