@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.view.view-names",
+      "type": "java.lang.String",
+      "description": "Description for spring.view.view-names."
+  }
+] }
