@@ -4,7 +4,7 @@
 
 <t:wrapper>
     <div class="page-header mt-5">
-        <h1>Welcome to the Drivers Page!</h1>
+        <h1>Welcome to the Drivers Page</h1>
     </div>
     <br/>
     <table class="table table-striped table-hover">

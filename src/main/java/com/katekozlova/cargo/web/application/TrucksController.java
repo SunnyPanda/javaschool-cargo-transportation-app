@@ -36,7 +36,7 @@ public class TrucksController {
         return "redirect:/trucks/list";
     }
 
-    @GetMapping(value = {"/edit"})
+    @GetMapping(value = {"/create"})
     public String newTruck(ModelMap model) {
         Truck truck = new Truck();
         model.addAttribute("truck", truck);
@@ -44,7 +44,7 @@ public class TrucksController {
         return "trucks/edit";
     }
 
-    @PostMapping(value = "/edit")
+    @PostMapping(value = "/create")
     public String createTruck(Truck truck) {
         trucksService.createAndUpdate(truck);
         return "redirect:/trucks/list";

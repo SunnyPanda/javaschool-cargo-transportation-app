@@ -8,7 +8,6 @@
         <h2>New Driver</h2>
     </div>
     <form:form method="POST" modelAttribute="driver">
-        <%--<form:input type="hidden" path="id" id="id"/>--%>
         <table>
             <tr>
                 <td><label for="personalNumber">Personal Number: </label></td>

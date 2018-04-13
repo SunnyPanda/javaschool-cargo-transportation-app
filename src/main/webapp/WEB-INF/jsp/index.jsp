@@ -4,7 +4,7 @@
 
 <t:wrapper>
     <h1>Welcome Page</h1>
-    Go to <a href="<c:url value='/drivers/list' />">Drivers List</a>
+    <a href="<c:url value='/drivers/list' />">Drivers List</a>
     <br/>
-    Go to <a href="<c:url value='/trucks/list' />">Trucks List</a>
+    <a href="<c:url value='/trucks/list' />">Trucks List</a>
 </t:wrapper>
