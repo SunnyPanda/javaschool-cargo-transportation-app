@@ -3,20 +3,20 @@ package com.katekozlova.cargo.data.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TRUCK")
+@Table(name = "trucks")
 public class Truck {
     @Id
-    @Column(name = "TRUCK_ID")
+    @Column(name = "truck_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "REG_NUMBER")
+    @Column(name = "reg_number")
     private String regNumber;
 
-    @Column(name = "SHIFT_SIZE")
+    @Column(name = "shift_size")
     private String shiftSize;
 
-    @Column(name = "CAPACITY")
+    @Column(name = "capacity")
     private String capacity;
 
     public long getId() {
