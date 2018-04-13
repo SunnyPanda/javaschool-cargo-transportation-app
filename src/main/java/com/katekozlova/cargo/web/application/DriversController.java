@@ -35,21 +35,21 @@ public class DriversController {
     @GetMapping(value = "/delete/{id}")
     public String deleteDriver(@PathVariable("id") long id) {
         driversService.deleteDriver(id);
-        return "redirect:/";
+        return "redirect:/drivers/list";
     }
 
     @GetMapping(value = {"/edit"})
     public String newDriver(ModelMap model) {
         Driver driver = new Driver();
         model.addAttribute("driver", driver);
-        model.addAttribute("edit", true);
+        model.addAttribute("edit", false);
         return "drivers/edit";
     }
 
     @PostMapping(value = "/edit")
     public String createDriver(Driver driver) {
         driversService.createAndUpdate(driver);
-        return "redirect:/";
+        return "redirect:/drivers/list";
     }
 
     @GetMapping(value = {"/edit/{id}"})
@@ -63,7 +63,7 @@ public class DriversController {
     @PostMapping(value = "/edit/{id}")
     public String updateDriver(Driver driver) {
         driversService.createAndUpdate(driver);
-        return "redirect:/";
+        return "redirect:/drivers/list";
     }
 }
 

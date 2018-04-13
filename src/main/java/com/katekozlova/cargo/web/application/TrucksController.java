@@ -33,27 +33,27 @@ public class TrucksController {
     @GetMapping(value = "/delete/{id}")
     public String deleteTruck(@PathVariable("id") long id) {
         trucksService.deleteTruck(id);
-        return "redirect:/trucks";
+        return "redirect:/trucks/list";
     }
 
     @GetMapping(value = {"/edit"})
     public String newTruck(ModelMap model) {
         Truck truck = new Truck();
         model.addAttribute("truck", truck);
-        model.addAttribute("edit", true);
+        model.addAttribute("edit", false);
         return "trucks/edit";
     }
 
     @PostMapping(value = "/edit")
     public String createTruck(Truck truck) {
         trucksService.createAndUpdate(truck);
-        return "redirect:/trucks";
+        return "redirect:/trucks/list";
     }
 
     @GetMapping(value = {"/edit/{id}"})
     public String editTruck(@PathVariable("id") long id, ModelMap model) {
         Optional<Truck> truck = trucksService.findById(id);
-        model.addAttribute("driver", truck);
+        model.addAttribute("truck", truck);
         model.addAttribute("edit", true);
         return "trucks/edit";
     }
@@ -61,6 +61,6 @@ public class TrucksController {
     @PostMapping(value = "/edit/{id}")
     public String updateTruck(Truck truck) {
         trucksService.createAndUpdate(truck);
-        return "redirect:/trucks";
+        return "redirect:/trucks/list";
     }
 }

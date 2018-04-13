@@ -20,7 +20,7 @@
             <td>Personal Number</td>
             <td>Last Name</td>
             <td>First Name</td>
-            <td><a href="<c:url value='/edit${driver}'/>">new</a></td>
+            <td><a href="<c:url value='/drivers/edit${driver}'/>">new</a></td>
         </tr>
         <c:forEach items="${drivers}" var="driver" varStatus="status">
             <tr>

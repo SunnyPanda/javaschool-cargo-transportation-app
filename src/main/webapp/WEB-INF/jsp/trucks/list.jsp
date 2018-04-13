@@ -21,7 +21,7 @@
         <td>Reg. Number</td>
         <td>Shift Size</td>
         <td>Capacity</td>
-        <td><a href="<c:url value='/edit${truck}'/>">new</a></td>
+        <td><a href="<c:url value='/trucks/edit${truck}'/>">new</a></td>
     </tr>
     <c:forEach items="${trucks}" var="truck">
         <tr>
