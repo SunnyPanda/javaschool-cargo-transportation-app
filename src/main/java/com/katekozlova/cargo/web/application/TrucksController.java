@@ -1,6 +1,5 @@
 package com.katekozlova.cargo.web.application;
 
-import com.katekozlova.cargo.business.domain.ListOfTrucks;
 import com.katekozlova.cargo.business.service.TrucksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +19,8 @@ public class TrucksController {
     @RequestMapping(method = RequestMethod.GET)
     public String getDrivers(Model model) {
 
-        List<ListOfTrucks> listOfTrucksList = this.trucksService.getAllDrivers();
-        model.addAttribute("listOfTrucks", listOfTrucksList);
+//        List<ListOfTrucks> listOfTrucksList = this.trucksService.getAllDrivers();
+//        model.addAttribute("listOfTrucks", listOfTrucksList);
 
         return "trucks";
     }

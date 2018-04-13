@@ -1,61 +1,70 @@
 package com.katekozlova.cargo.web.application;
 
-import com.katekozlova.cargo.business.domain.ListOfDrivers;
 import com.katekozlova.cargo.business.service.DriversService;
+import com.katekozlova.cargo.data.entity.Driver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import sun.misc.Contended;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "/drivers")
+@RequestMapping(value = "/")
 public class DriversController {
 
+    private final DriversService driversService;
+
     @Autowired
-    private DriversService driversService;
+    public DriversController(DriversService driversService) {
+        this.driversService = driversService;
+    }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String getDrivers(Model model) {
+    @GetMapping
+    public ModelAndView list() {
+        List<Driver> drivers = driversService.getAllDrivers();
+        System.out.println("drivers = " + drivers);
+        return new ModelAndView("drivers/list", "drivers", drivers);
+    }
 
-        List<ListOfDrivers> listOfDriversList = this.driversService.getAllDrivers();
-        model.addAttribute("listOfDrivers", listOfDriversList);
+    @GetMapping(value = "/drivers/delete/{id}")
+    public String deleteDriver(@PathVariable("id") long id) {
+        driversService.deleteDriver(id);
+        return "redirect:/";
+    }
 
-        return "drivers";
+    @GetMapping(value = {"/edit"})
+    public String newDriver(ModelMap model) {
+        Driver driver = new Driver();
+        model.addAttribute("driver", driver);
+        model.addAttribute("edit", true);
+        return "drivers/edit";
+    }
+
+    @PostMapping(value = "/edit")
+    public String createDriver(Driver driver) {
+        driversService.createAndUpdate(driver);
+        return "redirect:/";
+    }
+
+    @GetMapping(value = {"/drivers/edit/{id}"})
+    public String editDriver(@PathVariable("id") long id,ModelMap model) {
+        Optional<Driver> driver = driversService.findById(id);
+        model.addAttribute("driver", driver);
+        model.addAttribute("edit", true);
+        return "drivers/edit";
+    }
+
+    @PostMapping(value = "/drivers/edit/{id}")
+    public String updateDriver(Driver driver) {
+        driversService.createAndUpdate(driver);
+        return "redirect:/";
     }
 }
 
-
-//@Controller
-//@RequestMapping(value="/reservations")
-//public class ReservationController {
-//    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-//
-//    @Autowired
-//    private ReservationService reservationService;
-//
-//    @RequestMapping(method= RequestMethod.GET)
-//    public String getReservations(@RequestParam(value = "date", required = false)String dateString, Model model){
-//        Date date = null;
-//        if (null != dateString) {
-//            try {
-//                date = DATE_FORMAT.parse(dateString);
-//            } catch (ParseException pe) {
-//                date = new Date();
-//            }
-//        } else {
-//            date = new Date();
-//        }
-//        List<RoomReservation> roomReservationList = this.reservationService.getRoomReservationsForDate(date);
-//        model.addAttribute("roomReservations", roomReservationList);
-//
-//
-//        return "reservations";
-//    }
-//}

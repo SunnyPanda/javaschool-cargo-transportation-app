@@ -5,14 +5,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "DRIVER")
 public class Driver {
+
     @Id
     @Column(name = "DRIVER_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name = "PERSONAL_NUMBER")
     private long personalNumber;
+
     @Column(name = "FIRST_NAME")
     private String firstName;
+
     @Column(name = "LAST_NAME")
     private String lastName;
 
@@ -46,5 +50,15 @@ public class Driver {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "id=" + id +
+                ", personalNumber=" + personalNumber +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }

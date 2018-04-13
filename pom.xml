@@ -6,7 +6,7 @@
 	<groupId>com.katekozlova</groupId>
 	<artifactId>cargo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>cargo</name>
 	<description>Demo project for Spring Boot</description>
@@ -68,6 +68,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>24.0-jre</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
