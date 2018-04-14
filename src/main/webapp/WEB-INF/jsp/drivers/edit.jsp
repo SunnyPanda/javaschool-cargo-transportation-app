@@ -33,6 +33,11 @@
                 <td><form:errors path="hoursPerMonth" cssClass="error"/></td>
             </tr>
             <tr>
+                <td><label for="driverStatus">Status: </label></td>
+                <td><form:input path="driverStatus" id="driverStatus"/></td>
+                <td><form:errors path="driverStatus" cssClass="error"/></td>
+            </tr>
+            <tr>
                 <td colspan="3">
                     <c:choose>
                         <c:when test="${edit}">
