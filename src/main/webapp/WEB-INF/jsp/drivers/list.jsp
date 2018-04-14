@@ -13,6 +13,7 @@
             <th scope="col">Personal Number</th>
             <th scope="col">Last Name</th>
             <th scope="col">First Name</th>
+            <th scope="col">Hours/month</th>
             <th/>
             <th/>
         </tr>
@@ -21,10 +22,11 @@
         <c:forEach items="${drivers}" var="driver" varStatus="status">
             <tr>
                 <th scope="row">${driver.personalNumber}</th>
-                <td>${driver.lastName}</td>
                 <td>${driver.firstName}</td>
-                <td><a href="<c:url value='/drivers/delete/${driver.id}'/>">delete</a></td>
+                <td>${driver.lastName}</td>
+                <td>${driver.hoursPerMonth}</td>
                 <td><a href="<c:url value='/drivers/edit/${driver.id}'/>">edit</a></td>
+                <td><a href="<c:url value='/drivers/delete/${driver.id}'/>">delete</a></td>
             </tr>
         </c:forEach>
         </tbody>

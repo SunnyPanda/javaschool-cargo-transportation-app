@@ -28,6 +28,11 @@
             </tr>
 
             <tr>
+                <td><label for="hoursPerMonth">Hours/month: </label></td>
+                <td><form:input path="hoursPerMonth" id="hoursPerMonth"/></td>
+                <td><form:errors path="hoursPerMonth" cssClass="error"/></td>
+            </tr>
+            <tr>
                 <td colspan="3">
                     <c:choose>
                         <c:when test="${edit}">

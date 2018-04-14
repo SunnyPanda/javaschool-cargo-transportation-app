@@ -1,5 +1,8 @@
 package com.katekozlova.cargo.data.entity;
 
+import org.hibernate.annotations.ManyToAny;
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,8 +10,8 @@ import javax.persistence.*;
 public class Driver {
 
     @Id
-    @Column(name = "driver_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "driver_generator", sequenceName = "driver_sequence", initialValue = 10)
+    @GeneratedValue(generator = "driver_generator")
     private long id;
 
     @Column(name = "personal_number")
@@ -19,6 +22,17 @@ public class Driver {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "hours_per_month")
+    private long hoursPerMonth;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.ORDINAL)
+    private DriverStatus driverStatus;
+
+//    @Column(name = "current_truck")
+//    @ManyToOne
+//    private Truck currentTruck;
 
     public long getId() {
         return id;
@@ -60,5 +74,21 @@ public class Driver {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    public long getHoursPerMonth() {
+        return hoursPerMonth;
+    }
+
+    public void setHoursPerMonth(long hoursPerMonth) {
+        this.hoursPerMonth = hoursPerMonth;
+    }
+
+    public DriverStatus getDriverStatus() {
+        return driverStatus;
+    }
+
+    public void setDriverStatus(DriverStatus driverStatus) {
+        this.driverStatus = driverStatus;
     }
 }
