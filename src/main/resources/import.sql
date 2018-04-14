@@ -12,6 +12,10 @@ insert into cargo (id, cargo_number, cargo_name, weight, status) values (4, 2345
 insert into cargo (id, cargo_number, cargo_name, weight, status) values (5, 7890, 'Пакет акций Apple', 10000, 1);
 
 insert into waypoints (id, city_id, cargo_id, waypoint_type) values (1, 4, 1, 0);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (2, 1, 1, 1);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (3, 1, 5, 0);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (4, 3, 5, 1);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (5, 2, 4, 0);
 
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (1, 'GHHGGGG', '2', '35', 0, 4);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (2, 'FE78430', '1', '100', 0, 1);
