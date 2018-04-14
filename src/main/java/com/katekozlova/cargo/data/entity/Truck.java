@@ -24,6 +24,9 @@ public class Truck {
     @Enumerated(EnumType.ORDINAL)
     private TruckState truckState;
 
+    @ManyToOne
+    private City currentCity;
+
     public long getId() {
         return id;
     }
@@ -62,5 +65,13 @@ public class Truck {
 
     public void setTruckState(TruckState truckState) {
         this.truckState = truckState;
+    }
+
+    public City getCurrentCity() {
+        return currentCity;
+    }
+
+    public void setCurrentCity(City currentCity) {
+        this.currentCity = currentCity;
     }
 }

@@ -28,6 +28,9 @@ public class Driver {
     private DriverStatus driverStatus;
 
     @ManyToOne
+    private City currentCity;
+
+    @ManyToOne
     private Truck currentTruck;
 
     public long getId() {
@@ -86,6 +89,14 @@ public class Driver {
 
     public void setDriverStatus(DriverStatus driverStatus) {
         this.driverStatus = driverStatus;
+    }
+
+    public City getCurrentCity() {
+        return currentCity;
+    }
+
+    public void setCurrentCity(City currentCity) {
+        this.currentCity = currentCity;
     }
 
     public Truck getCurrentTruck() {

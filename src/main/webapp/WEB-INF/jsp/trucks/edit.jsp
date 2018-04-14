@@ -36,6 +36,11 @@
                 </td>
                 <td><form:errors path="truckState" cssClass="error"/></td>
             </tr>
+            <tr>
+                <td><label for="currentCity">City: </label></td>
+                <td><form:input path="currentCity" id="currentCity"/></td>
+                <td><form:errors path="currentCity" cssClass="error"/></td>
+            </tr>
 
             <tr>
                 <td colspan="3">
