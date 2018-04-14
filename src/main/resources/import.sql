@@ -29,3 +29,4 @@ insert into drivers (id, personal_number, first_name, last_name, hours_per_month
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id) values (4, '69384023', 'Клюква', 'Песочная', 45, 2, 5, 5);
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id) values (5, '50948503', 'Елена', 'Парная', 15, 1, 3, 2);
 
+insert into orders (id, unique_number, status) values (1, 234354, 0);
