@@ -14,6 +14,7 @@
                 <th scope="col">Reg. Number</th>
                 <th scope="col">Shift Size</th>
                 <th scope="col">Capacity</th>
+                <th scope="col">State</th>
                 <th/>
                 <th/>
             </tr>
@@ -24,8 +25,9 @@
                     <th scope="row">${truck.regNumber}</th>
                     <td>${truck.shiftSize}</td>
                     <td>${truck.capacity}</td>
-                    <td><a href="<c:url value='/trucks/delete/${truck.id}'/>">delete</a></td>
+                    <td>${truck.truckState}</td>
                     <td><a href="<c:url value='/trucks/edit/${truck.id}'/>">edit</a></td>
+                    <td><a href="<c:url value='/trucks/delete/${truck.id}'/>">delete</a></td>
                 </tr>
             </c:forEach>
         </tbody>

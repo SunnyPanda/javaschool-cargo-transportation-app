@@ -28,6 +28,12 @@
             </tr>
 
             <tr>
+                <td><label for="truckState">Состояние: </label></td>
+                <td><form:input path="truckState" id="truckState"/></td>
+                <td><form:errors path="truckState" cssClass="error"/></td>
+            </tr>
+
+            <tr>
                 <td colspan="3">
                     <c:choose>
                         <c:when test="${edit}">

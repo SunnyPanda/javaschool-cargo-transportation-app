@@ -19,6 +19,10 @@ public class Truck {
     @Column(name = "capacity")
     private String capacity;
 
+    @Column(name = "state")
+    @Enumerated(EnumType.ORDINAL)
+    private TruckState truckState;
+
     public long getId() {
         return id;
     }
@@ -49,5 +53,13 @@ public class Truck {
 
     public void setCapacity(String capacity) {
         this.capacity = capacity;
+    }
+
+    public TruckState getTruckState() {
+        return truckState;
+    }
+
+    public void setTruckState(TruckState truckState) {
+        this.truckState = truckState;
     }
 }
