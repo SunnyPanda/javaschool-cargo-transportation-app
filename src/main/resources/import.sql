@@ -5,6 +5,14 @@ insert into cities (id, city_name) values (4, 'Воронеж');
 insert into cities (id, city_name) values (5, 'Казань');
 insert into cities (id, city_name) values (6, 'Иркутск');
 
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (1, 1234, 'Коробочка', 34, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (2, 3456, 'Бутылки', 59, 1);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (3, 6789, 'Машинка', 200, 2);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (4, 2345, 'Стол', 30, 2);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (5, 7890, 'Пакет акций Apple', 10000, 1);
+
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (1, 4, 1, 0);
+
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (1, 'GHHGGGG', '2', '35', 0, 4);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (2, 'FE78430', '1', '100', 0, 1);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (3, 'BJ50984', '2', '3', 1, 3);

@@ -9,4 +9,6 @@
     <a href="<c:url value='/trucks/list' />">Trucks List</a>
     <br/>
     <a href="<c:url value='/cities/list' />">Cities List</a>
+    <br/>
+    <a href="<c:url value='/cargo/list' />">Cargo List</a>
 </t:wrapper>
