@@ -4,8 +4,8 @@ insert into drivers (id, personal_number, first_name, last_name, hours_per_month
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status) values (4, '69384023', 'Клюква', 'Песочная', 45, 2);
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status) values (5, '50948503', 'Елена', 'Парная', 15, 1);
 
-insert into trucks (reg_number, shift_size, capacity, state) values ('GHHGGGG', '2', '35', 0);
-insert into trucks (reg_number, shift_size, capacity, state) values ('FE78430', '1', '100', 0);
-insert into trucks (reg_number, shift_size, capacity, state) values ('BJ50984', '2', '3', 1);
-insert into trucks (reg_number, shift_size, capacity, state) values ('YU74801', '3', '76', 1);
-insert into trucks (reg_number, shift_size, capacity, state) values ('SG87048', '2', '200', 0);
+insert into trucks (id, reg_number, shift_size, capacity, state) values (1, 'GHHGGGG', '2', '35', 0);
+insert into trucks (id, reg_number, shift_size, capacity, state) values (2, 'FE78430', '1', '100', 0);
+insert into trucks (id, reg_number, shift_size, capacity, state) values (3, 'BJ50984', '2', '3', 1);
+insert into trucks (id, reg_number, shift_size, capacity, state) values (4, 'YU74801', '3', '76', 1);
+insert into trucks (id, reg_number, shift_size, capacity, state) values (5, 'SG87048', '2', '200', 0);

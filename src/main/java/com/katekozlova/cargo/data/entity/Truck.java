@@ -5,9 +5,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "trucks")
 public class Truck {
+
     @Id
-    @Column(name = "truck_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "truck_generator", sequenceName = "truck_sequence", initialValue = 10)
+    @GeneratedValue(generator = "truck_generator")
     private long id;
 
     @Column(name = "reg_number")
