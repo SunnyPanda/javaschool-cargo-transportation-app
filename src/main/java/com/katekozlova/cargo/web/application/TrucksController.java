@@ -3,6 +3,7 @@ package com.katekozlova.cargo.web.application;
 import com.katekozlova.cargo.business.service.TrucksService;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Truck;
+import com.katekozlova.cargo.data.entity.TruckState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,7 @@ public class TrucksController {
         Truck truck = new Truck();
         model.addAttribute("truck", truck);
         model.addAttribute("edit", false);
+        model.addAttribute("stateValues", TruckState.values());
         return "trucks/edit";
     }
 
@@ -55,6 +57,7 @@ public class TrucksController {
         Optional<Truck> truck = trucksService.findById(id);
         model.addAttribute("truck", truck);
         model.addAttribute("edit", true);
+        model.addAttribute("stateValues", TruckState.values());
         return "trucks/edit";
     }
 

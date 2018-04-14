@@ -29,7 +29,11 @@
 
             <tr>
                 <td><label for="truckState">Состояние: </label></td>
-                <td><form:input path="truckState" id="truckState"/></td>
+                <td>
+                    <form:select path="truckState" id="truckState">
+                        <form:options items="${stateValues}"/>
+                    </form:select>
+                </td>
                 <td><form:errors path="truckState" cssClass="error"/></td>
             </tr>
 

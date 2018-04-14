@@ -15,6 +15,8 @@
             <th scope="col">First Name</th>
             <th scope="col">Hours/month</th>
             <th scope="col">Status</th>
+            <%--REMOVE--%>
+            <th scope="col">Truck</th>
             <th/>
             <th/>
         </tr>
@@ -27,6 +29,7 @@
                 <td>${driver.lastName}</td>
                 <td>${driver.hoursPerMonth}</td>
                 <td>${driver.driverStatus}</td>
+                <td>${driver.currentTruck.regNumber}</td>
                 <td><a href="<c:url value='/drivers/edit/${driver.id}'/>">edit</a></td>
                 <td><a href="<c:url value='/drivers/delete/${driver.id}'/>">delete</a></td>
             </tr>

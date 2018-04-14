@@ -2,6 +2,8 @@ package com.katekozlova.cargo.web.application;
 
 import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.data.entity.Driver;
+import com.katekozlova.cargo.data.entity.DriverStatus;
+import com.katekozlova.cargo.data.entity.TruckState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -42,6 +44,7 @@ public class DriversController {
         Driver driver = new Driver();
         model.addAttribute("driver", driver);
         model.addAttribute("edit", false);
+        model.addAttribute("statusValues", DriverStatus.values());
         return "drivers/edit";
     }
 
@@ -56,6 +59,7 @@ public class DriversController {
         Optional<Driver> driver = driversService.findById(id);
         model.addAttribute("driver", driver);
         model.addAttribute("edit", true);
+        model.addAttribute("statusValues", DriverStatus.values());
         return "drivers/edit";
     }
 

@@ -1,8 +1,5 @@
 package com.katekozlova.cargo.data.entity;
 
-import org.hibernate.annotations.ManyToAny;
-import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
 
 @Entity
@@ -30,9 +27,8 @@ public class Driver {
     @Enumerated(EnumType.ORDINAL)
     private DriverStatus driverStatus;
 
-//    @Column(name = "current_truck")
-//    @ManyToOne
-//    private Truck currentTruck;
+    @ManyToOne
+    private Truck currentTruck;
 
     public long getId() {
         return id;
@@ -90,5 +86,13 @@ public class Driver {
 
     public void setDriverStatus(DriverStatus driverStatus) {
         this.driverStatus = driverStatus;
+    }
+
+    public Truck getCurrentTruck() {
+        return currentTruck;
+    }
+
+    public void setCurrentTruck(Truck currentTruck) {
+        this.currentTruck = currentTruck;
     }
 }
