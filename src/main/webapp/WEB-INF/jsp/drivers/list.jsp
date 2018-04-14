@@ -15,10 +15,7 @@
             <th scope="col">First Name</th>
             <th scope="col">Hours/month</th>
             <th scope="col">Status</th>
-            <%--REMOVE--%>
             <th scope="col">Truck</th>
-            <th/>
-            <th/>
         </tr>
         </thead>
         <tbody>
