@@ -1,5 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
+import org.aspectj.weaver.ast.Or;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,9 @@ public class Waypoint {
 
     @ManyToOne
     private Cargo cargo;
+
+    @ManyToOne
+    private Order order;
 
     @Column(name = "waypoint_type")
     @Enumerated(EnumType.ORDINAL)
@@ -51,5 +56,13 @@ public class Waypoint {
 
     public void setWaypointType(WaypointType waypointType) {
         this.waypointType = waypointType;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

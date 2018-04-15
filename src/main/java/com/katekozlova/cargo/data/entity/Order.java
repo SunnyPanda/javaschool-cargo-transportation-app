@@ -19,8 +19,8 @@ public class Order {
     @Enumerated(EnumType.ORDINAL)
     private OrderStatus orderStatus;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
-//    private Set<Waypoint> waypoints;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private Set<Waypoint> waypoints;
 
 
     public long getId() {
@@ -46,4 +46,5 @@ public class Order {
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
+
 }
