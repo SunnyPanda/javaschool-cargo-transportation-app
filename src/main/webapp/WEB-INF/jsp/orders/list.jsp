@@ -14,6 +14,7 @@
             <th scope="col">Status</th>
             <th scope="col">Waypoints</th>
             <th scope="col">Truck</th>
+            <th scope="col">Drivers</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +24,7 @@
                 <td>${order.orderStatus}</td>
                 <td><a href="<c:url value='/orders/waypoints/${order.id}'/>">waypoints</a></td></td>
                 <td>${order.truck.regNumber}</td>
+                <td><a href="<c:url value='/orders/drivers/${order.id}'/>">drivers</a></td></td>
                 <%--<td><a href="<c:url value='/orders/waypoints'/>">waypoints</a></td></td>--%>
                 <%--<td>${driver.lastName}</td>--%>
                 <%--<td>${driver.hoursPerMonth}</td>--%>

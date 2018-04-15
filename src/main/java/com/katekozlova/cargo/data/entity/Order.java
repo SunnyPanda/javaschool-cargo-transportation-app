@@ -25,6 +25,9 @@ public class Order {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "order")
     private Truck truck;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private Set<Driver> drivers;
+
     public long getId() {
         return id;
     }

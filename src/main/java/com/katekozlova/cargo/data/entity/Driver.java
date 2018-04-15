@@ -33,6 +33,9 @@ public class Driver {
     @ManyToOne
     private Truck currentTruck;
 
+    @ManyToOne
+    private Order order;
+
     public long getId() {
         return id;
     }
@@ -105,5 +108,13 @@ public class Driver {
 
     public void setCurrentTruck(Truck currentTruck) {
         this.currentTruck = currentTruck;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

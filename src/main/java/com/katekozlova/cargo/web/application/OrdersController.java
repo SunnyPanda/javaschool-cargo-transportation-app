@@ -1,14 +1,14 @@
 package com.katekozlova.cargo.web.application;
 
+import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.business.service.OrderService;
+import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Order;
 import com.katekozlova.cargo.data.entity.Waypoint;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,10 +19,12 @@ import java.util.List;
 public class OrdersController {
 
     private final OrderService orderService;
+    private final DriversService driversService;
 
     @Autowired
-    public OrdersController(OrderService orderService) {
+    public OrdersController(OrderService orderService, DriversService driversService) {
         this.orderService = orderService;
+        this.driversService = driversService;
     }
 
     @GetMapping(value = "/list")
@@ -35,6 +37,12 @@ public class OrdersController {
     public ModelAndView getWaypoints(@PathVariable("id") long id) {
         List<Waypoint> waypoints = orderService.getOrdersWaypoints(id);
         return new ModelAndView("orders/waypoints", "waypoints", waypoints);
+    }
+
+    @GetMapping(value = "/drivers/{id}")
+    public ModelAndView getDrivers(@PathVariable("id") long id) {
+        List<Driver> drivers = orderService.getOrdersDrivers(id);
+        return new ModelAndView("orders/drivers", "drivers", drivers);
     }
 
 //    @GetMapping(value = "/waypoints")
