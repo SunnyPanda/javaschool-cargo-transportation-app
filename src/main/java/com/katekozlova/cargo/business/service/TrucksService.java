@@ -1,13 +1,11 @@
 package com.katekozlova.cargo.business.service;
 
 import com.google.common.collect.Lists;
-import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Truck;
 import com.katekozlova.cargo.data.repository.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

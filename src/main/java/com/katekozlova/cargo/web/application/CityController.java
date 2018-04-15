@@ -23,7 +23,7 @@ public class CityController {
 
     @GetMapping(value = "/list")
     public ModelAndView list() {
-        List<City> cities =citiesService.getAllCities();
+        List<City> cities = citiesService.getAllCities();
         return new ModelAndView("cities/list", "cities", cities);
     }
 }

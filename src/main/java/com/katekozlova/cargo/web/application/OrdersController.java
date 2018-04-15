@@ -35,7 +35,7 @@ public class OrdersController {
 
     @GetMapping(value = "/waypoints/{id}")
     public ModelAndView getWaypoints(@PathVariable("id") long id) {
-        List<Waypoint> waypoints = orderService.getOrdersWaypoints(id);
+        List<Waypoint> waypoints = orderService.getOrderWaypoints(id);
         return new ModelAndView("orders/waypoints", "waypoints", waypoints);
     }
 
@@ -47,7 +47,7 @@ public class OrdersController {
 
 //    @GetMapping(value = "/waypoints")
 //    public ModelAndView getWaypoints() {
-//        List<Waypoint> waypoints = orderService.getOrdersWaypoints();
+//        List<Waypoint> waypoints = orderService.getOrderWaypoints();
 //        return new ModelAndView("orders/waypoints", "waypoints", waypoints);
 //    }
 }

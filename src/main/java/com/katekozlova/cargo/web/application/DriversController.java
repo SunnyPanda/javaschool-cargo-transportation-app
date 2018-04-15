@@ -3,7 +3,6 @@ package com.katekozlova.cargo.web.application;
 import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.DriverStatus;
-import com.katekozlova.cargo.data.entity.TruckState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -55,7 +54,7 @@ public class DriversController {
     }
 
     @GetMapping(value = {"/edit/{id}"})
-    public String editDriver(@PathVariable("id") long id,ModelMap model) {
+    public String editDriver(@PathVariable("id") long id, ModelMap model) {
         Optional<Driver> driver = driversService.findById(id);
         model.addAttribute("driver", driver);
         model.addAttribute("edit", true);
@@ -64,7 +63,7 @@ public class DriversController {
     }
 
     @PostMapping(value = "/edit/{id}")
-    public String updateDriver(Driver driver) {
+    public String updateDriver(@PathVariable("id") long id, Driver driver) {
         driversService.createAndUpdate(driver);
         return "redirect:/drivers/list";
     }

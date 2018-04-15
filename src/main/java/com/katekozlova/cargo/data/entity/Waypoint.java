@@ -1,7 +1,5 @@
 package com.katekozlova.cargo.data.entity;
 
-import org.aspectj.weaver.ast.Or;
-
 import javax.persistence.*;
 
 @Entity
