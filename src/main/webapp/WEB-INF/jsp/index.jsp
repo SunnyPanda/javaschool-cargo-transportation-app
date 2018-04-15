@@ -13,4 +13,6 @@
     <a href="<c:url value='/cargo/list' />">Cargo List</a>
     <br/>
     <a href="<c:url value='/waypoints/list' />">Waypoints List</a>
+    <br/>
+    <a href="<c:url value='/orders/list' />">Orders List</a>
 </t:wrapper>
