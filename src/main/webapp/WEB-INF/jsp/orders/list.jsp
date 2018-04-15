@@ -20,7 +20,8 @@
             <tr>
                 <th scope="row">${order.uniqueNumber}</th>
                 <td>${order.orderStatus}</td>
-                <td><a href="<c:url value='/waypoints/list'/>">waypoints</a></td></td>
+                <td><a href="<c:url value='/orders/waypoints/${order.id}'/>">waypoints</a></td></td>
+                <%--<td><a href="<c:url value='/orders/waypoints'/>">waypoints</a></td></td>--%>
                 <%--<td>${driver.lastName}</td>--%>
                 <%--<td>${driver.hoursPerMonth}</td>--%>
                 <%--<td>${driver.driverStatus}</td>--%>
