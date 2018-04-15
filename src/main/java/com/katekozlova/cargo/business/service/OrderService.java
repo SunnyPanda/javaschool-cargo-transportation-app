@@ -8,6 +8,7 @@ import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,9 +28,15 @@ public class OrderService {
     }
 
     public List<Waypoint> getOrdersWaypoints(long id) {
-        return Lists.newArrayList(waypointRepository.findAll());
-//        List<Waypoint> waypoints = Lists.newArrayList(waypointRepository.findAll());
-//        return waypoints;
+        //return Lists.newArrayList(waypointRepository.findAll());
+        List<Waypoint> waypoints = Lists.newArrayList(waypointRepository.findAll());
+        List<Waypoint> orderswaypoints = new ArrayList<>();
+        for (Waypoint point: waypoints) {
+            if (id == point.getOrder().getId()) {
+                orderswaypoints.add(point);
+            }
+        }
+        return orderswaypoints;
     }
 
     public List<Waypoint> getOrdersWaypoints() {
