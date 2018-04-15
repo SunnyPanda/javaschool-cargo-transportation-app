@@ -22,6 +22,8 @@ public class Order {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private Set<Waypoint> waypoints;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order")
+    private Truck truck;
 
     public long getId() {
         return id;
@@ -47,4 +49,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
+    public Truck getTruck() {
+        return truck;
+    }
+
+    public void setTruck(Truck truck) {
+        this.truck = truck;
+    }
 }

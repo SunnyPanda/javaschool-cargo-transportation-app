@@ -27,6 +27,9 @@ public class Truck {
     @ManyToOne
     private City currentCity;
 
+    @OneToOne
+    private Order order;
+
     public long getId() {
         return id;
     }
@@ -73,5 +76,13 @@ public class Truck {
 
     public void setCurrentCity(City currentCity) {
         this.currentCity = currentCity;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
