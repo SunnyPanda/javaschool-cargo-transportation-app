@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DriversService {
@@ -32,8 +31,14 @@ public class DriversService {
         return driverRepository.save(driver);
     }
 
-    public Optional<Driver> findById(long id) {
-        return driverRepository.findById(id);
+    //    public Optional<Driver> findById(long id) {
+////        if (driverRepository.findById(id).isPresent()) {
+////
+////        }
+//        return driverRepository.findById(id);
+//    }
+    public Driver findById(long id) {
+        return driverRepository.findDriverById(id);
     }
 }
 

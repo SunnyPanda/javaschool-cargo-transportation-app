@@ -41,16 +41,16 @@
                 </td>
                 <td><form:errors path="driverStatus" cssClass="error"/></td>
             </tr>
-            <tr>
-                <td><label for="currentCity">City: </label></td>
-                <td><form:input path="currentCity.name" id="currentCity"/></td>
-                <td><form:errors path="currentCity" cssClass="error"/></td>
-            </tr>
-            <tr>
-                <td><label for="currentTruck">Truck: </label></td>
-                <td><form:input path="currentTruck.regNumber" id="currentTruck"/></td>
-                <td><form:errors path="currentTruck" cssClass="error"/></td>
-            </tr>
+                <%--<tr>--%>
+                <%--<td><label for="currentCity">City: </label></td>--%>
+                <%--<td><form:input path="currentCity.name" id="currentCity"/></td>--%>
+                <%--<td><form:errors path="currentCity" cssClass="error"/></td>--%>
+                <%--</tr>--%>
+                <%--<tr>--%>
+                <%--<td><label for="currentTruck">Truck: </label></td>--%>
+                <%--<td><form:input path="currentTruck.regNumber" id="currentTruck"/></td>--%>
+                <%--<td><form:errors path="currentTruck" cssClass="error"/></td>--%>
+                <%--</tr>--%>
             <tr>
                 <td colspan="3">
                     <c:choose>

@@ -10,4 +10,8 @@ import java.util.List;
 public interface DriverRepository extends CrudRepository<Driver, Long> {
 
     List<Driver> findDriverByOrderId(Long id);
+
+    Driver findDriverById(Long id);
+
+    List<Driver> findDriverByCurrentTruck(Long id);
 }

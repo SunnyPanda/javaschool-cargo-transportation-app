@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Driver {
 
     @Id
-    @SequenceGenerator(name = "driver_generator", sequenceName = "driver_sequence", initialValue = 10)
+    @SequenceGenerator(name = "driver_generator", sequenceName = "driver_sequence", initialValue = 20)
     @GeneratedValue(generator = "driver_generator")
     private long id;
 

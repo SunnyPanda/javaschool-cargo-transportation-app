@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/drivers")
@@ -58,7 +57,8 @@ public class DriversController {
 
     @GetMapping(value = {"/edit/{id}"})
     public String editDriver(@PathVariable("id") long id, ModelMap model) {
-        Optional<Driver> driver = driversService.findById(id);
+//        Optional<Driver> driver = driversService.findById(id);
+        Driver driver = driversService.findById(id);
         model.addAttribute("driver", driver);
         model.addAttribute("edit", true);
         model.addAttribute("statusValues", DriverStatus.values());
@@ -69,6 +69,19 @@ public class DriversController {
     public String updateDriver(@PathVariable("id") long id, Driver driver) {
         driversService.createAndUpdate(driver);
         return "redirect:/drivers/list";
+    }
+
+//    @GetMapping(value = "{id}")
+//    public String driversInfo(@PathVariable("id") long id, ModelMap model) {
+//        Optional<Driver> driver = driversService.findById(id);
+//        model.addAttribute("driver", driver);
+//        return "drivers/id";
+//    }
+
+    @GetMapping(value = "{id}")
+    public ModelAndView driversInfo(@PathVariable("id") long id) {
+        Driver driver = driversService.findById(id);
+        return new ModelAndView("drivers/id", "driver", driver);
     }
 }
 
