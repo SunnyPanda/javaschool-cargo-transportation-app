@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <t:wrapper>
+    <%--@elvariable id="order" type=""--%>
     <form:form method="GET" modelAttribute="order">
         <div class="page-header mt-5">
             <h1>Для заказа </h1>

@@ -40,11 +40,18 @@ public class OrderService {
     }
 
     public List<Truck> getTrucks(long id) {
-        return truckRepository.findTrucksByTruckStateAndOrderIsNull(TruckState.SERVICEABLE);
+
+        return truckRepository.findTrucksByTruckStateAndOrderIsNullAndCapacityIsGreaterThan(TruckState.SERVICEABLE,
+                findMaxCargoWeight(getOrderWaypoints(id)));
+        //truckRepository.findTrucksByTruckStateAndOrderIsNull(TruckState.SERVICEABLE);
     }
 
-    public void addTruckToOrder(long number, long truckId) {
-        orderRepository.findOrderByUniqueNumber(number).setTruck(truckRepository.findTruckById(truckId));
+    public Order create(Order order) {
+        return orderRepository.save(order);
+    }
+
+    public void addTruckToOrder(long orderId, long truckId) {
+        orderRepository.findOrderByUniqueNumber(orderId).setTruck(truckRepository.findTruckById(truckId));
         //truckRepository.findTruckById(truckId).setOrder(orderRepository.findOrderByUniqueNumber(number));
     }
 
@@ -52,12 +59,17 @@ public class OrderService {
         return orderRepository.findOrderById(id);
     }
 
-//    public long findMaxCargoWeight(List<Waypoint> waypoints) {
-//        long maxWeight = 0;
-//        for (Waypoint waypoint: waypoints) {
-//            if (waypoint.getWaypointType().equals("SHIPMENT")) {
-//
-//            }
-//        }
-//    }
+    public long findMaxCargoWeight(List<Waypoint> waypoints) {
+        long maxWeight = 0;
+        long sumWeight = 0;
+        for (Waypoint waypoint : waypoints) {
+            if (waypoint.getWaypointType().equals(WaypointType.SHIPMENT)) {
+                sumWeight += waypoint.getCargo().getWeight();
+                maxWeight = Math.max(maxWeight, sumWeight);
+            } else {
+                sumWeight -= waypoint.getCargo().getWeight();
+            }
+        }
+        return maxWeight;
+    }
 }

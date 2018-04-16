@@ -15,10 +15,10 @@ public class Truck {
     private String regNumber;
 
     @Column(name = "shift_size")
-    private String shiftSize;
+    private int shiftSize;
 
     @Column(name = "capacity")
-    private String capacity;
+    private long capacity;
 
     @Column(name = "state")
     @Enumerated(EnumType.ORDINAL)
@@ -46,19 +46,19 @@ public class Truck {
         this.regNumber = regNumber;
     }
 
-    public String getShiftSize() {
+    public int getShiftSize() {
         return shiftSize;
     }
 
-    public void setShiftSize(String shiftSize) {
+    public void setShiftSize(int shiftSize) {
         this.shiftSize = shiftSize;
     }
 
-    public String getCapacity() {
+    public long getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(String capacity) {
+    public void setCapacity(long capacity) {
         this.capacity = capacity;
     }
 

@@ -11,7 +11,7 @@ import java.util.Set;
 public class Order {
 
     @Id
-    @SequenceGenerator(name = "order_generator", sequenceName = "order_sequence", initialValue = 10)
+    @SequenceGenerator(name = "order_generator", sequenceName = "order_sequence", initialValue = 20)
     @GeneratedValue(generator = "order_generator")
     private long id;
 

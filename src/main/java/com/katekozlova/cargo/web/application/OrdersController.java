@@ -2,16 +2,14 @@ package com.katekozlova.cargo.web.application;
 
 import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.business.service.OrderService;
-import com.katekozlova.cargo.business.service.TrucksService;
-import com.katekozlova.cargo.data.entity.Driver;
-import com.katekozlova.cargo.data.entity.Order;
-import com.katekozlova.cargo.data.entity.Truck;
-import com.katekozlova.cargo.data.entity.Waypoint;
+import com.katekozlova.cargo.data.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +23,7 @@ public class OrdersController {
     private final DriversService driversService;
 
     @Autowired
-    public OrdersController(OrderService orderService, DriversService driversService, TrucksService trucksService) {
+    public OrdersController(OrderService orderService, DriversService driversService) {
         this.orderService = orderService;
         this.driversService = driversService;
     }
@@ -48,18 +46,31 @@ public class OrdersController {
         return new ModelAndView("orders/drivers", "drivers", drivers);
     }
 
-
     @GetMapping(value = "/{id}/trucks")
     public ModelAndView getTrucks(@PathVariable("id") long id, Model model) {
         List<Truck> trucks = orderService.getTrucks(id);
-//        Order order = orderService.findById(id);
-//        model.addAttribute("order", order);
+        Order order = orderService.findById(id);
+        model.addAttribute("order", order);
         return new ModelAndView("orders/trucks", "trucks", trucks);
     }
 
-//    @GetMapping(value = "/{uniqueNumber}/trucks/add/{id}")
-//    public String addTruck(@PathVariable("uniqueNumber") long un, @PathVariable("id") long id2) {
-//        orderService.addTruckToOrder(un, id2);
-//        return "redirect:/orders/list";
-//    }
+    @GetMapping(value = "/{id1}/trucks/add/{id2}")
+    public String addTruck(@PathVariable("id1") long orderId, @PathVariable("id2") long truckId) {
+        orderService.addTruckToOrder(orderId, truckId);
+        return "redirect:/orders/list";
+    }
+
+    @GetMapping(value = {"/create"})
+    public String newOrder(ModelMap model) {
+        Order order = new Order();
+        model.addAttribute("order", order);
+        model.addAttribute("statusValues", OrderStatus.values());
+        return "orders/create";
+    }
+
+    @PostMapping(value = "/create")
+    public String createOrder(Order order) {
+        orderService.create(order);
+        return "redirect:/orders/list";
+    }
 }

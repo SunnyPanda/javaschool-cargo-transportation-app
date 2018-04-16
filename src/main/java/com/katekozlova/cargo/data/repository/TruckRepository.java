@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface TruckRepository extends CrudRepository<Truck, Long> {
 
+    List<Truck> findTrucksByTruckStateAndOrderIsNullAndCapacityIsGreaterThan(TruckState truckState, long weight);
+
     List<Truck> findTrucksByTruckStateAndOrderIsNull(TruckState truckState);
 
     Truck findTruckById(Long id);

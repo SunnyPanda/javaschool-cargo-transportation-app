@@ -21,14 +21,14 @@ insert into cities (id, city_name) values (9, 'Пермь');
 insert into cities (id, city_name) values (10, 'Краснодар');
 
 insert into cargo (id, cargo_number, cargo_name, weight, status) values (1, 0001, 'Коробочка', 34, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (2, 0002, 'Бутылки', 59, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (3, 0003, 'Машинка', 200, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (2, 0002, 'Бутылки', 13, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (3, 0003, 'Машинка', 3, 0);
 insert into cargo (id, cargo_number, cargo_name, weight, status) values (4, 0004, 'Стол', 30, 0);
 insert into cargo (id, cargo_number, cargo_name, weight, status) values (5, 0005, 'Пакет акций Apple', 1, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (6, 0006, 'Кухня', 100, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (7, 0007, 'Шкаф', 70, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (6, 0006, 'Кухня', 5, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (7, 0007, 'Шкаф', 3, 0);
 insert into cargo (id, cargo_number, cargo_name, weight, status) values (8, 0008, 'Пачка чипсов', 5, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (9, 0009, 'Слоник', 300, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (9, 0009, 'Слоник', 10, 0);
 insert into cargo (id, cargo_number, cargo_name, weight, status) values (10, 0010, 'Черепашка', 50, 0);
 
 insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (1, 1, 1, 1, 0);
@@ -58,7 +58,7 @@ insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id, order_id) values (4, 'DD44444', 2, 76, 0, 4, 4);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id, order_id) values (5, 'EE55555', 2, 200, 0, 5, 5);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (6, 'FF66666', 3, 40, 0, 6);
-insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (7, 'GG77777', 3, 90, 0, 7);
+insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (7, 'GG77777', 3, 400, 0, 7);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (8, 'HH88888', 3, 23, 0, 8);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (9, 'II99999', 3, 34, 0, 9);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (10, 'JJ00000', 3, 11, 0, 10);
