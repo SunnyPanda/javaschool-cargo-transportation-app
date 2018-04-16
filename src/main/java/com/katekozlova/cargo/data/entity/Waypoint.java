@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Waypoint {
 
     @Id
-    @SequenceGenerator(name = "waypoint_generator", sequenceName = "waypoint_sequence", initialValue = 10)
+    @SequenceGenerator(name = "waypoint_generator", sequenceName = "waypoint_sequence", initialValue = 21)
     @GeneratedValue(generator = "waypoint_generator")
     private long id;
 

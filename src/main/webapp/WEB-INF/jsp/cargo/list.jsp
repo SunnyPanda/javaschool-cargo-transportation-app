@@ -19,6 +19,7 @@
         <tbody>
         <c:forEach items="${cargo}" var="cargo" varStatus="status">
             <tr>
+                <td>${cargo.id}</td>
                 <th scope="row">${cargo.number}</th>
                 <td>${cargo.name}</td>
                 <td>${cargo.weight}</td>

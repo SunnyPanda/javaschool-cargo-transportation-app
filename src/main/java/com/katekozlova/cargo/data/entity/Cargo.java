@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Cargo {
 
     @Id
-    @SequenceGenerator(name = "cargo_generator", sequenceName = "cargo_sequence", initialValue = 10)
+    @SequenceGenerator(name = "cargo_generator", sequenceName = "cargo_sequence", initialValue = 11)
     @GeneratedValue(generator = "cargo_generator")
     private long id;
 
