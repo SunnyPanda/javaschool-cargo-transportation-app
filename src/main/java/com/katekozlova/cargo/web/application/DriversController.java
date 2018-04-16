@@ -71,17 +71,20 @@ public class DriversController {
         return "redirect:/drivers/list";
     }
 
-//    @GetMapping(value = "{id}")
-//    public String driversInfo(@PathVariable("id") long id, ModelMap model) {
-//        Optional<Driver> driver = driversService.findById(id);
-//        model.addAttribute("driver", driver);
-//        return "drivers/id";
-//    }
-
     @GetMapping(value = "{id}")
-    public ModelAndView driversInfo(@PathVariable("id") long id) {
+    public String driversInfo(@PathVariable("id") long id, ModelMap model) {
         Driver driver = driversService.findById(id);
-        return new ModelAndView("drivers/id", "driver", driver);
+        List<Driver> coDrivers = driversService.findByTruck(id);
+        System.out.println(coDrivers);
+        model.addAttribute("driver", driver);
+        model.addAttribute("coDrivers", coDrivers);
+        return "drivers/id";
     }
+
+//    @GetMapping(value = "{id}")
+//    public ModelAndView driversInfo(@PathVariable("id") long id) {
+//        Driver driver = driversService.findById(id);
+//        return new ModelAndView("drivers/id", "driver", driver);
+//    }
 }
 

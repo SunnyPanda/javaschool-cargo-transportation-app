@@ -40,6 +40,19 @@ public class DriversService {
     public Driver findById(long id) {
         return driverRepository.findDriverById(id);
     }
+
+    public List<Driver> findByTruck(long id) {
+
+        List<Driver> drivers = driverRepository.findDriverByCurrentTruck(driverRepository
+                .findDriverById(id).getCurrentTruck());
+        for (Driver driver : drivers) {
+            if (driver.getId() == id) {
+                drivers.remove(driver);
+            }
+        }
+
+        return drivers;
+    }
 }
 
 

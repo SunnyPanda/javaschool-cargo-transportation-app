@@ -23,7 +23,11 @@
                 <%--<c:set "driver" scope="session" value="driver" />--%>
             <tr>
                 <td>${driver.personalNumber}</td>
-
+                <td>
+                    <c:forEach items="${coDrivers}" var="coDriver" varStatus="status">
+                        ${coDriver.personalNumber}
+                    </c:forEach>
+                </td>
                     <%--<c:out value="${driver.personalNumber}" />--%>
                     <%--<th scope="row">${personalNumber}</th>--%>
             </tr>
