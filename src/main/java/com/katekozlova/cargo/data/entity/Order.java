@@ -1,6 +1,9 @@
 package com.katekozlova.cargo.data.entity;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,6 +16,7 @@ public class Order {
     private long id;
 
     @Column(name = "unique_number")
+    @NaturalId
     private long uniqueNumber;
 
     @Column(name = "status")
@@ -20,7 +24,7 @@ public class Order {
     private OrderStatus orderStatus;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    private Set<Waypoint> waypoints;
+    private List<Waypoint> waypoints;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "order")
     private Truck truck;
@@ -58,5 +62,13 @@ public class Order {
 
     public void setTruck(Truck truck) {
         this.truck = truck;
+    }
+
+    public List<Waypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(List<Waypoint> waypoints) {
+        this.waypoints = waypoints;
     }
 }

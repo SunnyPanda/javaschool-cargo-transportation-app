@@ -1,11 +1,10 @@
 package com.katekozlova.cargo.business.service;
 
 import com.google.common.collect.Lists;
-import com.katekozlova.cargo.data.entity.Driver;
-import com.katekozlova.cargo.data.entity.Order;
-import com.katekozlova.cargo.data.entity.Waypoint;
+import com.katekozlova.cargo.data.entity.*;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.OrderRepository;
+import com.katekozlova.cargo.data.repository.TruckRepository;
 import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +17,14 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final WaypointRepository waypointRepository;
     private final DriverRepository driverRepository;
+    private final TruckRepository truckRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, WaypointRepository waypointRepository, DriverRepository driverRepository) {
+    public OrderService(OrderRepository orderRepository, WaypointRepository waypointRepository, DriverRepository driverRepository, TruckRepository truckRepository) {
         this.orderRepository = orderRepository;
         this.waypointRepository = waypointRepository;
         this.driverRepository = driverRepository;
+        this.truckRepository = truckRepository;
     }
 
     public List<Order> getAllOrders() {
@@ -37,4 +38,26 @@ public class OrderService {
     public List<Driver> getOrdersDrivers(long id) {
         return driverRepository.findDriverByOrderId(id);
     }
+
+    public List<Truck> getTrucks(long id) {
+        return truckRepository.findTrucksByTruckStateAndOrderIsNull(TruckState.SERVICEABLE);
+    }
+
+    public void addTruckToOrder(long number, long truckId) {
+        orderRepository.findOrderByUniqueNumber(number).setTruck(truckRepository.findTruckById(truckId));
+        //truckRepository.findTruckById(truckId).setOrder(orderRepository.findOrderByUniqueNumber(number));
+    }
+
+    public Order findById(long id) {
+        return orderRepository.findOrderById(id);
+    }
+
+//    public long findMaxCargoWeight(List<Waypoint> waypoints) {
+//        long maxWeight = 0;
+//        for (Waypoint waypoint: waypoints) {
+//            if (waypoint.getWaypointType().equals("SHIPMENT")) {
+//
+//            }
+//        }
+//    }
 }
