@@ -29,6 +29,9 @@
                     </c:forEach>
                 </td>
                 <td>${driver.currentTruck.regNumber}</td>
+                <td>${driver.order.uniqueNumber}</td>
+                <td><a href="<c:url value='/orders/waypoints/${driver.order.id}'/>">waypoints</a></td>
+                </td>
                     <%--<c:out value="${driver.personalNumber}" />--%>
                     <%--<th scope="row">${personalNumber}</th>--%>
             </tr>
