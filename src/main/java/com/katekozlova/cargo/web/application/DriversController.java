@@ -75,7 +75,6 @@ public class DriversController {
     public String driversInfo(@PathVariable("id") long id, ModelMap model) {
         Driver driver = driversService.findById(id);
         List<Driver> coDrivers = driversService.findByTruck(id);
-        System.out.println(coDrivers);
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
         return "drivers/id";

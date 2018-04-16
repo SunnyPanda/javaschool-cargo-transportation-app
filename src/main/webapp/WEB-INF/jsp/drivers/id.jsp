@@ -28,6 +28,7 @@
                         ${coDriver.personalNumber}
                     </c:forEach>
                 </td>
+                <td>${driver.currentTruck.regNumber}</td>
                     <%--<c:out value="${driver.personalNumber}" />--%>
                     <%--<th scope="row">${personalNumber}</th>--%>
             </tr>
