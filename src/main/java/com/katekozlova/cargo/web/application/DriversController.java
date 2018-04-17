@@ -4,7 +4,6 @@ import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.DriverStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -27,9 +27,9 @@ public class DriversController {
     }
 
     @GetMapping(value = "/list")
-    public ModelAndView list(Authentication authentication) {
-        System.out.println("authentication = " + authentication);
-        System.out.println("authentication.getAuthorities() = " + authentication.getAuthorities());
+    public ModelAndView list(HttpServletRequest request) {
+        System.out.println("request.isUserInRole(\"USER\") = " + request.isUserInRole("USER"));
+        System.out.println("request.isUserInRole(\"DRIVER\") = " + request.isUserInRole("DRIVER"));
         List<Driver> drivers = driversService.getAllDrivers();
         return new ModelAndView("drivers/list", "drivers", drivers);
     }

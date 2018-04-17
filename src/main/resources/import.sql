@@ -80,4 +80,5 @@ insert into drivers (id, personal_number, first_name, last_name, hours_per_month
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (14, 14, 'Леонид', 'Андреев', 45, 0, 9);
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (15, 15, 'Анатолий', 'Вассерман', 15, 0, 10);
 
-
+insert into users (id, username, password, role) values (1, 'user', '$2a$11$Aax9HOQhqLshWpLZPeoiYe.EMjj4/RaSf5PCO2zcfdxtnarufc28K', 'ROLE_USER');
+insert into users (id, username, password, role, driver_id) values (2, 'driver', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 2);

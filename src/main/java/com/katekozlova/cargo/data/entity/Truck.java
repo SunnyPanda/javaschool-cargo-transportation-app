@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Truck {
 
     @Id
-    @SequenceGenerator(name = "truck_generator", sequenceName = "truck_sequence", initialValue = 10)
+    @SequenceGenerator(name = "truck_generator", sequenceName = "truck_sequence", initialValue = 20)
     @GeneratedValue(generator = "truck_generator")
     private long id;
 

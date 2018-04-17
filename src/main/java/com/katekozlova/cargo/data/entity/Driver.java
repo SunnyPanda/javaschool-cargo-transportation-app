@@ -75,6 +75,11 @@ public class Driver {
                 ", personalNumber=" + personalNumber +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", hoursPerMonth=" + hoursPerMonth +
+                ", driverStatus=" + driverStatus +
+                ", currentCity=" + currentCity +
+                ", currentTruck=" + currentTruck +
+                ", order=" + order +
                 '}';
     }
 
