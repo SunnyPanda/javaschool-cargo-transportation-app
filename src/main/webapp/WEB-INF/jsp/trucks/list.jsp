@@ -16,7 +16,6 @@
                 <th scope="col">Capacity</th>
                 <th scope="col">State</th>
                 <th scope="col">City</th>
-                    <%--<th scope="col">Order</th>--%>
                 <th/>
                 <th/>
             </tr>
