@@ -16,7 +16,7 @@
                 <th scope="col">Capacity</th>
                 <th scope="col">State</th>
                 <th scope="col">City</th>
-                <th scope="col">Order</th>
+                    <%--<th scope="col">Order</th>--%>
                 <th/>
                 <th/>
             </tr>
@@ -29,7 +29,7 @@
                     <td>${truck.capacity}</td>
                     <td>${truck.truckState}</td>
                     <td>${truck.currentCity.name}</td>
-                    <td>${truck.order.id}</td>
+                        <%--<td>${truck.order.id}</td>--%>
                     <td><a href="<c:url value='/trucks/edit/${truck.id}'/>">edit</a></td>
                     <td><a href="<c:url value='/trucks/delete/${truck.id}'/>">delete</a></td>
                 </tr>

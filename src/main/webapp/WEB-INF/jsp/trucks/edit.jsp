@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td><label for="currentCity">City: </label></td>
-                <td><form:input path="currentCity" id="currentCity"/></td>
+                <td><form:input path="currentCity.name" id="currentCity"/></td>
                 <td><form:errors path="currentCity" cssClass="error"/></td>
             </tr>
 

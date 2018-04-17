@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class City {
 
     @Id
-    @SequenceGenerator(name = "city_generator", sequenceName = "city_sequence", initialValue = 10)
+    @SequenceGenerator(name = "city_generator", sequenceName = "city_sequence", initialValue = 20)
     @GeneratedValue(generator = "city_generator")
     private long id;
 
