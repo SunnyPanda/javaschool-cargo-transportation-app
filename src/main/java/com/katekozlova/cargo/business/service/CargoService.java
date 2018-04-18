@@ -21,4 +21,8 @@ public class CargoService {
     public List<Cargo> getAllCargo() {
         return Lists.newArrayList(cargoRepository.findAll());
     }
+
+    public Cargo getByNumber(long cargoNumber) {
+        return cargoRepository.findCargoByNumber(cargoNumber);
+    }
 }

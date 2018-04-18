@@ -72,4 +72,8 @@ public class OrderService {
         }
         return maxWeight;
     }
+
+    public Order findByUniqueNumber(long uniqueNumber) {
+        return orderRepository.findOrderByUniqueNumber(uniqueNumber);
+    }
 }
