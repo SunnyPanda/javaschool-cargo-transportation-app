@@ -1,4 +1,4 @@
-insert into orders (id, unique_number, status) values (1, 1, 0);
+insert into orders (id, unique_number, status) values (1, 1234, 0);
 insert into orders (id, unique_number, status) values (2, 2, 1);
 insert into orders (id, unique_number, status) values (3, 3, 1);
 insert into orders (id, unique_number, status) values (4, 4, 1);
@@ -45,12 +45,12 @@ insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (1
 insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (12, 7, 6, 6, 1);
 insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (13, 7, 7, 7, 0);
 insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (14, 8, 7, 7, 1);
-insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (15, 8, 8, 8, 0);
-insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (16, 9, 8, 8, 1);
-insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (17, 9, 9, 9, 0);
-insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (18, 10, 9, 9, 1);
-insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (19, 10, 10, 10, 0);
-insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (20, 1, 10, 10, 1);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (15, 8, 8, 0);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (16, 9, 8, 1);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (17, 9, 9, 0);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (18, 10, 9, 1);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (19, 10, 10, 0);
+insert into waypoints (id, city_id, cargo_id, waypoint_type) values (20, 1, 10, 1);
 
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id, order_id) values (1, 'AA11111', 2, 35, 0, 1, 1);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id, order_id) values (2, 'BB22222', 2, 100, 0, 2, 2);

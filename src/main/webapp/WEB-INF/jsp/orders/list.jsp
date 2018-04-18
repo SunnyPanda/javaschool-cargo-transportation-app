@@ -39,5 +39,5 @@
         </c:forEach>
         </tbody>
     </table>
-    <a class="btn btn-primary" href="<c:url value='/orders/create'/>" role="button">New Order</a>
+    <a class="btn btn-primary" href="<c:url value='/orders/create/step1'/>" role="button">New Order</a>
 </t:wrapper>

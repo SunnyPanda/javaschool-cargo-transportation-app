@@ -8,10 +8,7 @@ import com.katekozlova.cargo.security.AppUserPrincipal;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,9 +36,13 @@ public class IndexController {
     }
 
     @PostMapping("/orders/search")
-    public String searchOrder(@RequestParam("uniqueNumber") long uniqueNumber, Model model) {
-        Order order = orderService.findByUniqueNumber(uniqueNumber);
-        System.out.println("order = " + order.getUniqueNumber());
+    public String searchOrder(@RequestParam("uniqueNumber") long uniqueNumber) {
+        return "redirect:/orders/search/" + uniqueNumber;
+    }
+
+    @GetMapping("/orders/search/{unique-number}")
+    public String searchOrderView(@PathVariable("unique-number") long id, Model model) {
+        Order order = orderService.findByUniqueNumber(id);
         model.addAttribute("order", order);
         return "orders/search";
     }

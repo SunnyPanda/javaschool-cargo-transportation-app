@@ -8,7 +8,7 @@
     <div class="page-header">
         <h2>New Order</h2>
     </div>
-    <form:form method="POST" modelAttribute="order">
+    <form:form action="/create/waypoint" method="POST" modelAttribute="order">
         <table>
             <tr>
                 <td><label for="uniqueNumber">Номер заказа: </label></td>
@@ -16,18 +16,27 @@
                 <td><form:errors path="uniqueNumber" cssClass="error"/></td>
             </tr>
             </br>
-                <%--<form:form action="orders/search" method="POST" modelAttribute="order">--%>
-                <%--<label for="waypoints">Выберите маршрутную точку:</label>--%>
-                <%--<form:select path="waypoints" id="waypoints">--%>
-                <%--<form:options items="${}"/>--%>
-                <%--</form:select>--%>
-                <%--<input type="submit" value="Search"/>--%>
-                <%--</form:form>--%>
             <tr>
                 <td colspan="3">
-                    <input type="submit" value="Register"/>
+                    <input type="submit" value="Next"/>
                 </td>
             </tr>
+                <%--<tr>--%>
+
+                <%--<td><label for="waypoints">Выберите маршрутную точку:</label></td>--%>
+                <%--<td><form:select path="waypoints" id="waypoints">--%>
+                <%--<form:options items="${waypoints}"/>--%>
+                <%--</form:select></td>--%>
+                <%--<td colspan="3"><input type="submit" value="Выбрать"/></td>--%>
+                <%--</form:form>--%>
+                <%--</tr>--%>
+
+                <%--<form:form method="POST" modelAttribute="order">--%>
+                <%--<tr>--%>
+                <%--<td colspan="3">--%>
+                <%--<input type="submit" value="Register"/>--%>
+                <%--</td>--%>
+                <%--</tr>--%>
         </table>
     </form:form>
 </t:wrapper>

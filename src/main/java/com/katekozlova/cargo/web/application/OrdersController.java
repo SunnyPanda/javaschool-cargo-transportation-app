@@ -2,14 +2,16 @@ package com.katekozlova.cargo.web.application;
 
 import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.business.service.OrderService;
-import com.katekozlova.cargo.data.entity.*;
+import com.katekozlova.cargo.business.service.WaypointService;
+import com.katekozlova.cargo.data.entity.Driver;
+import com.katekozlova.cargo.data.entity.Order;
+import com.katekozlova.cargo.data.entity.Truck;
+import com.katekozlova.cargo.data.entity.Waypoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,11 +23,13 @@ public class OrdersController {
 
     private final OrderService orderService;
     private final DriversService driversService;
+    private final WaypointService waypointService;
 
     @Autowired
-    public OrdersController(OrderService orderService, DriversService driversService) {
+    public OrdersController(OrderService orderService, DriversService driversService, WaypointService waypointService) {
         this.orderService = orderService;
         this.driversService = driversService;
+        this.waypointService = waypointService;
     }
 
     @GetMapping(value = "/list")
@@ -60,23 +64,44 @@ public class OrdersController {
         return "redirect:/orders/list";
     }
 
-    @GetMapping(value = {"/create"})
-    public String newOrder(ModelMap model) {
+    @GetMapping(value = "/create/step1")
+    public String createOrder(Model model) {
         Order order = new Order();
         model.addAttribute("order", order);
-        model.addAttribute("statusValues", OrderStatus.values());
-        return "orders/create";
+        return "orders/create/step1";
     }
 
-    @PostMapping(value = "/create")
-    public String createOrder(Order order) {
-        orderService.create(order);
-        return "redirect:/orders/list";
-    }
+//    @PostMapping(value = "/create/step1")
+//    public String saveNumber(Order order) {
+//    orderService.create(order);
+//    return "create/waypoint";
+//    }
+
+//    @GetMapping(value = "/create/waypoint")
+//    public String createWaypoint(Model model) {
+//        return
+//    }
+//    @GetMapping(value = "/create")
+//    public String newOrder(ModelMap model) {
+//        Order order = new Order();
+//        List<Waypoint> waypoints = waypointService.findFreeWaypoints();
+//        model.addAttribute("waypoints", waypoints);
+//        model.addAttribute("order", order);
+//        model.addAttribute("statusValues", OrderStatus.values());
+//        return "orders/create";
+//    }
+//
+//    @PostMapping(value = "/create")
+//    public String createOrder(Order order) {
+//        orderService.create(order);
+//        return "redirect:/orders/list";
+//    }
 
     @GetMapping(value = "/status")
     public ModelAndView getStatus() {
         List<Order> orders = orderService.getAllOrders();
         return new ModelAndView("orders/status", "orders", orders);
     }
+
+
 }

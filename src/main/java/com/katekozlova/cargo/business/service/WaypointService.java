@@ -21,4 +21,8 @@ public class WaypointService {
     public List<Waypoint> getAllWaypoints() {
         return Lists.newArrayList(waypointRepository.findAll());
     }
+
+    public List<Waypoint> findFreeWaypoints() {
+        return waypointRepository.findWaypointsByOrderIsNull();
+    }
 }
