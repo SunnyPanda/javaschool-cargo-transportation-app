@@ -1,6 +1,7 @@
 package com.katekozlova.cargo.security;
 
 import com.google.common.collect.Lists;
+import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,13 @@ public class AppUserPrincipal implements UserDetails {
 
     AppUserPrincipal(User user) {
         this.user = user;
+    }
+
+    public Driver getDriver() {
+        if (user == null) {
+            return null;
+        }
+        return user.getDriver();
     }
 
     @Override

@@ -5,7 +5,7 @@
 
 <t:wrapper>
     <div class="page-header mt-5">
-        <h1>Welcome to the Drivers Page</h1>
+        <h1>Welcome to the Driver Page</h1>
     </div>
     <br/>
     <form:form method="GET" modelAttribute="driver">

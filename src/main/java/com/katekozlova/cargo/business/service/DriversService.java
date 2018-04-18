@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DriversService {
@@ -39,13 +40,7 @@ public class DriversService {
 
         List<Driver> drivers = driverRepository.findDriverByCurrentTruck(driverRepository
                 .findDriverById(id).getCurrentTruck());
-        for (Driver driver : drivers) {
-            if (driver.getId() == id) {
-                drivers.remove(driver);
-            }
-        }
-
-        return drivers;
+        return drivers.stream().filter(driver -> driver.getId() != id).collect(Collectors.toList());
     }
 }
 

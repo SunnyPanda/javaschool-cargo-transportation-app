@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -27,9 +26,7 @@ public class DriversController {
     }
 
     @GetMapping(value = "/list")
-    public ModelAndView list(HttpServletRequest request) {
-        System.out.println("request.isUserInRole(\"USER\") = " + request.isUserInRole("USER"));
-        System.out.println("request.isUserInRole(\"DRIVER\") = " + request.isUserInRole("DRIVER"));
+    public ModelAndView list() {
         List<Driver> drivers = driversService.getAllDrivers();
         return new ModelAndView("drivers/list", "drivers", drivers);
     }
@@ -70,7 +67,7 @@ public class DriversController {
         return "redirect:/drivers/list";
     }
 
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/info/{id}")
     public String driversInfo(@PathVariable("id") long id, ModelMap model) {
         Driver driver = driversService.findById(id);
         List<Driver> coDrivers = driversService.findByTruck(id);
