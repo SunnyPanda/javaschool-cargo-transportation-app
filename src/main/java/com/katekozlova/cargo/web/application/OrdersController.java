@@ -73,4 +73,10 @@ public class OrdersController {
         orderService.create(order);
         return "redirect:/orders/list";
     }
+
+    @GetMapping(value = "/status")
+    public ModelAndView getStatus() {
+        List<Order> orders = orderService.getAllOrders();
+        return new ModelAndView("orders/status", "orders", orders);
+    }
 }

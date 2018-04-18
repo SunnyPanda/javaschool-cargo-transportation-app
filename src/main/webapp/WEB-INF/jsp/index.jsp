@@ -15,4 +15,10 @@
     <a href="<c:url value='/waypoints/list' />">Waypoints List</a>
     <br/>
     <a href="<c:url value='/orders/list' />">Orders List</a>
+    <br/>
+    <br/>
+    <br/>
+    <a href="<c:url value='/cargo/status' />">Cargo's status</a>
+    <br/>
+    <a href="<c:url value='/orders/status' />">Order's status</a>
 </t:wrapper>

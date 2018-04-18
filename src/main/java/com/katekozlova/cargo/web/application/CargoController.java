@@ -26,4 +26,10 @@ public class CargoController {
         List<Cargo> cargo = cargoService.getAllCargo();
         return new ModelAndView("cargo/list", "cargo", cargo);
     }
+
+    @GetMapping(value = "/status")
+    public ModelAndView getStatus() {
+        List<Cargo> cargo = cargoService.getAllCargo();
+        return new ModelAndView("cargo/status", "cargo", cargo);
+    }
 }
