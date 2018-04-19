@@ -47,6 +47,7 @@ public class OrderService {
     }
 
     public Order create(Order order) {
+        order.setOrderStatus ( OrderStatus.NO );
         return orderRepository.save(order);
     }
 
