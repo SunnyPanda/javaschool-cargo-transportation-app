@@ -81,16 +81,41 @@ public class OrdersController {
 
     @PostMapping(value = "/save")
     public String saveWaypoint(Order order, Model model) {
-        System.out.println("Мы зашли в save");
-        for (Waypoint waypoint : order.getWaypoints()) {
-            System.out.println("waypoint.getId() = " + waypoint.getId());
+        System.out.println ( "До сохранения" );
+        for ( Waypoint waypoint : order.getWaypoints ( ) ) {
+            System.out.println ( "waypoint.getId() = " + waypoint.getId ( ) );
         }
-        orderService.create(order);
-        List<Waypoint> waypoints = waypointService.findFreeWaypoints();
-        model.addAttribute("freewaypoints", waypoints);
+        orderService.saveWaipoints ( order );
+        List<Waypoint> freeWaypoints = waypointService.findFreeWaypoints ( );
+        model.addAttribute ( "order", order );
+        model.addAttribute ( "freewaypoints", freeWaypoints );
         return "orders/create/waypoint";
     }
 
+    @PostMapping(value = "/addtruck")
+    public String addTruck(Order order, Model model) {
+        List<Truck> trucks = orderService.getTrucks ( order.getId ( ) );
+        model.addAttribute ( "order", order );
+        model.addAttribute ( "trucks", trucks );
+        return "orders/create/truck";
+    }
+
+    @PostMapping(value = "/savetruck")
+    public String saveTruck(Order order, Model model) {
+        orderService.saveTruckToOrder ( order );
+        List<Truck> trucks = orderService.getTrucks ( order.getId ( ) );
+        model.addAttribute ( "order", order );
+        model.addAttribute ( "trucks", trucks );
+        return "orders/create/truck";
+    }
+
+    @PostMapping(value = "/adddriver")
+    public String addDriver(Order order, Model model) {
+//        List<Truck> trucks = orderService.getTrucks(order.getId ());
+//        model.addAttribute("order", order);
+//        model.addAttribute("trucks", trucks);
+        return "orders/create/driver";
+    }
 //    @GetMapping(value = "/create/waypoint")
 //    public String createWaypoint(Model model) {
 //        return "orders/list";

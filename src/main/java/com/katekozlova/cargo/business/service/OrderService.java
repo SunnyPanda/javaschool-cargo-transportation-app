@@ -50,6 +50,17 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    public Order saveWaipoints(Order order) {
+
+        getOrderIdToWaypoint ( order );
+        return orderRepository.save ( order );
+    }
+
+    public Order saveTruckToOrder(Order order) {
+        order.getTruck ( ).setOrder ( order );
+        return orderRepository.save ( order );
+    }
+
     public void addTruckToOrder(long orderId, long truckId) {
         orderRepository.findOrderByUniqueNumber(orderId).setTruck(truckRepository.findTruckById(truckId));
         //truckRepository.findTruckById(truckId).setOrder(orderRepository.findOrderByUniqueNumber(number));
@@ -75,5 +86,11 @@ public class OrderService {
 
     public Order findByUniqueNumber(long uniqueNumber) {
         return orderRepository.findOrderByUniqueNumber(uniqueNumber);
+    }
+
+    public void getOrderIdToWaypoint(Order order) {
+        for ( Waypoint waypoint : order.getWaypoints ( ) ) {
+            waypoint.setOrder ( order );
+        }
     }
 }

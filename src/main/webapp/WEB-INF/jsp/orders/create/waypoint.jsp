@@ -6,7 +6,7 @@
 <t:wrapper>
     </br>
     <div class="page-header">
-        <h2>Hillo</h2>
+        <h2>Waypoints</h2>
     </div>
     <form:form action="/orders/save" method="POST" modelAttribute="order">
         <c:forEach items="${order.waypoints}" var="waypoint" varStatus="status">
@@ -19,34 +19,16 @@
 
         <table>
             <td><label for="waypoints">Выберите маршрутную точку:</label></td>
-            <td><form:select path="waypoints" id="waypoints">
-                <form:options items="${freewaypoints}"/>
-            </form:select></td>
+            <td>
+                <form:select path="waypoints" id="waypoints" multiple="true">
+                    <form:options items="${freewaypoints}"/>
+                </form:select>
+            </td>
             <td colspan="3"><input type="submit" value="Выбрать"/></td>
-    <%--</form:form>--%>
-    <%--</tr>--%>
-    <%--</br>--%>
-    <%--<tr>--%>
-    <%--<td colspan="3">--%>
-    <%--<input type="submit" value="Next"/>--%>
-    <%--</td>--%>
-    <%--</tr>--%>
-    <%--<tr>--%>
+        </table>
+    </form:form>
 
-    <%--<td><label for="waypoints">Выберите маршрутную точку:</label></td>--%>
-    <%--<td><form:select path="waypoints" id="waypoints">--%>
-    <%--<form:options items="${waypoints}"/>--%>
-    <%--</form:select></td>--%>
-    <%--<td colspan="3"><input type="submit" value="Выбрать"/></td>--%>
-    <%--</form:form>--%>
-    <%--</tr>--%>
-
-    <%--<form:form method="POST" modelAttribute="order">--%>
-    <%--<tr>--%>
-    <%--<td colspan="3">--%>
-    <%--<input type="submit" value="Register"/>--%>
-    <%--</td>--%>
-    <%--</tr>--%>
-    </table>
-</form:form>
+    <form:form action="/orders/addtruck" method="POST" modelAttribute="order">
+        <td colspan="3"><input type="submit" value="Next"/></td>
+    </form:form>
 </t:wrapper>
