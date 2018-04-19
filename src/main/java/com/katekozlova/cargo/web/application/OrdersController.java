@@ -10,15 +10,14 @@ import com.katekozlova.cargo.data.entity.Waypoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Controller
 @RequestMapping(value = "/orders")
+@SessionAttributes("order")
 public class OrdersController {
 
     private final OrderService orderService;
@@ -71,15 +70,15 @@ public class OrdersController {
         return "orders/create/step1";
     }
 
-//    @PostMapping(value = "/create/step1")
-//    public String saveNumber(Order order) {
-//    orderService.create(order);
-//    return "create/waypoint";
-//    }
+    @PostMapping(value = "/create/waypoint")
+    public String saveNumber(Order order) {
+        orderService.create(order);
+        return "orders/create/waypoint";
+    }
 
 //    @GetMapping(value = "/create/waypoint")
 //    public String createWaypoint(Model model) {
-//        return
+//        return "orders/list";
 //    }
 //    @GetMapping(value = "/create")
 //    public String newOrder(ModelMap model) {

@@ -8,12 +8,12 @@
     <div class="page-header">
         <h2>Hillo</h2>
     </div>
-    <%--<form:form action="/create/waypoint" method="POST" modelAttribute="order">--%>
-    <%--<table>--%>
-    <%--<td><label for="waypoints">Выберите маршрутную точку:</label></td>--%>
-    <%--<td><form:select path="waypoints" id="waypoints">--%>
-    <%--<form:options items="${waypoints}"/>--%>
-    <%--</form:select></td>--%>
+    <form:form method="POST" modelAttribute="order">
+        <table>
+            <td><label for="waypoints">Выберите маршрутную точку:</label></td>
+            <td><form:select path="waypoints" id="waypoints">
+                <form:options items="${waypoints}"/>
+            </form:select></td>
     <%--<td colspan="3"><input type="submit" value="Выбрать"/></td>--%>
     <%--</form:form>--%>
     <%--</tr>--%>
