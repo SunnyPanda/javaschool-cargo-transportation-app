@@ -8,13 +8,21 @@
     <div class="page-header">
         <h2>Hillo</h2>
     </div>
-    <form:form method="POST" modelAttribute="order">
+    <form:form action="/orders/save" method="POST" modelAttribute="order">
+        <c:forEach items="${order.waypoints}" var="waypoint" varStatus="status">
+            <tr>
+                <td>${waypoint.city.name}</td>
+                <td>${waypoint.cargo.name}</td>
+                <td>${waypoint.waypointType.name()}</td>
+            </tr>
+        </c:forEach>
+
         <table>
             <td><label for="waypoints">Выберите маршрутную точку:</label></td>
             <td><form:select path="waypoints" id="waypoints">
-                <form:options items="${waypoints}"/>
+                <form:options items="${freewaypoints}"/>
             </form:select></td>
-    <%--<td colspan="3"><input type="submit" value="Выбрать"/></td>--%>
+            <td colspan="3"><input type="submit" value="Выбрать"/></td>
     <%--</form:form>--%>
     <%--</tr>--%>
     <%--</br>--%>

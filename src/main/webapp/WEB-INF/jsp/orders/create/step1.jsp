@@ -8,7 +8,7 @@
     <div class="page-header">
         <h2>New Order</h2>
     </div>
-    <form:form action="orders/create/waypoint" method="POST" modelAttribute="order">
+    <form:form action="/orders/create/waypoint" method="POST" modelAttribute="order">
         <table>
             <tr>
                 <td><label for="uniqueNumber">Номер заказа: </label></td>

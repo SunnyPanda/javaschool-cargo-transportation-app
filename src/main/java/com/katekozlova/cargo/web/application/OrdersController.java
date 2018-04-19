@@ -71,8 +71,23 @@ public class OrdersController {
     }
 
     @PostMapping(value = "/create/waypoint")
-    public String saveNumber(Order order) {
+    public String saveNumber(Order order, Model model) {
         orderService.create(order);
+        List<Waypoint> waypoints = waypointService.findFreeWaypoints();
+        model.addAttribute("order", order);
+        model.addAttribute("freewaypoints", waypoints);
+        return "orders/create/waypoint";
+    }
+
+    @PostMapping(value = "/save")
+    public String saveWaypoint(Order order, Model model) {
+        System.out.println("Мы зашли в save");
+        for (Waypoint waypoint : order.getWaypoints()) {
+            System.out.println("waypoint.getId() = " + waypoint.getId());
+        }
+        orderService.create(order);
+        List<Waypoint> waypoints = waypointService.findFreeWaypoints();
+        model.addAttribute("freewaypoints", waypoints);
         return "orders/create/waypoint";
     }
 
