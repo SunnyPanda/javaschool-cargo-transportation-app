@@ -16,4 +16,5 @@ public interface WaypointRepository extends CrudRepository<Waypoint, Long> {
 
     Waypoint findWaypointsByCargoIdAndWaypointType(long id, WaypointType waypointType);
 
+    List<Waypoint> findWaypointsByOrderIdAndWaypointType(long id, WaypointType waypointType);
 }

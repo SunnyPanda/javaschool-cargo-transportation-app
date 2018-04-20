@@ -32,23 +32,61 @@
                 <td>${driver.order.uniqueNumber}</td>
                 <td><a href="<c:url value='/orders/waypoints/${driver.order.id}'/>">waypoints</a></td>
                 </td>
-                    <%--<c:out value="${driver.personalNumber}" />--%>
-                    <%--<th scope="row">${personalNumber}</th>--%>
             </tr>
-                <%--<c:forEach items="${drivers}" var="driver" varStatus="status">--%>
-                <%--<tr>--%>
-                <%--<th scope="row">${driver.personalNumber}</th>--%>
-                <%--<td>${driver.firstName}</td>--%>
-                <%--<td>${driver.lastName}</td>--%>
-                <%--<td>${driver.hoursPerMonth}</td>--%>
-                <%--<td>${driver.driverStatus}</td>--%>
-                <%--<td>${driver.currentCity.name}</td>--%>
-                <%--<td>${driver.currentTruck.regNumber}</td>--%>
-                <%--<td><a href="<c:url value='/drivers/edit/${driver.id}'/>">edit</a></td>--%>
-                <%--<td><a href="<c:url value='/drivers/delete/${driver.id}'/>">delete</a></td>--%>
-                <%--</tr>--%>
-                <%--</c:forEach>--%>
             </tbody>
         </table>
     </form:form>
+    <form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm">
+        <tr>
+            <td>
+                <form:select path="driverStatus">
+                    <form:option value="IN_SHIFT">Заступил на смену</form:option>
+                    <form:option value="REST">Окончил смену</form:option>
+                </form:select>
+            </td>
+            <td colspan="3"><input type="submit" value="Confirm"/></td>
+        </tr>
+    </form:form>
+    <%--<tr>--%>
+    <%--<td>--%>
+    <%--<form:select path="driverStatus">--%>
+    <%--<form:option value="BEHIND_THE_WHEEL" >За рулём</form:option>--%>
+    <%--<form:option value="IN_SHIFT" >Второй водитель</form:option>--%>
+    <%--<form:option value="IN_SHIFT" >Погрузочно-разгрузочные работы</form:option>--%>
+    <%--<form:option value="IN_SHIFT" >Отдых</form:option>--%>
+    <%--</form:select>--%>
+    <%--</td>--%>
+    <%--<td colspan="3"><input type="submit" value="Confirm"/></td>--%>
+    <%--</tr>--%>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Cargo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <c:forEach items="${waypoints}" var="waypoint" varStatus="status">
+                    ${waypoint.cargo.number}
+                    ${waypoint.cargo.name}
+                </c:forEach>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
 </t:wrapper>
+
+<%--<tr>--%>
+<%--<td colspan="3">--%>
+<%--<c:choose>--%>
+<%--<c:when test="${begin}">--%>
+<%--<input type="submit" value="Update"/>--%>
+<%--</c:when>--%>
+<%--<c:otherwise>--%>
+<%--<input type="submit" value="Register"/>--%>
+<%--</c:otherwise>--%>
+<%--</c:choose>--%>
+<%--</td>--%>
+<%--</tr>--%>

@@ -36,6 +36,8 @@ public class Driver {
     @ManyToOne
     private Order order;
 
+    // private long status;
+
     public long getId() {
         return id;
     }
@@ -122,4 +124,12 @@ public class Driver {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+//    public long getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(long status) {
+//        this.status = status;
+//    }
 }

@@ -3,7 +3,10 @@ package com.katekozlova.cargo.business.service;
 
 import com.google.common.collect.Lists;
 import com.katekozlova.cargo.data.entity.Driver;
+import com.katekozlova.cargo.data.entity.Waypoint;
+import com.katekozlova.cargo.data.entity.WaypointType;
 import com.katekozlova.cargo.data.repository.DriverRepository;
+import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,33 +17,39 @@ import java.util.stream.Collectors;
 public class DriversService {
 
     private final DriverRepository driverRepository;
+    private final WaypointRepository waypointRepository;
 
     @Autowired
-    public DriversService(DriverRepository driverRepository) {
+    public DriversService(DriverRepository driverRepository, WaypointRepository waypointRepository) {
         this.driverRepository = driverRepository;
+        this.waypointRepository = waypointRepository;
     }
 
     public List<Driver> getAllDrivers() {
-        return Lists.newArrayList(driverRepository.findAll());
+        return Lists.newArrayList ( driverRepository.findAll ( ) );
     }
 
     public void deleteDriver(long id) {
-        driverRepository.deleteById(id);
+        driverRepository.deleteById ( id );
     }
 
     public Driver createAndUpdate(Driver driver) {
-        return driverRepository.save(driver);
+        return driverRepository.save ( driver );
     }
 
     public Driver findById(long id) {
-        return driverRepository.findDriverById(id);
+        return driverRepository.findDriverById ( id );
     }
 
     public List<Driver> findByTruck(long id) {
 
-        List<Driver> drivers = driverRepository.findDriverByCurrentTruck(driverRepository
-                .findDriverById(id).getCurrentTruck());
-        return drivers.stream().filter(driver -> driver.getId() != id).collect(Collectors.toList());
+        List<Driver> drivers = driverRepository.findDriverByCurrentTruck ( driverRepository
+                .findDriverById ( id ).getCurrentTruck ( ) );
+        return drivers.stream ( ).filter ( driver -> driver.getId ( ) != id ).collect ( Collectors.toList ( ) );
+    }
+
+    public List<Waypoint> getCargoByWaypoints(long orderId) {
+        return waypointRepository.findWaypointsByOrderIdAndWaypointType ( orderId, WaypointType.SHIPMENT );
     }
 }
 

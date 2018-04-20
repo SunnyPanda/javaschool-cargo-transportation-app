@@ -3,19 +3,18 @@ package com.katekozlova.cargo.web.application;
 import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.DriverStatus;
+import com.katekozlova.cargo.data.entity.Waypoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Controller
 @RequestMapping(value = "/drivers")
+@SessionAttributes("driver")
 public class DriversController {
 
     private final DriversService driversService;
@@ -68,11 +67,19 @@ public class DriversController {
     }
 
     @GetMapping(value = "/info/{id}")
-    public String driversInfo(@PathVariable("id") long id, ModelMap model) {
-        Driver driver = driversService.findById(id);
+    public String driversInfo(@PathVariable("id") long id, Driver driver, ModelMap model) {
+        driver = driversService.findById ( id );
         List<Driver> coDrivers = driversService.findByTruck(id);
+        List<Waypoint> waypoints = driversService.getCargoByWaypoints ( driver.getOrder ( ).getId ( ) );
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
+        model.addAttribute ( "waypoints", waypoints );
+        return "drivers/id";
+    }
+
+    @PostMapping(value = "/id/confirm")
+    public String confirmStatus(Driver driver) {
+        driversService.createAndUpdate ( driver );
         return "drivers/id";
     }
 
