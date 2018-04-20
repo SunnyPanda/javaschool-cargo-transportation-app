@@ -81,10 +81,6 @@ public class OrdersController {
 
     @PostMapping(value = "/save")
     public String saveWaypoint(Order order, Model model) {
-        System.out.println ( "До сохранения" );
-        for ( Waypoint waypoint : order.getWaypoints ( ) ) {
-            System.out.println ( "waypoint.getId() = " + waypoint.getId ( ) );
-        }
         orderService.saveWaipoints ( order );
         List<Waypoint> freeWaypoints = waypointService.findFreeWaypoints ( );
         model.addAttribute ( "order", order );

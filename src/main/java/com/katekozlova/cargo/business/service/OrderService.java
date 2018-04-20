@@ -52,7 +52,7 @@ public class OrderService {
     }
 
     public Order saveWaipoints(Order order) {
-
+        // checkWaypoints(order.getWaypoints ());
         getOrderIdToWaypoint ( order );
         return orderRepository.save ( order );
     }
@@ -97,6 +97,18 @@ public class OrderService {
 
     public Order findByUniqueNumber(long uniqueNumber) {
         return orderRepository.findOrderByUniqueNumber(uniqueNumber);
+    }
+
+    public boolean checkWaypoints(List<Waypoint> waypoints) {
+        for ( Waypoint waypoint : waypoints ) {
+            if (waypoint.getWaypointType ( ) == WaypointType.SHIPMENT) {
+                waypointRepository.findWaypointsByCargoIdAndWaypointType ( waypoint.getCargo ( ).getId ( ), WaypointType.LANDING );
+            } else {
+                waypointRepository.findWaypointsByCargoIdAndWaypointType ( waypoint.getCargo ( ).getId ( ), WaypointType.SHIPMENT );
+            }
+        }
+
+        return true;
     }
 
     public void getOrderIdToWaypoint(Order order) {
