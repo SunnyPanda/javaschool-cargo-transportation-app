@@ -15,4 +15,6 @@ public interface DriverRepository extends CrudRepository<Driver, Long> {
     Driver findDriverById(Long id);
 
     List<Driver> findDriverByCurrentTruck(Truck truck);
+
+    List<Driver> findDriverByOrderIsNullAndCurrentCityId(Long id);
 }

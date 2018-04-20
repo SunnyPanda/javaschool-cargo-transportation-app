@@ -71,4 +71,12 @@ public class Order {
     public void setWaypoints(List<Waypoint> waypoints) {
         this.waypoints = waypoints;
     }
+
+    public Set<Driver> getDrivers() {
+        return drivers;
+    }
+
+    public void setDrivers(Set<Driver> drivers) {
+        this.drivers = drivers;
+    }
 }

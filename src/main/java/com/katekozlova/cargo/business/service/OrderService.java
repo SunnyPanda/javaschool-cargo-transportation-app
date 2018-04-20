@@ -67,6 +67,16 @@ public class OrderService {
         //truckRepository.findTruckById(truckId).setOrder(orderRepository.findOrderByUniqueNumber(number));
     }
 
+    public List<Driver> getDrivers(Order order) {
+        return driverRepository.findDriverByOrderIsNullAndCurrentCityId ( order.getTruck ( )
+                .getCurrentCity ( ).getId ( ) );
+    }
+
+    public Order saveDriversToOrder(Order order) {
+        getOrderToDriver ( order );
+        return orderRepository.save ( order );
+    }
+
     public Order findById(long id) {
         return orderRepository.findOrderById(id);
     }
@@ -92,6 +102,12 @@ public class OrderService {
     public void getOrderIdToWaypoint(Order order) {
         for ( Waypoint waypoint : order.getWaypoints ( ) ) {
             waypoint.setOrder ( order );
+        }
+    }
+
+    public void getOrderToDriver(Order order) {
+        for ( Driver driver : order.getDrivers ( ) ) {
+            driver.setOrder ( order );
         }
     }
 }

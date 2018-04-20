@@ -111,9 +111,18 @@ public class OrdersController {
 
     @PostMapping(value = "/adddriver")
     public String addDriver(Order order, Model model) {
-//        List<Truck> trucks = orderService.getTrucks(order.getId ());
-//        model.addAttribute("order", order);
-//        model.addAttribute("trucks", trucks);
+        List<Driver> drivers = orderService.getDrivers ( order );
+        model.addAttribute ( "order", order );
+        model.addAttribute ( "drivers", drivers );
+        return "orders/create/driver";
+    }
+
+    @PostMapping(value = "/savedriver")
+    public String saveDriver(Order order, Model model) {
+        orderService.saveDriversToOrder ( order );
+        List<Driver> drivers = orderService.getDrivers ( order );
+        model.addAttribute ( "order", order );
+        model.addAttribute ( "drivers", drivers );
         return "orders/create/driver";
     }
 //    @GetMapping(value = "/create/waypoint")
