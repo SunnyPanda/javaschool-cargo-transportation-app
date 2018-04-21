@@ -95,3 +95,4 @@ insert into users (id, username, password, role) values (1, 'user', '$2a$11$Aax9
 insert into users (id, username, password, role, driver_id) values (2, 'driver1', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 1);
 insert into users (id, username, password, role, driver_id) values (3, 'driver2', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 2);
 insert into users (id, username, password, role, driver_id) values (4, 'driver3', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 3);
+insert into users (id, username, password, role, driver_id) values (5, 'driver4', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 11);

@@ -38,6 +38,7 @@ public class Driver {
     @ManyToOne
     private Order order;
 
+    @Column
     private DateTime shiftBegin;
 
     public long getId() {

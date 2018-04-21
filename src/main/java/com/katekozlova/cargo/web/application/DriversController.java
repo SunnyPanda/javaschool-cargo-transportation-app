@@ -89,7 +89,11 @@ public class DriversController {
         return "drivers/id";
     }
 
-
+    @PostMapping(value = "/id/shiftend")
+    public String shiftEnd(Driver driver) {
+        driversService.setShiftEnd(driver);
+        return "drivers/id";
+    }
 //    @GetMapping(value = "{id}")
 //    public ModelAndView driversInfo(@PathVariable("id") long id) {
 //        Driver driver = driversService.findById(id);

@@ -10,6 +10,7 @@ import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeComparator;
+import org.joda.time.Hours;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,11 +66,16 @@ public class DriversService {
     }
 
     public void setShiftEnd(Driver driver) {
-        DateTime firstDayOfMonth = new DateTime().dayOfMonth().withMinimumValue();
+        final DateTime shiftEnd = new DateTime();
+        DateTime firstDayOfMonth = shiftEnd.dayOfMonth().withMinimumValue();
         if (DateTimeComparator.getDateOnlyInstance().compare(firstDayOfMonth, driver.getShiftBegin()) < 0) {
-
+            driver.setHoursPerMonth(driver.getHoursPerMonth() + driver.getOrder().getTravelTime());
+        } else {
+            driver.setHoursPerMonth(0);
+            final long hoursBetween = Hours.hoursBetween(firstDayOfMonth, shiftEnd).getHours();
+            driver.setHoursPerMonth(hoursBetween);
         }
-
+        driver.setDriverStatus(DriverStatus.REST);
     }
 
 //    @Scheduled(fixedRate = 30000, initialDelay = 20000)

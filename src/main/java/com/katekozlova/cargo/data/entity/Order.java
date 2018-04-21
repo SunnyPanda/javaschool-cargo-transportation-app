@@ -32,6 +32,9 @@ public class Order {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private Set<Driver> drivers;
 
+    @Column
+    private Long travelTime;
+
     public long getId() {
         return id;
     }
@@ -78,5 +81,13 @@ public class Order {
 
     public void setDrivers(Set<Driver> drivers) {
         this.drivers = drivers;
+    }
+
+    public long getTravelTime() {
+        return travelTime;
+    }
+
+    public void setTravelTime(long travelTime) {
+        this.travelTime = travelTime;
     }
 }

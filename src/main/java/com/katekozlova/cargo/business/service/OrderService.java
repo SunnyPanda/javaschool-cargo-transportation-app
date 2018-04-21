@@ -82,9 +82,9 @@ public class OrderService {
         final DateTime endOfMonth = now.dayOfMonth().withMaximumValue().millisOfDay().withMaximumValue();
         final long hoursBetween = Hours.hoursBetween(now, endOfMonth).getHours();
 
-        final long travelTime = getTravelTime(order.getWaypoints());
+        order.setTravelTime(getTravelTime(order.getWaypoints()));
         for (Driver driver : drivers) {
-            if (driver.getHoursPerMonth() + Math.min(hoursBetween, travelTime) <= 176) {
+            if (driver.getHoursPerMonth() + Math.min(hoursBetween, order.getTravelTime()) <= 176) {
                 appropriateDravirs.add(driver);
             }
         }
