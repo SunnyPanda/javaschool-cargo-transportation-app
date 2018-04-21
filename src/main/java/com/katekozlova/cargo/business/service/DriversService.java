@@ -3,14 +3,15 @@ package com.katekozlova.cargo.business.service;
 
 import com.google.common.collect.Lists;
 import com.katekozlova.cargo.data.entity.Driver;
+import com.katekozlova.cargo.data.entity.DriverStatus;
 import com.katekozlova.cargo.data.entity.Waypoint;
 import com.katekozlova.cargo.data.entity.WaypointType;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.WaypointRepository;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,11 +21,13 @@ public class DriversService {
 
     private final DriverRepository driverRepository;
     private final WaypointRepository waypointRepository;
+    private final OrderService orderService;
 
     @Autowired
-    public DriversService(DriverRepository driverRepository, WaypointRepository waypointRepository) {
+    public DriversService(DriverRepository driverRepository, WaypointRepository waypointRepository, OrderService orderService) {
         this.driverRepository = driverRepository;
         this.waypointRepository = waypointRepository;
+        this.orderService = orderService;
     }
 
     public List<Driver> getAllDrivers() {
@@ -54,12 +57,27 @@ public class DriversService {
         return waypointRepository.findWaypointsByOrderIdAndWaypointType ( orderId, WaypointType.SHIPMENT );
     }
 
-    @Scheduled(fixedRate = 30000, initialDelay = 20000)
-    @Transactional
-    public void scheduleTask() {
-        driverRepository.updateDriver();
-        System.out.println("Траляля");
+    public void setShiftBeginTime(Driver driver) {
+
+        driver.setShiftBegin(new DateTime());
+        driver.setDriverStatus(DriverStatus.IN_SHIFT);
+        System.out.println("driver.getShiftBegin() = " + driver.getShiftBegin());
     }
+
+    public void setShiftEnd(Driver driver) {
+        DateTime firstDayOfMonth = new DateTime().dayOfMonth().withMinimumValue();
+        if (DateTimeComparator.getDateOnlyInstance().compare(firstDayOfMonth, driver.getShiftBegin()) < 0) {
+
+        }
+
+    }
+
+//    @Scheduled(fixedRate = 30000, initialDelay = 20000)
+//    @Transactional
+//    public void scheduleTask() {
+//        driverRepository.updateDriver();
+//        System.out.println("Траляля");
+//    }
 }
 
 

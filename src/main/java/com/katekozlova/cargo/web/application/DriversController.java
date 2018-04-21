@@ -83,6 +83,13 @@ public class DriversController {
         return "drivers/id";
     }
 
+    @PostMapping(value = "/id/shiftbegin")
+    public String shiftBegin(Driver driver) {
+        driversService.setShiftBeginTime(driver);
+        return "drivers/id";
+    }
+
+
 //    @GetMapping(value = "{id}")
 //    public ModelAndView driversInfo(@PathVariable("id") long id) {
 //        Driver driver = driversService.findById(id);

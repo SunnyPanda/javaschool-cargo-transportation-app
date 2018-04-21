@@ -1,5 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 
 @Entity
@@ -36,7 +38,7 @@ public class Driver {
     @ManyToOne
     private Order order;
 
-    // private long status;
+    private DateTime shiftBegin;
 
     public long getId() {
         return id;
@@ -125,11 +127,11 @@ public class Driver {
         this.order = order;
     }
 
-//    public long getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(long status) {
-//        this.status = status;
-//    }
+    public DateTime getShiftBegin() {
+        return shiftBegin;
+    }
+
+    public void setShiftBegin(DateTime shiftBegin) {
+        this.shiftBegin = shiftBegin;
+    }
 }

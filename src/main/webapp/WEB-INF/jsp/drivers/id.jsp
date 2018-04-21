@@ -36,16 +36,22 @@
             </tbody>
         </table>
     </form:form>
+    <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftbegin">
+        <td colspan="3"><input type="submit" value="Заступил в смену"/></td>
+    </form:form>
     <form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm">
         <tr>
             <td>
                 <form:select path="driverStatus">
-                    <form:option value="IN_SHIFT">Заступил на смену</form:option>
-                    <form:option value="REST">Окончил смену</form:option>
+                    <form:option value="BEHIND_THE_WHEEL">За рулём</form:option>
+                    <form:option value="IN_SHIFT">Второй водитель</form:option>
+                    <form:option value="IN_SHIFT">Погрузочно-разгрузочные работы</form:option>
+                    <form:option value="IN_SHIFT">Отдых</form:option>
                 </form:select>
             </td>
             <td colspan="3"><input type="submit" value="Confirm"/></td>
         </tr>
+    </form:form>
         <table class="table table-striped table-hover">
             <thead>
             <tr>
@@ -64,29 +70,9 @@
             </tr>
             </tbody>
         </table>
-
-        <tr>
-            <td><label for="hoursPerMonth">Провёл часов в смене: </label></td>
-            <td><form:input path="hoursPerMonth" id="hoursPerMonth"/></td>
-            <td><form:errors path="hoursPerMonth" cssClass="error"/></td>
-            <td colspan="3"><input type="submit" value="Confirm"/></td>
-        </tr>
+    <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftend">
+        <td colspan="3"><input type="submit" value="Окончил смену"/></td>
     </form:form>
-    <%--<form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm2">--%>
-    <%--<tr>--%>
-    <%--<td>--%>
-    <%--<form:select path="driverStatus">--%>
-    <%--<form:option value="BEHIND_THE_WHEEL" >За рулём</form:option>--%>
-    <%--<form:option value="IN_SHIFT" >Второй водитель</form:option>--%>
-    <%--<form:option value="IN_SHIFT" >Погрузочно-разгрузочные работы</form:option>--%>
-    <%--<form:option value="IN_SHIFT" >Отдых</form:option>--%>
-    <%--</form:select>--%>
-    <%--</td>--%>
-    <%--<td colspan="3"><input type="submit" value="Confirm"/></td>--%>
-    <%--</tr>--%>
-    <%--</form:form>--%>
-
-
 </t:wrapper>
 
 <%--<tr>--%>
