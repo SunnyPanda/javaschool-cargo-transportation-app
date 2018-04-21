@@ -8,7 +8,9 @@ import com.katekozlova.cargo.data.entity.WaypointType;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,6 +52,13 @@ public class DriversService {
 
     public List<Waypoint> getCargoByWaypoints(long orderId) {
         return waypointRepository.findWaypointsByOrderIdAndWaypointType ( orderId, WaypointType.SHIPMENT );
+    }
+
+    @Scheduled(fixedRate = 30000, initialDelay = 20000)
+    @Transactional
+    public void scheduleTask() {
+        driverRepository.updateDriver();
+        System.out.println("Траляля");
     }
 }
 
