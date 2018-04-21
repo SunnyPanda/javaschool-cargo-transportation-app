@@ -32,15 +32,15 @@
                 <td><form:input path="hoursPerMonth" id="hoursPerMonth"/></td>
                 <td><form:errors path="hoursPerMonth" cssClass="error"/></td>
             </tr>
-            <tr>
-                <td><label for="driverStatus">Status: </label></td>
-                <td>
-                    <form:select path="driverStatus" id="driverStatus">
-                        <form:options items="${statusValues}"/>
-                    </form:select>
-                </td>
-                <td><form:errors path="driverStatus" cssClass="error"/></td>
-            </tr>
+                <%--<tr>--%>
+                <%--<td><label for="driverStatus">Status: </label></td>--%>
+                <%--<td>--%>
+                <%--<form:select path="driverStatus" id="driverStatus">--%>
+                <%--<form:options items="${statusValues}"/>--%>
+                <%--</form:select>--%>
+                <%--</td>--%>
+                <%--<td><form:errors path="driverStatus" cssClass="error"/></td>--%>
+                <%--</tr>--%>
             <tr>
                 <td><label for="currentCity">City: </label></td>
                 <td><form:input path="currentCity.name" id="currentCity"/></td>

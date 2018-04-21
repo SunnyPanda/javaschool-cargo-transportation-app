@@ -36,7 +36,7 @@
             </tbody>
         </table>
     </form:form>
-    <form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm">
+    <form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm1">
         <tr>
             <td>
                 <form:select path="driverStatus">
@@ -46,33 +46,7 @@
             </td>
             <td colspan="3"><input type="submit" value="Confirm"/></td>
         </tr>
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Cargo</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <c:forEach items="${waypoints}" var="waypoint" varStatus="status">
-                        ${waypoint.cargo.number}
-                        ${waypoint.cargo.name}
-                    </c:forEach>
-                </td>
-
-            </tr>
-            </tbody>
-        </table>
-
-        <tr>
-            <td><label for="hoursPerMonth">Провёл часов в смене: </label></td>
-            <td><form:input path="hoursPerMonth" id="hoursPerMonth"/></td>
-            <td><form:errors path="hoursPerMonth" cssClass="error"/></td>
-            <td colspan="3"><input type="submit" value="Confirm"/></td>
-        </tr>
     </form:form>
-    <%--<form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm2">--%>
     <%--<tr>--%>
     <%--<td>--%>
     <%--<form:select path="driverStatus">--%>
@@ -84,20 +58,22 @@
     <%--</td>--%>
     <%--<td colspan="3"><input type="submit" value="Confirm"/></td>--%>
     <%--</tr>--%>
-    <%--</form:form>--%>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Cargo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <c:forEach items="${waypoints}" var="waypoint" varStatus="status">
+                    ${waypoint.cargo.number}
+                    ${waypoint.cargo.name}
+                </c:forEach>
+            </td>
 
-
+        </tr>
+        </tbody>
+    </table>
 </t:wrapper>
-
-<%--<tr>--%>
-<%--<td colspan="3">--%>
-<%--<c:choose>--%>
-<%--<c:when test="${begin}">--%>
-<%--<input type="submit" value="Update"/>--%>
-<%--</c:when>--%>
-<%--<c:otherwise>--%>
-<%--<input type="submit" value="Register"/>--%>
-<%--</c:otherwise>--%>
-<%--</c:choose>--%>
-<%--</td>--%>
-<%--</tr>--%>

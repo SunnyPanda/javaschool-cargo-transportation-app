@@ -44,7 +44,7 @@ public class OrdersController {
     }
 
     @GetMapping(value = "/drivers/{id}")
-    public ModelAndView getDrivers(@PathVariable("id") long id) {
+    public ModelAndView getDriversToOrder(@PathVariable("id") long id) {
         List<Driver> drivers = orderService.getOrdersDrivers(id);
         return new ModelAndView("orders/drivers", "drivers", drivers);
     }

@@ -2,29 +2,33 @@ package com.katekozlova.cargo.business.service;
 
 import com.google.common.collect.Lists;
 import com.katekozlova.cargo.data.entity.*;
-import com.katekozlova.cargo.data.repository.DriverRepository;
-import com.katekozlova.cargo.data.repository.OrderRepository;
-import com.katekozlova.cargo.data.repository.TruckRepository;
-import com.katekozlova.cargo.data.repository.WaypointRepository;
+import com.katekozlova.cargo.data.repository.*;
+import org.joda.time.DateTime;
+import org.joda.time.Hours;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class OrderService {
 
+    private static final long TRUCK_SPEED = 70;
+
     private final OrderRepository orderRepository;
     private final WaypointRepository waypointRepository;
     private final DriverRepository driverRepository;
     private final TruckRepository truckRepository;
+    private final MapDistanceRepository mapDistanceRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, WaypointRepository waypointRepository, DriverRepository driverRepository, TruckRepository truckRepository) {
+    public OrderService(OrderRepository orderRepository, WaypointRepository waypointRepository, DriverRepository driverRepository, TruckRepository truckRepository, MapDistanceRepository mapDistanceRepository) {
         this.orderRepository = orderRepository;
         this.waypointRepository = waypointRepository;
         this.driverRepository = driverRepository;
         this.truckRepository = truckRepository;
+        this.mapDistanceRepository = mapDistanceRepository;
     }
 
     public List<Order> getAllOrders() {
@@ -68,8 +72,23 @@ public class OrderService {
     }
 
     public List<Driver> getDrivers(Order order) {
-        return driverRepository.findDriverByOrderIsNullAndCurrentCityId ( order.getTruck ( )
-                .getCurrentCity ( ).getId ( ) );
+        return getDriversByHours(driverRepository.findDriverByOrderIsNullAndCurrentCityId(order.getTruck()
+                .getCurrentCity().getId()), order);
+    }
+
+    public List<Driver> getDriversByHours(List<Driver> drivers, Order order) {
+        List<Driver> appropriateDravirs = new ArrayList<>();
+        final DateTime now = new DateTime();
+        final DateTime endOfMonth = now.dayOfMonth().withMaximumValue().millisOfDay().withMaximumValue();
+        final long hoursBetween = Hours.hoursBetween(now, endOfMonth).getHours();
+
+        final long travelTime = getTravelTime(order.getWaypoints());
+        for (Driver driver : drivers) {
+            if (driver.getHoursPerMonth() + Math.min(hoursBetween, travelTime) <= 176) {
+                appropriateDravirs.add(driver);
+            }
+        }
+        return appropriateDravirs;
     }
 
     public Order saveDriversToOrder(Order order) {
@@ -121,5 +140,20 @@ public class OrderService {
         for ( Driver driver : order.getDrivers ( ) ) {
             driver.setOrder ( order );
         }
+    }
+
+    public long getTravelTime(List<Waypoint> waypoints) {
+        long travelDistance = 0;
+        MapDistance mapDistance;
+        for (int i = 0; i < waypoints.size() - 1; i++) {
+            mapDistance = mapDistanceRepository.findMapDistanceByCityFromAndCityTo(waypoints.get(i).getCity(),
+                    waypoints.get(i + 1).getCity());
+            if (mapDistance == null) {
+                mapDistance = mapDistanceRepository.findMapDistanceByCityFromAndCityTo(waypoints.get(i + 1).getCity(),
+                        waypoints.get(i).getCity());
+            }
+            travelDistance += mapDistance.getDisrance();
+        }
+        return travelDistance / TRUCK_SPEED;
     }
 }
