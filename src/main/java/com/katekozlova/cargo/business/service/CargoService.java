@@ -1,6 +1,5 @@
 package com.katekozlova.cargo.business.service;
 
-import com.google.common.collect.Lists;
 import com.katekozlova.cargo.data.entity.Cargo;
 import com.katekozlova.cargo.data.repository.CargoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class CargoService {
     }
 
     public List<Cargo> getAllCargo() {
-        return Lists.newArrayList(cargoRepository.findAll());
+        return cargoRepository.findAll();
     }
 
     public Cargo getByNumber(long cargoNumber) {

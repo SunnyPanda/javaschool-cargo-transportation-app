@@ -1,11 +1,13 @@
 package com.katekozlova.cargo.data.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 @Table(name = "cargo")
 public class Cargo {
-
     @Id
     @SequenceGenerator(name = "cargo_generator", sequenceName = "cargo_sequence", initialValue = 11)
     @GeneratedValue(generator = "cargo_generator")
@@ -23,44 +25,4 @@ public class Cargo {
     @Column(name = "status")
     @Enumerated
     private CargoStatus cargoStatus;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
-    public void setNumber(long number) {
-        this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getWeight() {
-        return weight;
-    }
-
-    public void setWeight(long weight) {
-        this.weight = weight;
-    }
-
-    public CargoStatus getCargoStatus() {
-        return cargoStatus;
-    }
-
-    public void setCargoStatus(CargoStatus cargoStatus) {
-        this.cargoStatus = cargoStatus;
-    }
 }
