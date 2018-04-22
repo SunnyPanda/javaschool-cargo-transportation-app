@@ -6,6 +6,8 @@
     <div class="page-header mt-5">
         <h1>Welcome to the Drivers Page</h1>
     </div>
+
+    <a class="btn btn-primary" href="<c:url value='/drivers/create'/>" role="button">New Driver</a>
     <br/>
     <table class="table table-striped table-hover">
         <thead>
@@ -35,5 +37,4 @@
         </c:forEach>
         </tbody>
     </table>
-    <a class="btn btn-primary" href="<c:url value='/drivers/create'/>" role="button">New Driver</a>
 </t:wrapper>

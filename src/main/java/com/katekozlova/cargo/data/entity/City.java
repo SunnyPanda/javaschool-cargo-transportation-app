@@ -1,6 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cities")
@@ -13,6 +14,10 @@ public class City {
 
     @Column(name = "city_name")
     private String name;
+
+    //    @OneToMany(mappedBy = "currentCity", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "currentCity", cascade = CascadeType.REMOVE)
+    private List<Driver> driver;
 
     public long getId() {
         return id;
@@ -28,6 +33,14 @@ public class City {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Driver> getDriver() {
+        return driver;
+    }
+
+    public void setDriver(List<Driver> driver) {
+        this.driver = driver;
     }
 }
 

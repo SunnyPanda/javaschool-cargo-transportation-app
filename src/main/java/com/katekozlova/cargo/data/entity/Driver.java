@@ -29,7 +29,7 @@ public class Driver {
     @Enumerated(EnumType.ORDINAL)
     private DriverStatus driverStatus;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private City currentCity;
 
     @ManyToOne
@@ -37,6 +37,9 @@ public class Driver {
 
     @ManyToOne
     private Order order;
+
+    @OneToOne(mappedBy = "driver", cascade = CascadeType.REMOVE)
+    private User user;
 
     @Column
     private DateTime shiftBegin;
@@ -134,5 +137,13 @@ public class Driver {
 
     public void setShiftBegin(DateTime shiftBegin) {
         this.shiftBegin = shiftBegin;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
