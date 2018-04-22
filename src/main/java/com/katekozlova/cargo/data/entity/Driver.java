@@ -29,7 +29,7 @@ public class Driver {
     @Enumerated(EnumType.ORDINAL)
     private DriverStatus driverStatus;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private City currentCity;
 
     @ManyToOne

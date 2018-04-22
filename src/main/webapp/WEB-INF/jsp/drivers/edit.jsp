@@ -42,9 +42,16 @@
                 <%--<td><form:errors path="driverStatus" cssClass="error"/></td>--%>
                 <%--</tr>--%>
             <tr>
-                <td><label for="currentCity">City: </label></td>
-                <td><form:input path="currentCity.name" id="currentCity"/></td>
-                <td><form:errors path="currentCity" cssClass="error"/></td>
+                <td><label for="currentCity">City: </label>
+                <td>
+                    <form:select path="currentCity">
+                        <form:option value="1">Санкт-Петербург</form:option>
+                        <form:option value="2">Москва</form:option>
+                        <form:option value="3">Владивосток</form:option>
+                        <form:option value="4">Екатеринбург</form:option>
+                        <form:option value="5">Уфа</form:option>
+                    </form:select>
+                </td>
             </tr>
                 <%--<tr>--%>
                 <%--<td><label for="currentTruck">Truck: </label></td>--%>

@@ -17,7 +17,7 @@ public class City {
 
     //    @OneToMany(mappedBy = "currentCity", fetch = FetchType.LAZY)
     @OneToMany(mappedBy = "currentCity", cascade = CascadeType.REMOVE)
-    private List<Driver> driver;
+    private List<Driver> drivers;
 
     public long getId() {
         return id;
@@ -35,12 +35,12 @@ public class City {
         this.name = name;
     }
 
-    public List<Driver> getDriver() {
-        return driver;
+    public List<Driver> getDrivers() {
+        return drivers;
     }
 
-    public void setDriver(List<Driver> driver) {
-        this.driver = driver;
+    public void setDrivers(List<Driver> drivers) {
+        this.drivers = drivers;
     }
 }
 
