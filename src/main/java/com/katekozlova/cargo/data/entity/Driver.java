@@ -11,7 +11,7 @@ public class Driver {
     @Id
     @SequenceGenerator(name = "driver_generator", sequenceName = "driver_sequence", initialValue = 20)
     @GeneratedValue(generator = "driver_generator")
-    private long id;
+    private Long id;
 
     @Column(name = "personal_number")
     private long personalNumber;
@@ -38,17 +38,17 @@ public class Driver {
     @ManyToOne
     private Order order;
 
-    @OneToOne(mappedBy = "driver", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "driver", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private User user;
 
     @Column
     private DateTime shiftBegin;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

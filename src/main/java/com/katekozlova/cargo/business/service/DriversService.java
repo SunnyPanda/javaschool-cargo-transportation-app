@@ -11,11 +11,13 @@ import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class DriversService {
 
     private final DriverRepository driverRepository;
@@ -30,30 +32,30 @@ public class DriversService {
     }
 
     public List<Driver> getAllDrivers() {
-        return Lists.newArrayList ( driverRepository.findAll ( ) );
+        return Lists.newArrayList(driverRepository.findAll());
     }
 
-    public void deleteDriver(long id) {
-        driverRepository.deleteById ( id );
+    public void deleteDriver(Driver driver) {
+        driverRepository.delete(driver);
     }
 
     public Driver createAndUpdate(Driver driver) {
-        return driverRepository.save ( driver );
+        return driverRepository.save(driver);
     }
 
     public Driver findById(long id) {
-        return driverRepository.findDriverById ( id );
+        return driverRepository.findById(id);
     }
 
     public List<Driver> findByTruck(long id) {
 
-        List<Driver> drivers = driverRepository.findDriverByCurrentTruck ( driverRepository
-                .findDriverById ( id ).getCurrentTruck ( ) );
-        return drivers.stream ( ).filter ( driver -> driver.getId ( ) != id ).collect ( Collectors.toList ( ) );
+        List<Driver> drivers = driverRepository.findByCurrentTruck(driverRepository
+                .findById(id).getCurrentTruck());
+        return drivers.stream().filter(driver -> driver.getId() != id).collect(Collectors.toList());
     }
 
     public List<Waypoint> getCargoByWaypoints(long orderId) {
-        return waypointRepository.findWaypointsByOrderIdAndWaypointType ( orderId, WaypointType.SHIPMENT );
+        return waypointRepository.findWaypointsByOrderIdAndWaypointType(orderId, WaypointType.SHIPMENT);
     }
 
     public void setShiftBeginTime(Driver driver) {

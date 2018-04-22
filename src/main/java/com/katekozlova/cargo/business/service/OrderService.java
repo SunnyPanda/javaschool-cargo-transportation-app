@@ -40,7 +40,7 @@ public class OrderService {
     }
 
     public List<Driver> getOrdersDrivers(long id) {
-        return driverRepository.findDriverByOrderId(id);
+        return driverRepository.findByOrder(id);
     }
 
     public List<Truck> getTrucks(long id) {
@@ -72,7 +72,7 @@ public class OrderService {
     }
 
     public List<Driver> getDrivers(Order order) {
-        return getDriversByHours(driverRepository.findDriverByOrderIsNullAndCurrentCityId(order.getTruck()
+        return getDriversByHours(driverRepository.findByOrderAndCurrentCity(order.getTruck()
                 .getCurrentCity().getId()), order);
     }
 
