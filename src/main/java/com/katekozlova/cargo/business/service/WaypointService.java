@@ -23,6 +23,6 @@ public class WaypointService {
     }
 
     public List<Waypoint> findFreeWaypoints() {
-        return waypointRepository.findWaypointsByOrderIsNull();
+        return waypointRepository.findWaypointsByNullOrder();
     }
 }

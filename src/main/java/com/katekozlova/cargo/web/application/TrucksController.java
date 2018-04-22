@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/trucks")
@@ -43,8 +42,8 @@ public class TrucksController {
     }
 
     @GetMapping(value = "/delete/{id}")
-    public String deleteTruck(@PathVariable("id") long id) {
-        trucksService.deleteTruck(id);
+    public String deleteTruck(@PathVariable("id") long id, Truck truck) {
+        trucksService.deleteTruck(truck);
         return "redirect:/trucks/list";
     }
 
@@ -69,7 +68,7 @@ public class TrucksController {
 
     @GetMapping(value = {"/edit/{id}"})
     public String editTruck(@PathVariable("id") long id, ModelMap model) {
-        Optional<Truck> truck = trucksService.findById(id);
+        Truck truck = trucksService.findById(id);
         model.addAttribute("truck", truck);
         model.addAttribute("edit", true);
         model.addAttribute("stateValues", TruckState.values());

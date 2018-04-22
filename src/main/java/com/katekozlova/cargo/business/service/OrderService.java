@@ -7,11 +7,13 @@ import org.joda.time.DateTime;
 import org.joda.time.Hours;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class OrderService {
 
     private static final long TRUCK_SPEED = 70;
@@ -36,7 +38,7 @@ public class OrderService {
     }
 
     public List<Waypoint> getOrderWaypoints(long id) {
-        return waypointRepository.findByOrderId(id);
+        return waypointRepository.findByOrder(id);
     }
 
     public List<Driver> getOrdersDrivers(long id) {
@@ -45,20 +47,20 @@ public class OrderService {
 
     public List<Truck> getTrucks(long id) {
 
-        return truckRepository.findTrucksByTruckStateAndOrderIsNullAndCapacityIsGreaterThan(TruckState.SERVICEABLE,
+        return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE,
                 findMaxCargoWeight(getOrderWaypoints(id)));
         //truckRepository.findTrucksByTruckStateAndOrderIsNull(TruckState.SERVICEABLE);
     }
 
     public Order create(Order order) {
-        order.setOrderStatus ( OrderStatus.NO );
+        order.setOrderStatus(OrderStatus.NO);
         return orderRepository.save(order);
     }
 
     public Order saveWaipoints(Order order) {
         // checkWaypoints(order.getWaypoints ());
-        getOrderIdToWaypoint ( order );
-        return orderRepository.save ( order );
+        getOrderIdToWaypoint(order);
+        return orderRepository.save(order);
     }
 
     public Order saveTruckToOrder(Order order) {
@@ -67,7 +69,7 @@ public class OrderService {
     }
 
     public void addTruckToOrder(long orderId, long truckId) {
-        orderRepository.findOrderByUniqueNumber(orderId).setTruck(truckRepository.findTruckById(truckId));
+        orderRepository.findByUniqueNumber(orderId).setTruck(truckRepository.findById(truckId));
         //truckRepository.findTruckById(truckId).setOrder(orderRepository.findOrderByUniqueNumber(number));
     }
 
@@ -92,13 +94,13 @@ public class OrderService {
     }
 
     public Order saveDriversToOrder(Order order) {
-        getOrderToDriver ( order );
+        getOrderToDriver(order);
         getTruckToDriver(order);
         return orderRepository.save ( order );
     }
 
     public Order findById(long id) {
-        return orderRepository.findOrderById(id);
+        return orderRepository.findById(id);
     }
 
     public long findMaxCargoWeight(List<Waypoint> waypoints) {
@@ -116,7 +118,7 @@ public class OrderService {
     }
 
     public Order findByUniqueNumber(long uniqueNumber) {
-        return orderRepository.findOrderByUniqueNumber(uniqueNumber);
+        return orderRepository.findByUniqueNumber(uniqueNumber);
     }
 
 //    public boolean checkWaypoints(List<Waypoint> waypoints) {

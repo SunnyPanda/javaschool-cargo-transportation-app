@@ -55,7 +55,7 @@ public class DriversService {
     }
 
     public List<Waypoint> getCargoByWaypoints(long orderId) {
-        return waypointRepository.findWaypointsByOrderIdAndWaypointType(orderId, WaypointType.SHIPMENT);
+        return waypointRepository.findWaypointsByOrderWaypointType(orderId, WaypointType.SHIPMENT);
     }
 
     public void setShiftBeginTime(Driver driver) {

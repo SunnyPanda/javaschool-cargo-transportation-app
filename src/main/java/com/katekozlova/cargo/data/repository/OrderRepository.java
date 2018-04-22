@@ -1,13 +1,46 @@
 package com.katekozlova.cargo.data.repository;
 
 import com.katekozlova.cargo.data.entity.Order;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
+
 @Repository
-public interface OrderRepository extends CrudRepository<Order, Long> {
+public class OrderRepository {
 
-    Order findOrderById(Long id);
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    Order findOrderByUniqueNumber(long uniqueNumber);
+    public List<Order> findAll() {
+        final TypedQuery<Order> query = entityManager.createQuery("select o from Order o", Order.class);
+        return query.getResultList();
+    }
+
+    public Order save(Order order) {
+        if (order.getId() == 0) {
+            entityManager.persist(order);
+        } else {
+            entityManager.merge(order);
+        }
+        return order;
+    }
+
+    //Order findOrderById(Long id);
+    public Order findById(long orderId) {
+        final TypedQuery<Order> query = entityManager
+                .createQuery("select o from Order o where o.id = :orderId", Order.class);
+        query.setParameter("orderId", orderId);
+        return query.getSingleResult();
+    }
+
+    //Order findOrderByUniqueNumber(long uniqueNumber);
+    public Order findByUniqueNumber(long uniqueNumber) {
+        final TypedQuery<Order> query = entityManager
+                .createQuery("select o from Order o where o.uniqueNumber = :uniqueNumber", Order.class);
+        query.setParameter("uniqueNumber", uniqueNumber);
+        return query.getSingleResult();
+    }
 }

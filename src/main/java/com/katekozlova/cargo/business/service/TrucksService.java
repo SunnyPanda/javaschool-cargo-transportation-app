@@ -5,11 +5,12 @@ import com.katekozlova.cargo.data.entity.Truck;
 import com.katekozlova.cargo.data.repository.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@Transactional
 public class TrucksService {
 
     private TruckRepository truckRepository;
@@ -23,15 +24,15 @@ public class TrucksService {
         return Lists.newArrayList(truckRepository.findAll());
     }
 
-    public void deleteTruck(long id) {
-        truckRepository.deleteById(id);
+    public void deleteTruck(Truck truck) {
+        truckRepository.delete(truck);
     }
 
     public Truck createAndUpdate(Truck truck) {
         return truckRepository.save(truck);
     }
 
-    public Optional<Truck> findById(long id) {
+    public Truck findById(long id) {
         return truckRepository.findById(id);
     }
 }
