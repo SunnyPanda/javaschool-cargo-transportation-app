@@ -153,10 +153,10 @@ public class OrderService {
         long travelDistance = 0;
         MapDistance mapDistance;
         for (int i = 0; i < waypoints.size() - 1; i++) {
-            mapDistance = mapDistanceRepository.findMapDistanceByCityFromAndCityTo(waypoints.get(i).getCity(),
+            mapDistance = mapDistanceRepository.findMapDistanceBetweenTwoCities(waypoints.get(i).getCity(),
                     waypoints.get(i + 1).getCity());
             if (mapDistance == null) {
-                mapDistance = mapDistanceRepository.findMapDistanceByCityFromAndCityTo(waypoints.get(i + 1).getCity(),
+                mapDistance = mapDistanceRepository.findMapDistanceBetweenTwoCities(waypoints.get(i + 1).getCity(),
                         waypoints.get(i).getCity());
             }
             travelDistance += mapDistance.getDisrance();

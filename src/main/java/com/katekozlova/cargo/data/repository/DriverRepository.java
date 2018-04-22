@@ -33,7 +33,6 @@ public class DriverRepository {
         return driver;
     }
 
-    //List<Driver> findDriverByOrderId(Long id);
     public List<Driver> findByOrder(long orderId) {
         final TypedQuery<Driver> query = entityManager
                 .createQuery("select d from Driver d where d.order.id = :orderId", Driver.class);
@@ -41,7 +40,6 @@ public class DriverRepository {
         return query.getResultList();
     }
 
-    //Driver findDriverById(Long id);
     public Driver findById(long driverId) {
         final TypedQuery<Driver> query = entityManager
                 .createQuery("select d from Driver d where d.id = :driverId", Driver.class);
@@ -49,7 +47,6 @@ public class DriverRepository {
         return query.getSingleResult();
     }
 
-    //List<Driver> findDriverByCurrentTruck(Truck truck);
     public List<Driver> findByCurrentTruck(Truck truck) {
         final TypedQuery<Driver> query = entityManager
                 .createQuery("select d from Driver d where d.currentTruck = :truck", Driver.class);
