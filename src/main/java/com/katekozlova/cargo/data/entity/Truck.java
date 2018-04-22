@@ -1,6 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "trucks")
@@ -23,6 +24,9 @@ public class Truck {
     @Column(name = "state")
     @Enumerated(EnumType.ORDINAL)
     private TruckState truckState;
+
+    @OneToMany(mappedBy = "currentTruck", cascade = CascadeType.REMOVE)
+    private List<Driver> drivers;
 
     @ManyToOne
     private City currentCity;
@@ -84,5 +88,13 @@ public class Truck {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public List<Driver> getDrivers() {
+        return drivers;
+    }
+
+    public void setDrivers(List<Driver> drivers) {
+        this.drivers = drivers;
     }
 }

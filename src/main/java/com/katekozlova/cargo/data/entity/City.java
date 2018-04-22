@@ -19,6 +19,9 @@ public class City {
     @OneToMany(mappedBy = "currentCity", cascade = CascadeType.REMOVE)
     private List<Driver> drivers;
 
+    @OneToMany(mappedBy = "currentCity", cascade = CascadeType.REMOVE)
+    private List<Truck> trucks;
+
     public long getId() {
         return id;
     }
