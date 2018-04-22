@@ -90,4 +90,17 @@ public class Order {
     public void setTravelTime(long travelTime) {
         this.travelTime = travelTime;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", uniqueNumber=" + uniqueNumber +
+                ", orderStatus=" + orderStatus +
+//                ", waypoints=" + waypoints +
+//                ", truck=" + truck +
+//                ", drivers=" + drivers +
+                ", travelTime=" + travelTime +
+                '}';
+    }
 }

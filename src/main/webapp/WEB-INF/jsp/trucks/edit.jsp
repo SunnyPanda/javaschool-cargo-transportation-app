@@ -12,7 +12,10 @@
             <tr>
                 <td><label for="regNumber">Регистрационный номер: </label></td>
                 <td><form:input path="regNumber" id="regNumber"/></td>
-                <td><form:errors path="regNumber" cssClass="error"/></td>
+                <td>
+                        <form:errors path="regNumber" cssClass="error"/>
+                        <%--<span id="regNumber" class="error">Error!<span>/td>--%>
+
             </tr>
 
             <tr>

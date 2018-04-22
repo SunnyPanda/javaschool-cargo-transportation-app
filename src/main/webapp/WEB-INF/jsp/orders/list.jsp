@@ -25,8 +25,8 @@
                 <td><a href="<c:url value='/orders/waypoints/${order.id}'/>">waypoints</a></td></td>
                 <td>${order.truck.regNumber}</td>
                 <td><a href="<c:url value='/orders/drivers/${order.id}'/>">drivers</a></td></td>
-                <td><a class="btn btn-primary" href="<c:url value='/orders/${order.id}/trucks'/>"
-                       role="button">Add truck</a></td>
+                    <%--<td><a class="btn btn-primary" href="<c:url value='/orders/${order.id}/trucks'/>"--%>
+                    <%--role="button">Add truck</a></td>--%>
                 <%--<td><a href="<c:url value='/orders/waypoints'/>">waypoints</a></td></td>--%>
                 <%--<td>${driver.lastName}</td>--%>
                 <%--<td>${driver.hoursPerMonth}</td>--%>

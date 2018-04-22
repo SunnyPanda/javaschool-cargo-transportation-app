@@ -63,4 +63,15 @@ public class Waypoint {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+    @Override
+    public String toString() {
+        return "Waypoint{" +
+                "id=" + id +
+                ", city=" + city +
+                ", cargo=" + cargo +
+                ", order=" + order +
+                ", waypointType=" + waypointType +
+                '}';
+    }
 }

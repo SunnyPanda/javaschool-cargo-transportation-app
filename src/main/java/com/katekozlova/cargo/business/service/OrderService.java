@@ -93,6 +93,7 @@ public class OrderService {
 
     public Order saveDriversToOrder(Order order) {
         getOrderToDriver ( order );
+        getTruckToDriver(order);
         return orderRepository.save ( order );
     }
 
@@ -118,17 +119,17 @@ public class OrderService {
         return orderRepository.findOrderByUniqueNumber(uniqueNumber);
     }
 
-    public boolean checkWaypoints(List<Waypoint> waypoints) {
-        for ( Waypoint waypoint : waypoints ) {
-            if (waypoint.getWaypointType ( ) == WaypointType.SHIPMENT) {
-                waypointRepository.findWaypointsByCargoIdAndWaypointType ( waypoint.getCargo ( ).getId ( ), WaypointType.LANDING );
-            } else {
-                waypointRepository.findWaypointsByCargoIdAndWaypointType ( waypoint.getCargo ( ).getId ( ), WaypointType.SHIPMENT );
-            }
-        }
-
-        return true;
-    }
+//    public boolean checkWaypoints(List<Waypoint> waypoints) {
+//        for ( Waypoint waypoint : waypoints ) {
+//            if (waypoint.getWaypointType ( ) == WaypointType.SHIPMENT) {
+//                waypointRepository.findWaypointsByCargoIdAndWaypointType ( waypoint.getCargo ( ).getId ( ), WaypointType.LANDING );
+//            } else {
+//                waypointRepository.findWaypointsByCargoIdAndWaypointType ( waypoint.getCargo ( ).getId ( ), WaypointType.SHIPMENT );
+//            }
+//        }
+//
+//        return true;
+//    }
 
     public void getOrderIdToWaypoint(Order order) {
         for ( Waypoint waypoint : order.getWaypoints ( ) ) {
@@ -139,6 +140,12 @@ public class OrderService {
     public void getOrderToDriver(Order order) {
         for ( Driver driver : order.getDrivers ( ) ) {
             driver.setOrder ( order );
+        }
+    }
+
+    public void getTruckToDriver(Order order) {
+        for (Driver driver : order.getDrivers()) {
+            driver.setCurrentTruck(order.getTruck());
         }
     }
 

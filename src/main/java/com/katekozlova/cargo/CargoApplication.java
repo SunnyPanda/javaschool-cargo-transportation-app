@@ -4,7 +4,9 @@ import com.katekozlova.cargo.security.AppUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,5 +41,12 @@ public class CargoApplication implements WebMvcConfigurer {
 //        System.out.println("user|" + new BCryptPasswordEncoder(11).encode("user"));
 //        System.out.println("driver|" + new BCryptPasswordEncoder(11).encode("driver"));
         return new BCryptPasswordEncoder(11);
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasename("messages");
+        return source;
     }
 }

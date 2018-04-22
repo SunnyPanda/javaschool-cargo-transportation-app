@@ -78,26 +78,36 @@ public class DriversController {
     }
 
     @PostMapping(value = "/id/confirm")
-    public String confirmStatus(Driver driver) {
+    public String confirmStatus(Driver driver, ModelMap model) {
         driversService.createAndUpdate ( driver );
+        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
+        List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
+        model.addAttribute("driver", driver);
+        model.addAttribute("coDrivers", coDrivers);
+        model.addAttribute("waypoints", waypoints);
         return "drivers/id";
     }
 
     @PostMapping(value = "/id/shiftbegin")
-    public String shiftBegin(Driver driver) {
+    public String shiftBegin(Driver driver, ModelMap model) {
         driversService.setShiftBeginTime(driver);
+        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
+        List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
+        model.addAttribute("driver", driver);
+        model.addAttribute("coDrivers", coDrivers);
+        model.addAttribute("waypoints", waypoints);
         return "drivers/id";
     }
 
     @PostMapping(value = "/id/shiftend")
-    public String shiftEnd(Driver driver) {
+    public String shiftEnd(Driver driver, ModelMap model) {
         driversService.setShiftEnd(driver);
+        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
+        List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
+        model.addAttribute("driver", driver);
+        model.addAttribute("coDrivers", coDrivers);
+        model.addAttribute("waypoints", waypoints);
         return "drivers/id";
     }
-//    @GetMapping(value = "{id}")
-//    public ModelAndView driversInfo(@PathVariable("id") long id) {
-//        Driver driver = driversService.findById(id);
-//        return new ModelAndView("drivers/id", "driver", driver);
-//    }
 }
 

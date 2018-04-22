@@ -9,13 +9,16 @@
         <h2>Waypoints</h2>
     </div>
     <form:form action="/orders/save" method="POST" modelAttribute="order">
-        <c:forEach items="${order.waypoints}" var="waypoint" varStatus="status">
-            <tr>
-                <td>${waypoint.city.name}</td>
-                <td>${waypoint.cargo.name}</td>
-                <td>${waypoint.waypointType.name()}</td>
-            </tr>
-        </c:forEach>
+        <table>
+            <c:forEach items="${order.waypoints}" var="waypoint" varStatus="status">
+                <tr>
+                    <td>${waypoint.city.name}</td>
+                    <td>${waypoint.cargo.name}</td>
+                    <td>${waypoint.waypointType.name()}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
 
         <table>
             <td><label for="waypoints">Выберите маршрутную точку:</label></td>
@@ -24,6 +27,7 @@
                     <form:options items="${freewaypoints}"/>
                 </form:select>
             </td>
+            <td><form:errors path="waypoints" cssClass="error"/></td>
             <td colspan="3"><input type="submit" value="Выбрать"/></td>
         </table>
     </form:form>

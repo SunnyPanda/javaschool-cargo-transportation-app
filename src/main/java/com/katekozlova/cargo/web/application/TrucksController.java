@@ -1,17 +1,19 @@
 package com.katekozlova.cargo.web.application;
 
 import com.katekozlova.cargo.business.service.TrucksService;
+import com.katekozlova.cargo.business.validation.TruckValidator;
 import com.katekozlova.cargo.data.entity.Truck;
 import com.katekozlova.cargo.data.entity.TruckState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,11 +21,19 @@ import java.util.Optional;
 @RequestMapping(value = "/trucks")
 public class TrucksController {
 
-    private TrucksService trucksService;
+    private final TrucksService trucksService;
+
+    private final TruckValidator truckValidator;
 
     @Autowired
-    public TrucksController(TrucksService trucksService) {
+    public TrucksController(TrucksService trucksService, TruckValidator truckValidator) {
         this.trucksService = trucksService;
+        this.truckValidator = truckValidator;
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(truckValidator);
     }
 
     @GetMapping(value = "/list")
@@ -48,7 +58,11 @@ public class TrucksController {
     }
 
     @PostMapping(value = "/create")
-    public String createTruck(Truck truck) {
+    public String createTruck(@Validated Truck truck, BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "trucks/edit";
+        }
         trucksService.createAndUpdate(truck);
         return "redirect:/trucks/list";
     }
@@ -63,7 +77,10 @@ public class TrucksController {
     }
 
     @PostMapping(value = "/edit/{id}")
-    public String updateTruck(@PathVariable("id") long id, Truck truck) {
+    public String updateTruck(@PathVariable("id") long id, @Valid Truck truck, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "trucks/edit";
+        }
         trucksService.createAndUpdate(truck);
         return "redirect:/trucks/list";
     }
