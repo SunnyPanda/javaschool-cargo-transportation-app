@@ -1,11 +1,23 @@
 package com.katekozlova.cargo.data.repository;
 
 import com.katekozlova.cargo.data.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
-    User findByUsername(String username);
+@Repository
+public class UserRepository {
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public User findByUsername(String username) {
+        final TypedQuery<User> query = entityManager
+                .createQuery("select u from User u where u.username = :username", User.class);
+        query.setParameter("username", username);
+        return query.getSingleResult();
+    }
 
 }

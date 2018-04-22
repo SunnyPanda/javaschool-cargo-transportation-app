@@ -14,7 +14,6 @@ public class MapDistanceRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    //MapDistance findMapDistanceByCityFromAndCityTo(City city1, City city2);
     public MapDistance findMapDistanceBetweenTwoCities(City cityFrom, City cityTo) {
         final TypedQuery<MapDistance> query = entityManager
                 .createQuery("select md from MapDistance md where md.cityFrom = :cityFrom and md.cityTo = :cityTo", MapDistance.class);
