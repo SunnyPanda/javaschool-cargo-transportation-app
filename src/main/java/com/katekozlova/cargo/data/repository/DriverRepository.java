@@ -25,7 +25,7 @@ public class DriverRepository {
     }
 
     public Driver save(Driver driver) {
-        if (driver.getId() == null) {
+        if (driver.getId() == 0) {
             entityManager.persist(driver);
         } else {
             entityManager.merge(driver);
@@ -60,7 +60,7 @@ public class DriverRepository {
     //List<Driver> findDriverByOrderIsNullAndCurrentCityId(Long id);
     public List<Driver> findByOrderAndCurrentCity(long cityId) {
         final TypedQuery<Driver> query = entityManager
-                .createQuery("select d from Driver d where d.order = :null and d.currentCity.id = :cityId", Driver.class);
+                .createQuery("select d from Driver d where d.order is null and d.currentCity.id = :cityId", Driver.class);
         query.setParameter("cityId", cityId);
         return query.getResultList();
     }

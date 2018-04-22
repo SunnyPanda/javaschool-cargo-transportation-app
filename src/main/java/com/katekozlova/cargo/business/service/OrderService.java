@@ -77,7 +77,7 @@ public class OrderService {
     }
 
     public List<Driver> getDriversByHours(List<Driver> drivers, Order order) {
-        List<Driver> appropriateDravirs = new ArrayList<>();
+        List<Driver> appropriateDrivers = new ArrayList<>();
         final DateTime now = new DateTime();
         final DateTime endOfMonth = now.dayOfMonth().withMaximumValue().millisOfDay().withMaximumValue();
         final long hoursBetween = Hours.hoursBetween(now, endOfMonth).getHours();
@@ -85,10 +85,10 @@ public class OrderService {
         order.setTravelTime(getTravelTime(order.getWaypoints()));
         for (Driver driver : drivers) {
             if (driver.getHoursPerMonth() + Math.min(hoursBetween, order.getTravelTime()) <= 176) {
-                appropriateDravirs.add(driver);
+                appropriateDrivers.add(driver);
             }
         }
-        return appropriateDravirs;
+        return appropriateDrivers;
     }
 
     public Order saveDriversToOrder(Order order) {

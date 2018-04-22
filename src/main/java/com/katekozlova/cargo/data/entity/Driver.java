@@ -11,7 +11,7 @@ public class Driver {
     @Id
     @SequenceGenerator(name = "driver_generator", sequenceName = "driver_sequence", initialValue = 20)
     @GeneratedValue(generator = "driver_generator")
-    private Long id;
+    private long id;
 
     @Column(name = "personal_number")
     private long personalNumber;
@@ -44,11 +44,11 @@ public class Driver {
     @Column
     private DateTime shiftBegin;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

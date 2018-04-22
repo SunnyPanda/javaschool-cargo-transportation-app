@@ -120,9 +120,9 @@ public class OrdersController {
 
     @PostMapping(value = "/adddriver")
     public String addDriver(Order order, Model model) {
-        List<Driver> drivers = orderService.getDrivers ( order );
-        model.addAttribute ( "order", order );
-        model.addAttribute ( "drivers", drivers );
+        List<Driver> drivers = orderService.getDrivers(order);
+        model.addAttribute("order", order);
+        model.addAttribute("drivers", drivers);
         return "orders/create/driver";
     }
 
