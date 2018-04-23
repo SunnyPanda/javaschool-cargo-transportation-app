@@ -16,7 +16,8 @@ public class MapDistanceRepository {
 
     public MapDistance findMapDistanceBetweenTwoCities(City cityFrom, City cityTo) {
         final TypedQuery<MapDistance> query = entityManager
-                .createQuery("select md from MapDistance md where md.cityFrom = :cityFrom and md.cityTo = :cityTo", MapDistance.class);
+                .createQuery("select md from MapDistance md where (md.cityFrom = :cityFrom and md.cityTo = :cityTo) or " +
+                        "(md.cityFrom = :cityTo and md.cityTo = :cityFrom)", MapDistance.class);
         query.setParameter("cityFrom", cityFrom);
         query.setParameter("cityTo", cityTo);
 

@@ -90,6 +90,7 @@ public class OrderService {
                 appropriateDrivers.add(driver);
             }
         }
+        System.out.println("appropriateDrivers = " + appropriateDrivers);
         return appropriateDrivers;
     }
 
@@ -157,10 +158,6 @@ public class OrderService {
         for (int i = 0; i < waypoints.size() - 1; i++) {
             mapDistance = mapDistanceRepository.findMapDistanceBetweenTwoCities(waypoints.get(i).getCity(),
                     waypoints.get(i + 1).getCity());
-            if (mapDistance == null) {
-                mapDistance = mapDistanceRepository.findMapDistanceBetweenTwoCities(waypoints.get(i + 1).getCity(),
-                        waypoints.get(i).getCity());
-            }
             travelDistance += mapDistance.getDisrance();
         }
         return travelDistance / TRUCK_SPEED;
