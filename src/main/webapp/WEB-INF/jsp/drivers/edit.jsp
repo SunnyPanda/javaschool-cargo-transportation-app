@@ -44,13 +44,7 @@
             <tr>
                 <td><label for="currentCity">City: </label>
                 <td>
-                    <form:select path="currentCity">
-                        <form:option value="1">Санкт-Петербург</form:option>
-                        <form:option value="2">Москва</form:option>
-                        <form:option value="3">Владивосток</form:option>
-                        <form:option value="4">Екатеринбург</form:option>
-                        <form:option value="5">Уфа</form:option>
-                    </form:select>
+                    <form:select path="currentCity" items="${cities}" itemLabel="name" itemValue="id"/>
                 </td>
             </tr>
                 <%--<tr>--%>

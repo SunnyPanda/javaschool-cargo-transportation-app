@@ -1,5 +1,6 @@
 package com.katekozlova.cargo.web.application;
 
+import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.business.service.TrucksService;
 import com.katekozlova.cargo.business.validation.TruckValidator;
 import com.katekozlova.cargo.data.entity.Truck;
@@ -21,12 +22,14 @@ import java.util.List;
 public class TrucksController {
 
     private final TrucksService trucksService;
+    private final DriversService driversService;
 
     private final TruckValidator truckValidator;
 
     @Autowired
-    public TrucksController(TrucksService trucksService, TruckValidator truckValidator) {
+    public TrucksController(TrucksService trucksService, DriversService driversService, TruckValidator truckValidator) {
         this.trucksService = trucksService;
+        this.driversService = driversService;
         this.truckValidator = truckValidator;
     }
 
@@ -43,6 +46,7 @@ public class TrucksController {
 
     @GetMapping(value = "/delete/{id}")
     public String deleteTruck(@PathVariable("id") long id, Truck truck) {
+
         trucksService.deleteTruck(truck);
         return "redirect:/trucks/list";
     }

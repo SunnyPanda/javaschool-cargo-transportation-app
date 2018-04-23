@@ -1,6 +1,8 @@
 package com.katekozlova.cargo.web.application;
 
+import com.katekozlova.cargo.business.service.CitiesService;
 import com.katekozlova.cargo.business.service.DriversService;
+import com.katekozlova.cargo.data.entity.City;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.DriverStatus;
 import com.katekozlova.cargo.data.entity.Waypoint;
@@ -18,10 +20,12 @@ import java.util.List;
 public class DriversController {
 
     private final DriversService driversService;
+    private final CitiesService citiesService;
 
     @Autowired
-    public DriversController(DriversService driversService) {
+    public DriversController(DriversService driversService, CitiesService citiesService) {
         this.driversService = driversService;
+        this.citiesService = citiesService;
     }
 
     @GetMapping(value = "/list")
@@ -39,47 +43,52 @@ public class DriversController {
     @GetMapping(value = {"/create"})
     public String newDriver(ModelMap model) {
         Driver driver = new Driver();
+        // TODO: Add CityService
+        final List<City> cities = citiesService.getAllCities();
         model.addAttribute("driver", driver);
         model.addAttribute("edit", false);
         model.addAttribute("statusValues", DriverStatus.values());
+        model.addAttribute("cities", cities);
         return "drivers/edit";
     }
 
     @PostMapping(value = "/create")
     public String createDriver(Driver driver) {
-        driversService.createAndUpdate(driver);
+        driversService.create(driver);
         return "redirect:/drivers/list";
     }
 
     @GetMapping(value = {"/edit/{id}"})
     public String editDriver(@PathVariable("id") long id, ModelMap model) {
         Driver driver = driversService.findById(id);
+        final List<City> cities = citiesService.getAllCities();
         model.addAttribute("driver", driver);
         model.addAttribute("edit", true);
         model.addAttribute("statusValues", DriverStatus.values());
+        model.addAttribute("cities", cities);
         return "drivers/edit";
     }
 
     @PostMapping(value = "/edit/{id}")
     public String updateDriver(@PathVariable("id") long id, Driver driver) {
-        driversService.createAndUpdate(driver);
+        driversService.update(driver);
         return "redirect:/drivers/list";
     }
 
     @GetMapping(value = "/info/{id}")
     public String driversInfo(@PathVariable("id") long id, Driver driver, ModelMap model) {
-        driver = driversService.findById ( id );
+        driver = driversService.findById(id);
         List<Driver> coDrivers = driversService.findByTruck(id);
-        List<Waypoint> waypoints = driversService.getCargoByWaypoints ( driver.getOrder ( ).getId ( ) );
+        List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
-        model.addAttribute ( "waypoints", waypoints );
+        model.addAttribute("waypoints", waypoints);
         return "drivers/id";
     }
 
     @PostMapping(value = "/id/confirm")
     public String confirmStatus(Driver driver, ModelMap model) {
-        driversService.createAndUpdate ( driver );
+        driversService.update(driver);
         List<Driver> coDrivers = driversService.findByTruck(driver.getId());
         List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);

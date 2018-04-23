@@ -1,7 +1,9 @@
 package com.katekozlova.cargo.business.service;
 
 import com.google.common.collect.Lists;
+import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Truck;
+import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +15,13 @@ import java.util.List;
 @Transactional
 public class TrucksService {
 
-    private TruckRepository truckRepository;
+    private final TruckRepository truckRepository;
+    private final DriverRepository driverRepository;
 
     @Autowired
-    public TrucksService(TruckRepository truckRepository) {
+    public TrucksService(TruckRepository truckRepository, DriverRepository driverRepository) {
         this.truckRepository = truckRepository;
+        this.driverRepository = driverRepository;
     }
 
     public List<Truck> getAllTrucks() {
@@ -25,6 +29,13 @@ public class TrucksService {
     }
 
     public void deleteTruck(Truck truck) {
+
+        truck.setDrivers(driverRepository.findByCurrentTruck(truck));
+        if (!driverRepository.findByCurrentTruck(truck).isEmpty()) {
+            for (Driver driver : truck.getDrivers()) {
+                driver.setCurrentTruck(null);
+            }
+        }
         truckRepository.delete(truck);
     }
 

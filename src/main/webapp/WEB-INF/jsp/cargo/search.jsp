@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <th scope="row">${cargo.cargoStatus}</th>
+        <th scope="row">${cargo.cargoStatus.toString()}</th>
         </tbody>
     </table>
 </t:wrapper>

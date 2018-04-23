@@ -22,7 +22,7 @@
                 <th scope="row">${cargo.number}</th>
                 <td>${cargo.name}</td>
                 <td>${cargo.weight}</td>
-                <td>${cargo.cargoStatus}</td>
+                <td>${cargo.cargoStatus.toString()}</td>
             </tr>
         </c:forEach>
         </tbody>

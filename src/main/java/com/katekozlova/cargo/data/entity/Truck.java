@@ -25,7 +25,7 @@ public class Truck {
     @Enumerated(EnumType.ORDINAL)
     private TruckState truckState;
 
-    @OneToMany(mappedBy = "currentTruck", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "currentTruck")
     private List<Driver> drivers;
 
     @ManyToOne

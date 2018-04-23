@@ -79,8 +79,8 @@ insert into drivers (id, personal_number, first_name, last_name, hours_per_month
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (2, 2, 'Вениамин', 'Пунктуальный', 46, 1, 1, 1, 1);
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (3, 3, 'Варвара', 'Полякова', 123, 1, 2, 2, 2);
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (4, 4, 'Клюква', 'Песочная', 45, 1, 3, 3, 3);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (5, 5, 'Елена', 'Парная', 15, 1, 4, 4, 4);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (6, 6, 'Александр', 'Иванов', 23, 1, 3, 3, 3);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (5, 5, 'Елена', 'Парная', 15, 1, 4);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (6, 6, 'Александр', 'Иванов', 23, 1, 4);
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (7, 7, 'Кристина', 'Петрова', 46, 1, 4);
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (8, 8, 'Олег', 'Сидоров', 123, 1, 4);
 insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (9, 9, 'Виталий', 'Ольховский', 45, 1, 4);

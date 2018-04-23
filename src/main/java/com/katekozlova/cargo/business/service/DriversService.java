@@ -2,10 +2,7 @@ package com.katekozlova.cargo.business.service;
 
 
 import com.google.common.collect.Lists;
-import com.katekozlova.cargo.data.entity.Driver;
-import com.katekozlova.cargo.data.entity.DriverStatus;
-import com.katekozlova.cargo.data.entity.Waypoint;
-import com.katekozlova.cargo.data.entity.WaypointType;
+import com.katekozlova.cargo.data.entity.*;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.joda.time.DateTime;
@@ -39,7 +36,12 @@ public class DriversService {
         driverRepository.delete(driver);
     }
 
-    public Driver createAndUpdate(Driver driver) {
+    public Driver update(Driver driver) {
+        return driverRepository.save(driver);
+    }
+
+    public Driver create(Driver driver) {
+        driver.setDriverStatus(DriverStatus.REST);
         return driverRepository.save(driver);
     }
 
@@ -63,6 +65,10 @@ public class DriversService {
         driver.setShiftBegin(new DateTime());
         driver.setDriverStatus(DriverStatus.IN_SHIFT);
         System.out.println("driver.getShiftBegin() = " + driver.getShiftBegin());
+    }
+
+    public List<Driver> findByTruck(Truck truck) {
+        return driverRepository.findByCurrentTruck(truck);
     }
 
     public void setShiftEnd(Driver driver) {

@@ -26,7 +26,7 @@
                     <th scope="row">${truck.regNumber}</th>
                     <td>${truck.shiftSize}</td>
                     <td>${truck.capacity}</td>
-                    <td>${truck.truckState}</td>
+                    <td>${truck.truckState.toString()}</td>
                     <td>${truck.currentCity.name}</td>
                         <%--<td>${truck.order.id}</td>--%>
                     <td><a href="<c:url value='/trucks/edit/${truck.id}'/>">edit</a></td>

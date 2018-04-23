@@ -18,4 +18,11 @@ public class CityRepository {
         final TypedQuery<City> query = entityManager.createQuery("select c from City c", City.class);
         return query.getResultList();
     }
+
+    public City findById(long cityId) {
+        final TypedQuery<City> query = entityManager
+                .createQuery("select c from City c where c.id = :cityId", City.class);
+        query.setParameter("cityId", cityId);
+        return query.getSingleResult();
+    }
 }

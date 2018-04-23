@@ -54,6 +54,13 @@ public class DriverRepository {
         return query.getResultList();
     }
 
+    public List<Driver> findByCurrentTruck(long truckId) {
+        final TypedQuery<Driver> query = entityManager
+                .createQuery("select d from Driver d where d.currentTruck.id = :truckId", Driver.class);
+        query.setParameter("truckId", truckId);
+        return query.getResultList();
+    }
+
     //List<Driver> findDriverByOrderIsNullAndCurrentCityId(Long id);
     public List<Driver> findByOrderAndCurrentCity(long cityId) {
         final TypedQuery<Driver> query = entityManager

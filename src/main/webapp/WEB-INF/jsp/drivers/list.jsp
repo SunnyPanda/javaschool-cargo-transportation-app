@@ -28,7 +28,7 @@
                 <td>${driver.firstName}</td>
                 <td>${driver.lastName}</td>
                 <td>${driver.hoursPerMonth}</td>
-                <td>${driver.driverStatus}</td>
+                <td>${driver.driverStatus.toString()}</td>
                 <td>${driver.currentCity.name}</td>
                 <td>${driver.currentTruck.regNumber}</td>
                 <td><a href="<c:url value='/drivers/edit/${driver.id}'/>">edit</a></td>
