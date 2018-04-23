@@ -4,7 +4,10 @@ import com.katekozlova.cargo.business.service.CargoService;
 import com.katekozlova.cargo.business.service.CitiesService;
 import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.business.validation.DriverValidator;
-import com.katekozlova.cargo.data.entity.*;
+import com.katekozlova.cargo.data.entity.CargoStatus;
+import com.katekozlova.cargo.data.entity.City;
+import com.katekozlova.cargo.data.entity.Driver;
+import com.katekozlova.cargo.data.entity.Waypoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -78,13 +81,18 @@ public class DriversController {
         Driver driver = driversService.findById(id);
         final List<City> cities = citiesService.getAllCities();
         model.addAttribute("driver", driver);
-        model.addAttribute("statusValues", DriverStatus.values());
+        //model.addAttribute("statusValues", DriverStatus.values());
         model.addAttribute("cities", cities);
         return "drivers/edit";
     }
 
     @PostMapping(value = "/edit/{id}")
-    public String updateDriver(@PathVariable("id") long id, Driver driver) {
+    public String updateDriver(@Validated Driver driver, BindingResult bindingResult, ModelMap model) {
+        if (bindingResult.hasErrors()) {
+            final List<City> cities = citiesService.getAllCities();
+            model.addAttribute("cities", cities);
+            return "drivers/edit";
+        }
         driversService.update(driver);
         return "redirect:/drivers/list";
     }

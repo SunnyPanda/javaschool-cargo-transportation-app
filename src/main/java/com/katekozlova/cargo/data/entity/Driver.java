@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "drivers")
+@Table(name = "drivers", uniqueConstraints = @UniqueConstraint(columnNames = "personal_number"))
 public class Driver {
 
     @Id

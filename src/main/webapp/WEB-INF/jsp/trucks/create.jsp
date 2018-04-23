@@ -6,7 +6,7 @@
 <t:wrapper>
     </br>
     <div class="page-header">
-        <h2>Edit Truck</h2>
+        <h2>New Truck</h2>
     </div>
     <form:form method="POST" modelAttribute="truck">
         <table>
@@ -46,7 +46,7 @@
             </tr>
 
             <tr>
-                <td colspan="3"><input type="submit" value="Update"/></td>
+                <td colspan="3"><input type="submit" value="Register"/></td>
             </tr>
         </table>
     </form:form>

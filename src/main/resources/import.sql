@@ -9,7 +9,7 @@ insert into orders (id, unique_number, status) values (5, 5, 1);
 -- insert into orders (id, unique_number, status) values (9, 9, 1);
 -- insert into orders (id, unique_number, status) values (10, 10, 1);
 
-insert into cities (id, city_name) values (1, 'Санкт-Петрбург');
+insert into cities (id, city_name) values (1, 'Санкт-Петербург');
 insert into cities (id, city_name) values (2, 'Москва');
 insert into cities (id, city_name) values (3, 'Владивосток');
 insert into cities (id, city_name) values (4, 'Екатеринбург');

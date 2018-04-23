@@ -1,8 +1,10 @@
 package com.katekozlova.cargo.web.application;
 
+import com.katekozlova.cargo.business.service.CitiesService;
 import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.business.service.TrucksService;
 import com.katekozlova.cargo.business.validation.TruckValidator;
+import com.katekozlova.cargo.data.entity.City;
 import com.katekozlova.cargo.data.entity.Truck;
 import com.katekozlova.cargo.data.entity.TruckState;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -23,13 +24,15 @@ public class TrucksController {
 
     private final TrucksService trucksService;
     private final DriversService driversService;
+    private final CitiesService citiesService;
 
     private final TruckValidator truckValidator;
 
     @Autowired
-    public TrucksController(TrucksService trucksService, DriversService driversService, TruckValidator truckValidator) {
+    public TrucksController(TrucksService trucksService, DriversService driversService, CitiesService citiesService, TruckValidator truckValidator) {
         this.trucksService = trucksService;
         this.driversService = driversService;
+        this.citiesService = citiesService;
         this.truckValidator = truckValidator;
     }
 
@@ -54,17 +57,21 @@ public class TrucksController {
     @GetMapping(value = {"/create"})
     public String newTruck(ModelMap model) {
         Truck truck = new Truck();
+        final List<City> cities = citiesService.getAllCities();
         model.addAttribute("truck", truck);
-        model.addAttribute("edit", false);
         model.addAttribute("stateValues", TruckState.values());
-        return "trucks/edit";
+        model.addAttribute("cities", cities);
+        return "trucks/create";
     }
 
     @PostMapping(value = "/create")
-    public String createTruck(@Validated Truck truck, BindingResult result) {
+    public String createTruck(@Validated Truck truck, BindingResult bindingResult, ModelMap model) {
 
-        if (result.hasErrors()) {
-            return "trucks/edit";
+        if (bindingResult.hasErrors()) {
+            final List<City> cities = citiesService.getAllCities();
+            model.addAttribute("cities", cities);
+            model.addAttribute("stateValues", TruckState.values());
+            return "trucks/create";
         }
         trucksService.createAndUpdate(truck);
         return "redirect:/trucks/list";
@@ -73,15 +80,19 @@ public class TrucksController {
     @GetMapping(value = {"/edit/{id}"})
     public String editTruck(@PathVariable("id") long id, ModelMap model) {
         Truck truck = trucksService.findById(id);
+        final List<City> cities = citiesService.getAllCities();
         model.addAttribute("truck", truck);
-        model.addAttribute("edit", true);
         model.addAttribute("stateValues", TruckState.values());
+        model.addAttribute("cities", cities);
         return "trucks/edit";
     }
 
     @PostMapping(value = "/edit/{id}")
-    public String updateTruck(@PathVariable("id") long id, @Valid Truck truck, BindingResult bindingResult) {
+    public String updateTruck(@Validated Truck truck, BindingResult bindingResult, ModelMap model) {
         if (bindingResult.hasErrors()) {
+            final List<City> cities = citiesService.getAllCities();
+            model.addAttribute("cities", cities);
+            model.addAttribute("stateValues", TruckState.values());
             return "trucks/edit";
         }
         trucksService.createAndUpdate(truck);

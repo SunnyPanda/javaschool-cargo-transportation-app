@@ -3,8 +3,9 @@ package com.katekozlova.cargo.business.validation;
 import com.katekozlova.cargo.data.entity.Truck;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import java.util.regex.Pattern;
 
 @Component
 public class TruckValidator implements Validator {
@@ -15,18 +16,28 @@ public class TruckValidator implements Validator {
     }
 
     public void validate(Object obj, Errors e) {
-        ValidationUtils.rejectIfEmpty(e, "regNumber", "truck.regNumber.empty");
-        ValidationUtils.rejectIfEmpty(e, "shiftSize", "truck.shiftSize.empty");
-        ValidationUtils.rejectIfEmpty(e, "capacity", "truck.capacity.empty");
+        // ValidationUtils.rejectIfEmpty(e, "regNumber", "truck.regNumber.empty");
+//        ValidationUtils.rejectIfEmpty(e, "shiftSize", "truck.shiftSize.empty");
+//        ValidationUtils.rejectIfEmpty(e, "capacity", "truck.capacity.empty");
         // ValidationUtils.rejectIfEmpty(e, "currentCity", "truck.currentCity.empty");
 
         Truck truck = (Truck) obj;
 
+        Pattern regNumberPattern = Pattern.compile("[A-Z]{2}\\d{5}");
+        if (!regNumberPattern.matcher(truck.getRegNumber()).matches()) {
+            e.rejectValue("regNumber", "truck.regNumber.invalid");
+        }
 
-//        if (p.getAge() < 0) {
-//            e.rejectValue("age", "negativevalue");
-//        } else if (p.getAge() > 110) {
-//            e.rejectValue("age", "too.darn.old");
-//        }
+        Pattern shiftSizePattern = Pattern.compile("\\d");
+        long shift = truck.getShiftSize();
+        if (!(shiftSizePattern.matcher(Long.toString(shift))).matches() && shift > 0 && shift < 5) {
+            e.rejectValue("siftSize", "driver.siftSize.invalid");
+        }
+
+        Pattern capacityPattern = Pattern.compile("\\d+");
+        long capacity = truck.getCapacity();
+        if (!(shiftSizePattern.matcher(Long.toString(capacity))).matches()) {
+            e.rejectValue("capacity", "driver.capacity.invalid");
+        }
     }
 }
