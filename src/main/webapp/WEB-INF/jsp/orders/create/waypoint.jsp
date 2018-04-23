@@ -23,9 +23,10 @@
         <table>
             <td><label for="waypoints">Выберите маршрутную точку:</label></td>
             <td>
-                <form:select path="waypoints" id="waypoints" multiple="true">
-                    <form:options items="${freewaypoints}"/>
-                </form:select>
+                    <%--<form:select path="currentCity" items="${cities}" itemLabel="name" itemValue="id"/>--%>
+                <form:select path="waypoints" items="${freewaypoints}" itemValue="id" itemLabel="id" multiple="true"/>
+                    <%--<form:options items="${freewaypoints}"/>--%>
+                    <%--</form:select>--%>
             </td>
             <td><form:errors path="waypoints" cssClass="error"/></td>
             <td colspan="3"><input type="submit" value="Выбрать"/></td>

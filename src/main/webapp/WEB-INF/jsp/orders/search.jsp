@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <th scope="row">${order.orderStatus}</th>
+        <th scope="row">${order.orderStatus.toString()}</th>
         </tbody>
     </table>
 </t:wrapper>

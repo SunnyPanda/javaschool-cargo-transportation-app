@@ -21,7 +21,7 @@
         <c:forEach items="${orders}" var="order" varStatus="status">
             <tr>
                 <th scope="row">${order.uniqueNumber}</th>
-                <td>${order.orderStatus}</td>
+                <td>${order.orderStatus.toString()}</td>
                 <td><a href="<c:url value='/orders/waypoints/${order.id}'/>">waypoints</a></td></td>
                 <td>${order.truck.regNumber}</td>
                 <td><a href="<c:url value='/orders/drivers/${order.id}'/>">drivers</a></td></td>

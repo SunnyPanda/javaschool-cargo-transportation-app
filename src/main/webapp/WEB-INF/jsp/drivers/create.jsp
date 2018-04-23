@@ -6,7 +6,7 @@
 <t:wrapper>
     </br>
     <div class="page-header">
-        <h2>Edit Driver</h2>
+        <h2>New Driver</h2>
     </div>
     <form:form method="POST" modelAttribute="driver">
         <table>
@@ -33,28 +33,14 @@
                 <td><form:input path="hoursPerMonth" id="hoursPerMonth"/></td>
                 <td><form:errors path="hoursPerMonth" cssClass="error"/></td>
             </tr>
-                <%--<tr>--%>
-                <%--<td><label for="driverStatus">Status: </label></td>--%>
-                <%--<td>--%>
-                <%--<form:select path="driverStatus" id="driverStatus">--%>
-                <%--<form:options items="${statusValues}"/>--%>
-                <%--</form:select>--%>
-                <%--</td>--%>
-                <%--<td><form:errors path="driverStatus" cssClass="error"/></td>--%>
-                <%--</tr>--%>
             <tr>
                 <td><label for="currentCity">City: </label>
                 <td>
                     <form:select path="currentCity" items="${cities}" itemLabel="name" itemValue="id"/>
                 </td>
             </tr>
-                <%--<tr>--%>
-                <%--<td><label for="currentTruck">Truck: </label></td>--%>
-                <%--<td><form:input path="currentTruck.regNumber" id="currentTruck"/></td>--%>
-                <%--<td><form:errors path="currentTruck" cssClass="error"/></td>--%>
-                <%--</tr>--%>
             <tr>
-                <td colspan="3"><input type="submit" value="Update"/></td>
+                <td colspan="3"><input type="submit" value="Register"/></td>
             </tr>
         </table>
     </form:form>

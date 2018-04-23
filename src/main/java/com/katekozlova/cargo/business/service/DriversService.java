@@ -6,6 +6,8 @@ import com.katekozlova.cargo.data.entity.*;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
+import org.joda.time.Hours;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,6 +66,7 @@ public class DriversService {
 
         driver.setShiftBegin(new DateTime());
         driver.setDriverStatus(DriverStatus.IN_SHIFT);
+        driverRepository.save(driver);
         System.out.println("driver.getShiftBegin() = " + driver.getShiftBegin());
     }
 
@@ -72,16 +75,19 @@ public class DriversService {
     }
 
     public void setShiftEnd(Driver driver) {
-//        final DateTime shiftEnd = new DateTime();
-//        DateTime firstDayOfMonth = shiftEnd.dayOfMonth().withMinimumValue();
-//        if (DateTimeComparator.getDateOnlyInstance().compare(firstDayOfMonth, driver.getShiftBegin()) < 0) {
-//            driver.setHoursPerMonth(driver.getHoursPerMonth() + driver.getOrder().getTravelTime());
-//        } else {
-//            driver.setHoursPerMonth(0);
-//            final long hoursBetween = Hours.hoursBetween(firstDayOfMonth, shiftEnd).getHours();
-//            driver.setHoursPerMonth(hoursBetween);
-//        }
+        final DateTime shiftEnd = new DateTime();
+        DateTime firstDayOfMonth = shiftEnd.dayOfMonth().withMinimumValue();
+        if (DateTimeComparator.getDateOnlyInstance().compare(firstDayOfMonth, driver.getShiftBegin()) < 0) {
+            driver.setHoursPerMonth(driver.getHoursPerMonth() + driver.getOrder().getTravelTime());
+        } else {
+            driver.setHoursPerMonth(0);
+            final long hoursBetween = Hours.hoursBetween(firstDayOfMonth, shiftEnd).getHours();
+            driver.setHoursPerMonth(hoursBetween);
+        }
         driver.setDriverStatus(DriverStatus.REST);
+        driver.setCurrentTruck(null);
+        driver.setOrder(null);
+        driverRepository.save(driver);
     }
 
 //    @Scheduled(fixedRate = 30000, initialDelay = 20000)

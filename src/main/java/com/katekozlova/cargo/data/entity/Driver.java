@@ -41,7 +41,7 @@ public class Driver {
     @OneToOne(mappedBy = "driver", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private User user;
 
-    @Column
+    @Column(length = 300)
     private DateTime shiftBegin;
 
     public long getId() {

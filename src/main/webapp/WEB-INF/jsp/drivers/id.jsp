@@ -64,9 +64,14 @@
                     <c:forEach items="${waypoints}" var="waypoint" varStatus="status">
                         ${waypoint.cargo.number}
                         ${waypoint.cargo.name}
+                    <form:form method="POST" modelAttribute="driver" action="/drivers/id/load/${waypoint.cargo.id}">
+                <td colspan="1"><input type="submit" value="Получил"/></td>
+                </form:form>
+                <form:form method="POST" modelAttribute="driver" action="/drivers/id/unload/${waypoint.cargo.id}">
+                    <td colspan="1"><input type="submit" value="Выгрузил"/></td>
+                </form:form>
                     </c:forEach>
                 </td>
-
             </tr>
             </tbody>
         </table>

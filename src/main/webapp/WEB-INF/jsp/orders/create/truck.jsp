@@ -13,9 +13,7 @@
         <table>
             <td><label for="truck">Выберите фуру:</label></td>
             <td>
-                <form:select path="truck" id="truck" multiple="true">
-                    <form:options items="${trucks}"/>
-                </form:select>
+                <form:select path="truck" items="${trucks}" itemValue="id" itemLabel="regNumber" multiple="true"/>
             </td>
             <td colspan="3"><input type="submit" value="Выбрать"/></td>
         </table>

@@ -14,6 +14,13 @@ public class CargoRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public Cargo findById(long cargoId) {
+        final TypedQuery<Cargo> query = entityManager
+                .createQuery("select c from Cargo c where c.id = :cargoId", Cargo.class);
+        query.setParameter("cargoId", cargoId);
+        return query.getSingleResult();
+    }
+
     public Cargo findCargoByNumber(long number) {
         final TypedQuery<Cargo> query = entityManager
                 .createQuery("select c from Cargo c where c.number = :number", Cargo.class);
@@ -24,5 +31,14 @@ public class CargoRepository {
     public List<Cargo> findAll() {
         final TypedQuery<Cargo> query = entityManager.createQuery("select c from Cargo c", Cargo.class);
         return query.getResultList();
+    }
+
+    public Cargo save(Cargo cargo) {
+        if (cargo.getId() == 0) {
+            entityManager.persist(cargo);
+        } else {
+            entityManager.merge(cargo);
+        }
+        return cargo;
     }
 }

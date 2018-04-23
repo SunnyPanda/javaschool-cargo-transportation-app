@@ -20,7 +20,7 @@
             <tr>
                 <td>${waypoint.city.name}</td>
                 <td>${waypoint.cargo.name}</td>
-                <td>${waypoint.waypointType}</td>
+                <td>${waypoint.waypointType.toString()}</td>
             </tr>
         </c:forEach>
         </tbody>

@@ -17,15 +17,9 @@
         <table>
             <td><label for="drivers">Выберите ${order.truck.shiftSize}х водителей:</label></td>
             <td>
-                    <%--<form:select path="drivers" id="drivers" multiple="true">--%>
-                    <%--<form:option value="-" label="--Please Select"/>--%>
-                    <%--<form:options items="${drivers}" itemValue=""/>--%>
-                    <%--</form:select>--%>
                 <ul>
-                    <form:select path="drivers" multiple="true">
-                        <%--<form:option value="-" label="--Please Select"/>--%>
-                        <form:options items="${drivers}"/>
-                    </form:select>
+                    <form:select path="drivers" items="${drivers}" itemValue="id" itemLabel="personalNumber"
+                                 multiple="true"/>
                 </ul>
             </td>
             <td colspan="3"><input type="submit" value="Выбрать"/></td>

@@ -15,6 +15,13 @@ public class WaypointRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public Waypoint findById(long waypointId) {
+        final TypedQuery<Waypoint> query = entityManager
+                .createQuery("select w from Waypoint w where w.id = :waypointId", Waypoint.class);
+        query.setParameter("waypointId", waypointId);
+        return query.getSingleResult();
+    }
+
     public List<Waypoint> findAll() {
         final TypedQuery<Waypoint> query = entityManager.createQuery("select w from Waypoint w", Waypoint.class);
         return query.getResultList();
