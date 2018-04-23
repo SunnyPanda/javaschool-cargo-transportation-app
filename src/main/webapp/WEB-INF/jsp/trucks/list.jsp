@@ -8,6 +8,7 @@
         <h1>Welcome to the Trucks Page</h1>
     </div>
     <br/>
+    <a class="btn btn-primary" href="<c:url value='/trucks/create'/>" role="button">New Truck</a>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -35,6 +36,5 @@
             </c:forEach>
         </tbody>
     </table>
-    <a class="btn btn-primary" href="<c:url value='/trucks/create'/>" role="button">New Truck</a>
 </t:wrapper>
 
