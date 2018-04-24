@@ -9,11 +9,11 @@ insert into orders (id, unique_number, status) values (5, 5, 1);
 -- insert into orders (id, unique_number, status) values (9, 9, 1);
 -- insert into orders (id, unique_number, status) values (10, 10, 1);
 
-insert into cities (id, city_name) values (1, 'Санкт-Петербург');
-insert into cities (id, city_name) values (2, 'Москва');
-insert into cities (id, city_name) values (3, 'Владивосток');
-insert into cities (id, city_name) values (4, 'Екатеринбург');
-insert into cities (id, city_name) values (5, 'Уфа');
+insert into cities (id, city_name) values (1, 'St. Petersburg');
+insert into cities (id, city_name) values (2, 'Moscow');
+insert into cities (id, city_name) values (3, 'Vladivostok');
+insert into cities (id, city_name) values (4, 'Ekaterinburg');
+insert into cities (id, city_name) values (5, 'Ufa');
 -- insert into cities (id, city_name) values (6, 'Пермь');
 -- insert into cities (id, city_name) values (7, 'Калининград');
 -- insert into cities (id, city_name) values (8, 'Владивосток');
@@ -31,16 +31,16 @@ insert into map_distance (id, city_from_id, city_to_id, distance) values (8, 3, 
 insert into map_distance (id, city_from_id, city_to_id, distance) values (9, 3, 5, 7688);
 insert into map_distance (id, city_from_id, city_to_id, distance) values (10, 4, 5, 511);
 
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (1, 0001, 'Коробочка', 34, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (2, 0002, 'Бутылки', 13, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (3, 0003, 'Машинка', 3, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (4, 0004, 'Стол', 30, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (5, 0005, 'Пакет акций Apple', 1, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (6, 0006, 'Кухня', 5, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (7, 0007, 'Шкаф', 3, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (8, 0008, 'Пачка чипсов', 5, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (9, 0009, 'Слоник', 10, 0);
-insert into cargo (id, cargo_number, cargo_name, weight, status) values (10, 0010, 'Черепашка', 50, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (1, 0001, 'Some box', 34, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (2, 0002, 'Bottles of red wine', 13, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (3, 0003, 'Small car', 3, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (4, 0004, 'Table', 30, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (5, 0005, 'Apple shareholding', 1, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (6, 0006, 'Kitchen', 5, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (7, 0007, 'Bookcase', 3, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (8, 0008, 'A packet of chips', 5, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (9, 0009, 'Elephant', 10, 0);
+insert into cargo (id, cargo_number, cargo_name, weight, status) values (10, 0010, 'Turtle', 50, 0);
 
 insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (1, 1, 1, 1, 0);
 insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (2, 2, 1, 1, 1);
@@ -75,24 +75,24 @@ insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id) values (10, 'JJ00000', 3, 11, 0, 5);
 
 
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (1, 1, 'Аркадий', 'Исааков', 23, 1, 1, 1, 1);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (2, 2, 'Вениамин', 'Пунктуальный', 46, 1, 1, 1, 1);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (3, 3, 'Варвара', 'Полякова', 123, 1, 2, 2, 2);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (4, 4, 'Клюква', 'Песочная', 45, 1, 3, 3, 3);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (5, 5, 'Елена', 'Парная', 15, 0, 4);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (6, 6, 'Александр', 'Иванов', 23, 0, 4);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (7, 7, 'Кристина', 'Петрова', 46, 0, 4);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (8, 8, 'Олег', 'Сидоров', 123, 0, 4);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (9, 9, 'Виталий', 'Ольховский', 45, 0, 4);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (10, 10, 'Андрэ', 'Фуэго', 170, 0, 5);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (11, 11, 'Павел', 'Ильинский', 23, 0, 5);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (12, 12, 'Армен', 'Джигарханян', 46, 0, 5);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (13, 13, 'Тигран', 'Волков', 123, 0, 1);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (14, 14, 'Леонид', 'Андреев', 45, 0, 1);
-insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (15, 15, 'Анатолий', 'Вассерман', 15, 0, 2);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (1, 1, 'George', 'Clooney', 23, 1, 1, 1, 1);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (2, 2, 'Sean', 'Bin', 46, 1, 1, 1, 1);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (3, 3, 'Keanu', 'Reeves', 123, 1, 2, 2, 2);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_truck_id, current_city_id, order_id) values (4, 4, 'George', 'Martin', 45, 1, 3, 3, 3);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (5, 5, 'Freddie', 'Mercury', 15, 0, 4);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (6, 6, 'Paul', 'McCartney', 23, 0, 4);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (7, 7, 'Christina', 'Aguilera', 46, 0, 4);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (8, 8, 'John', 'Lennon', 123, 0, 4);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (9, 9, 'Barack', 'Obama', 45, 0, 4);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (10, 10, 'Kristen', 'Stewart', 170, 0, 5);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (11, 11, 'Ripe', 'Avocado', 23, 0, 5);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (12, 12, 'Yellow', 'Pineapple', 46, 0, 5);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (13, 13, 'Quentin', 'Quentin', 123, 0, 1);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (14, 14, 'Peter', 'Jackson', 45, 0, 1);
+insert into drivers (id, personal_number, first_name, last_name, hours_per_month, status, current_city_id) values (15, 15, 'Bald', 'Brazzers', 15, 0, 2);
 
 insert into users (id, username, password, role) values (1, 'user', '$2a$11$Aax9HOQhqLshWpLZPeoiYe.EMjj4/RaSf5PCO2zcfdxtnarufc28K', 'ROLE_USER');
 insert into users (id, username, password, role, driver_id) values (2, 'driver1', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 1);
 insert into users (id, username, password, role, driver_id) values (3, 'driver2', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 2);
 insert into users (id, username, password, role, driver_id) values (4, 'driver3', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 3);
-insert into users (id, username, password, role, driver_id) values (5, 'driver4', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 11);
+insert into users (id, username, password, role, driver_id) values (5, 'driver11', '$2a$11$nmd5TT5fEkCiHaktsr5Gqe4L9bEiUa1Ektu7/dmp32FnRz.nZ/0Py', 'ROLE_DRIVER', 11);

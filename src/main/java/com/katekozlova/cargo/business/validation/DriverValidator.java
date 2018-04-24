@@ -29,12 +29,12 @@ public class DriverValidator implements Validator {
             errors.rejectValue("personalNumber", "driver.personalNumber.invalid");
         }
 
-        Pattern firstNamePattern = Pattern.compile("[А-Я][а-я]+");
+        Pattern firstNamePattern = Pattern.compile("[a-zA-z]+");
         if (!(firstNamePattern.matcher((driver.getFirstName()))).matches()) {
             errors.rejectValue("firstName", "driver.firstName.invalid");
         }
 
-        Pattern lastNamePattern = Pattern.compile("[А-Я][а-я]+");
+        Pattern lastNamePattern = Pattern.compile("[a-zA-z]+");
         if (!(lastNamePattern.matcher((driver.getLastName()))).matches()) {
             errors.rejectValue("lastName", "driver.lastName.invalid");
         }
@@ -44,6 +44,5 @@ public class DriverValidator implements Validator {
         if (!(hoursPerMonthPattern.matcher(Long.toString(hours))).matches() && hours > 176) {
             errors.rejectValue("hoursPerMonth", "driver.hoursPerMonth.invalid");
         }
-
     }
 }
