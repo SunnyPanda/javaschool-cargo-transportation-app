@@ -29,6 +29,7 @@ public class Truck {
     private List<Driver> drivers;
 
     @ManyToOne
+    @JoinColumn(name = "current_city_id")
     private City currentCity;
 
     @OneToOne

@@ -2,19 +2,19 @@ package com.katekozlova.cargo;
 
 import com.katekozlova.cargo.security.AppUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@SpringBootApplication
-@EnableScheduling
+//import org.springframework.boot.SpringApplication;
+//import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+//@SpringBootApplication
+//@EnableScheduling
 public class CargoApplication implements WebMvcConfigurer {
 
     private final AppUserDetailsService appUserDetailsService;
@@ -24,9 +24,9 @@ public class CargoApplication implements WebMvcConfigurer {
         this.appUserDetailsService = appUserDetailsService;
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(CargoApplication.class, args);
-    }
+//    public static void main(String[] args) {
+//        SpringApplication.run(CargoApplication.class, args);
+//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

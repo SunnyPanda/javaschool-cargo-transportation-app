@@ -30,12 +30,15 @@ public class Driver {
     private DriverStatus driverStatus;
 
     @ManyToOne
+    @JoinColumn(name = "current_city_id")
     private City currentCity;
 
     @ManyToOne
+    @JoinColumn(name = "current_truck_id")
     private Truck currentTruck;
 
     @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @OneToOne(mappedBy = "driver", cascade = CascadeType.REMOVE, orphanRemoval = true)

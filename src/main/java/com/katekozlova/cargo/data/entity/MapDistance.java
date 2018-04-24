@@ -12,9 +12,11 @@ public class MapDistance {
     private long id;
 
     @ManyToOne
+    @JoinColumn(name = "city_from_id")
     private City cityFrom;
 
     @ManyToOne
+    @JoinColumn(name = "city_to_id")
     private City cityTo;
 
     @Column

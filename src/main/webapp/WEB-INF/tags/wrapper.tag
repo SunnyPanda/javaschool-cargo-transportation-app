@@ -6,7 +6,7 @@
 <head>
     <title>Drivers List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<c:url value="/css/site.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/static/css/site.css"/>"/>
 </head>
 <body>
 <header>

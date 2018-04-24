@@ -1,4 +1,4 @@
-package com.katekozlova.cargo.web.application;
+package com.katekozlova.cargo.web;
 
 import com.katekozlova.cargo.business.service.CargoService;
 import com.katekozlova.cargo.business.service.CitiesService;

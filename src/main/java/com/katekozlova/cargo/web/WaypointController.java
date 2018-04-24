@@ -1,4 +1,4 @@
-package com.katekozlova.cargo.web.application;
+package com.katekozlova.cargo.web;
 
 import com.katekozlova.cargo.business.service.WaypointService;
 import com.katekozlova.cargo.data.entity.Waypoint;
