@@ -1,7 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
 public enum OrderStatus {
-    YES("Выполнен"), NO("Не выполнен");
+    YES("Finished"), NO("Unfinished");
 
     private final String label;
 

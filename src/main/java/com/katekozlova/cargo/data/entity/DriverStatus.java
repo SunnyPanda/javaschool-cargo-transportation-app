@@ -1,7 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
 public enum DriverStatus {
-    REST("Отдых"), IN_SHIFT("В смене"), BEHIND_THE_WHEEL("За рулем");
+    REST("Rest"), IN_SHIFT("In shift"), BEHIND_THE_WHEEL("Behind the wheel");
 
     private final String label;
 

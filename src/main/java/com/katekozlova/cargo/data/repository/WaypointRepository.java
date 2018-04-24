@@ -27,6 +27,15 @@ public class WaypointRepository {
         return query.getResultList();
     }
 
+    public Waypoint save(Waypoint waypoint) {
+        if (waypoint.getId() == 0) {
+            entityManager.persist(waypoint);
+        } else {
+            entityManager.merge(waypoint);
+        }
+        return waypoint;
+    }
+
     //List<Waypoint> findByOrderId(Long orderId);
     public List<Waypoint> findByOrder(long orderId) {
         final TypedQuery<Waypoint> query = entityManager

@@ -1,7 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
 public enum TruckState {
-    SERVICEABLE("Исправен"), DEFECTIVE("Неисправен");
+    SERVICEABLE("Serviceable"), DEFECTIVE("Defective");
 
     public final String label;
 

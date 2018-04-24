@@ -58,14 +58,14 @@ public class OrderService {
     }
 
     public Order saveWaipoints(Order order) {
-        // checkWaypoints(order.getWaypoints ());
         getOrderIdToWaypoint(order);
         return orderRepository.save(order);
     }
 
     public Order saveTruckToOrder(Order order) {
-        order.getTruck ( ).setOrder ( order );
-        return orderRepository.save ( order );
+        order.getTruck().setOrder(order);
+        truckRepository.save(order.getTruck());
+        return orderRepository.save(order);
     }
 
     public void addTruckToOrder(long orderId, long truckId) {
@@ -97,8 +97,9 @@ public class OrderService {
     public Order saveDriversToOrder(Order order) {
         getOrderToDriver(order);
         getTruckToDriver(order);
-        return orderRepository.save ( order );
+        return orderRepository.save(order);
     }
+
 
     public Order findById(long id) {
         return orderRepository.findById(id);
@@ -137,18 +138,21 @@ public class OrderService {
     public void getOrderIdToWaypoint(Order order) {
         for ( Waypoint waypoint : order.getWaypoints ( ) ) {
             waypoint.setOrder ( order );
+            waypointRepository.save(waypoint);
         }
     }
 
     public void getOrderToDriver(Order order) {
-        for ( Driver driver : order.getDrivers ( ) ) {
-            driver.setOrder ( order );
+        for (Driver driver : order.getDrivers()) {
+            driver.setOrder(order);
+            driverRepository.save(driver);
         }
     }
 
     public void getTruckToDriver(Order order) {
         for (Driver driver : order.getDrivers()) {
             driver.setCurrentTruck(order.getTruck());
+            driverRepository.save(driver);
         }
     }
 

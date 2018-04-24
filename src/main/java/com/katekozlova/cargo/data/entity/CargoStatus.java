@@ -1,7 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
 public enum CargoStatus {
-    PREPARED("Подготовлен"), SHIPPED("Отгружен"), DELIVERED("Доставлен");
+    PREPARED("Prepared"), SHIPPED("Shipped"), DELIVERED("Delivered");
 
     private final String label;
 

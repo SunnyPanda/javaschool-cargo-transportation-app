@@ -97,9 +97,9 @@ public class Order {
                 "id=" + id +
                 ", uniqueNumber=" + uniqueNumber +
                 ", orderStatus=" + orderStatus +
-//                ", waypoints=" + waypoints +
-//                ", truck=" + truck +
-//                ", drivers=" + drivers +
+                ", waypoints=" + waypoints +
+                ", truck=" + truck +
+                ", drivers=" + drivers +
                 ", travelTime=" + travelTime +
                 '}';
     }

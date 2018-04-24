@@ -83,14 +83,14 @@ public class Driver {
     public String toString() {
         return "Driver{" +
                 "id=" + id +
-                ", personalNumber=" + personalNumber +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", hoursPerMonth=" + hoursPerMonth +
-                ", driverStatus=" + driverStatus +
-                ", currentCity=" + currentCity +
-                ", currentTruck=" + currentTruck +
-                ", order=" + order +
+//                ", personalNumber=" + personalNumber +
+//                ", firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", hoursPerMonth=" + hoursPerMonth +
+//                ", driverStatus=" + driverStatus +
+//                ", currentCity=" + currentCity +
+//                ", currentTruck=" + currentTruck +
+//                ", order=" + order +
                 '}';
     }
 
