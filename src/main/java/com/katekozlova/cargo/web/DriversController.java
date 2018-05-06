@@ -45,6 +45,7 @@ public class DriversController {
 
     @GetMapping(value = "/list")
     public ModelAndView list() {
+        System.out.println("We're in controller");
         List<Driver> drivers = driversService.getAllDrivers();
         return new ModelAndView("drivers/list", "drivers", drivers);
     }

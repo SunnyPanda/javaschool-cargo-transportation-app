@@ -1,10 +1,10 @@
 package com.katekozlova.cargo.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -24,15 +24,17 @@ public class Order {
     private OrderStatus orderStatus;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @JsonIgnore
     private List<Waypoint> waypoints;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "order")
     private Truck truck;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    private Set<Driver> drivers;
+    private List<Driver> drivers;
 
     @Column
+    @JsonIgnore
     private Long travelTime;
 
     public long getId() {
@@ -75,11 +77,11 @@ public class Order {
         this.waypoints = waypoints;
     }
 
-    public Set<Driver> getDrivers() {
+    public List<Driver> getDrivers() {
         return drivers;
     }
 
-    public void setDrivers(Set<Driver> drivers) {
+    public void setDrivers(List<Driver> drivers) {
         this.drivers = drivers;
     }
 

@@ -31,6 +31,7 @@ public class DriversService {
     }
 
     public List<Driver> getAllDrivers() {
+        System.out.println("We're in service");
         return Lists.newArrayList(driverRepository.findAll());
     }
 

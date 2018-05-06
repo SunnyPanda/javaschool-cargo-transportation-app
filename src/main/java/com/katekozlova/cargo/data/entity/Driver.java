@@ -1,5 +1,6 @@
 package com.katekozlova.cargo.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -11,40 +12,50 @@ public class Driver {
     @Id
     @SequenceGenerator(name = "driver_generator", sequenceName = "driver_sequence", initialValue = 20)
     @GeneratedValue(generator = "driver_generator")
+    @JsonIgnore
     private long id;
 
     @Column(name = "personal_number")
     private long personalNumber;
 
     @Column(name = "first_name")
+    @JsonIgnore
     private String firstName;
 
     @Column(name = "last_name")
+    @JsonIgnore
     private String lastName;
 
     @Column(name = "hours_per_month")
+    @JsonIgnore
     private long hoursPerMonth;
 
     @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
+    @JsonIgnore
     private DriverStatus driverStatus;
 
     @ManyToOne
     @JoinColumn(name = "current_city_id")
+    @JsonIgnore
     private City currentCity;
 
     @ManyToOne
     @JoinColumn(name = "current_truck_id")
+    @JsonIgnore
     private Truck currentTruck;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
+    @JsonIgnore
     private Order order;
 
     @OneToOne(mappedBy = "driver", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
     private User user;
 
     @Column(length = 300)
+    @JsonIgnore
     private DateTime shiftBegin;
 
     public long getId() {

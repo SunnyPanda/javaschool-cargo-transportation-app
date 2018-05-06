@@ -19,6 +19,11 @@ public class OrderRepository {
         return query.getResultList();
     }
 
+    public List<Order> findAllOrders() {
+        final TypedQuery<Order> query = entityManager.createQuery("select distinct o from Order o left join fetch o.drivers d where d.order = o", Order.class);
+        return query.getResultList();
+    }
+
     public Order save(Order order) {
         if (order.getId() == 0) {
             entityManager.persist(order);

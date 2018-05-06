@@ -37,6 +37,10 @@ public class OrderService {
         return Lists.newArrayList(orderRepository.findAll());
     }
 
+    public List<Order> getAll() {
+        return Lists.newArrayList(orderRepository.findAllOrders());
+    }
+
     public List<Waypoint> getOrderWaypoints(long id) {
         return waypointRepository.findByOrder(id);
     }
