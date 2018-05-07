@@ -1,6 +1,7 @@
 package com.katekozlova.cargo.data.repository;
 
 import com.katekozlova.cargo.data.entity.Driver;
+import com.katekozlova.cargo.data.entity.DriverStatus;
 import com.katekozlova.cargo.data.entity.Truck;
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +38,13 @@ public class DriverRepository {
         final TypedQuery<Driver> query = entityManager
                 .createQuery("select d from Driver d where d.order.id = :orderId", Driver.class);
         query.setParameter("orderId", orderId);
+        return query.getResultList();
+    }
+
+    public List<Driver> findByStatus(DriverStatus driverStatus) {
+        final TypedQuery<Driver> query = entityManager
+                .createQuery("select d from Driver d where d.driverStatus = :driverStatus", Driver.class);
+        query.setParameter("driverStatus", driverStatus);
         return query.getResultList();
     }
 

@@ -3,6 +3,7 @@ package com.katekozlova.cargo.business.service;
 import com.google.common.collect.Lists;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Truck;
+import com.katekozlova.cargo.data.entity.TruckState;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,17 @@ public class TrucksService {
 
     public Truck findById(long id) {
         return truckRepository.findById(id);
+    }
+
+    public List<Truck> getTrucksByState(TruckState truckState) {
+        return truckRepository.findByState(truckState);
+    }
+
+    public List<Truck> getTrucksWithOrder() {
+        return truckRepository.findByOrder();
+    }
+
+    public List<Truck> availableTrucks(TruckState truckState) {
+        return truckRepository.findByOrderTruckState(truckState);
     }
 }

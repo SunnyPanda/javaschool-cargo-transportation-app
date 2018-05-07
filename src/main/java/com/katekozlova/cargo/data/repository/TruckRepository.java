@@ -33,22 +33,39 @@ public class TruckRepository {
         return truck;
     }
 
-    //List<Truck> findTrucksByTruckStateAndOrderIsNullAndCapacityIsGreaterThan(TruckState truckState, long weight);
+    public Truck findById(long truckId) {
+        final TypedQuery<Truck> query = entityManager
+                .createQuery("select t from Truck t where t.id = :truckId", Truck.class);
+        query.setParameter("truckId", truckId);
+        return query.getSingleResult();
+    }
+
+    public List<Truck> findByState(TruckState truckState) {
+        final TypedQuery<Truck> query = entityManager
+                .createQuery("select t from Truck t where t.truckState = :truckState", Truck.class);
+        query.setParameter("truckState", truckState);
+        return query.getResultList();
+    }
+
+    public List<Truck> findByOrder() {
+        final TypedQuery<Truck> query = entityManager
+                .createQuery("select t from Truck t where t.order is not null", Truck.class);
+        //query.setParameter("truckState", truckState);
+        return query.getResultList();
+    }
+
+    public List<Truck> findByOrderTruckState(TruckState truckState) {
+        final TypedQuery<Truck> query = entityManager
+                .createQuery("select t from Truck t where t.order is null and t.truckState = :truckState", Truck.class);
+        query.setParameter("truckState", truckState);
+        return query.getResultList();
+    }
+
     public List<Truck> findByOrderTruckStateCapacity(TruckState truckState, long weight) {
         final TypedQuery<Truck> query = entityManager
                 .createQuery("select t from Truck t where t.order is null and t.truckState = :truckState and t.capacity >= :weight", Truck.class);
         query.setParameter("truckState", truckState);
         query.setParameter("weight", weight);
         return query.getResultList();
-    }
-
-    //List<Truck> findTrucksByTruckStateAndOrderIsNull(TruckState truckState);
-
-    //Truck findTruckById(Long id);
-    public Truck findById(long truckId) {
-        final TypedQuery<Truck> query = entityManager
-                .createQuery("select t from Truck t where t.id = :truckId", Truck.class);
-        query.setParameter("truckId", truckId);
-        return query.getSingleResult();
     }
 }

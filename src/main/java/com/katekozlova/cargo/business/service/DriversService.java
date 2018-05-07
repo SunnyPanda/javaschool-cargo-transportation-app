@@ -52,6 +52,10 @@ public class DriversService {
         return driverRepository.findById(id);
     }
 
+    public List<Driver> getDriversByStatus(DriverStatus driverStatus) {
+        return driverRepository.findByStatus(driverStatus);
+    }
+
     public List<Driver> findByTruck(long id) {
 
         List<Driver> drivers = driverRepository.findByCurrentTruck(driverRepository
