@@ -24,6 +24,8 @@ import java.util.List;
 @SessionAttributes("driver")
 public class DriversController {
 
+    Logger logger = Logger.getLogger(SampleController.class);
+
     private final DriversService driversService;
     private final CitiesService citiesService;
     private final CargoService cargoService;

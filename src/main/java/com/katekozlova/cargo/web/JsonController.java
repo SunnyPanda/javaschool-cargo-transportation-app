@@ -34,7 +34,7 @@ public class JsonController {
     @GetMapping(value = "api/orders", produces = "application/json")
     @ResponseBody
     public List<Order> generateOrdersJson() throws JsonProcessingException {
-        List<Order> orders = orderService.getAll();
+        List<Order> orders = orderService.getAllOrders();
         return orders;
     }
 
