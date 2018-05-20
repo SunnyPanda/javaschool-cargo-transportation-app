@@ -7,6 +7,7 @@ import com.katekozlova.cargo.business.validation.TruckValidator;
 import com.katekozlova.cargo.data.entity.City;
 import com.katekozlova.cargo.data.entity.Truck;
 import com.katekozlova.cargo.data.entity.TruckState;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,12 +29,15 @@ public class TrucksController {
 
     private final TruckValidator truckValidator;
 
+    private final AmqpTemplate amqpTemplate;
+
     @Autowired
-    public TrucksController(TrucksService trucksService, DriversService driversService, CitiesService citiesService, TruckValidator truckValidator) {
+    public TrucksController(TrucksService trucksService, DriversService driversService, CitiesService citiesService, TruckValidator truckValidator, AmqpTemplate amqpTemplate) {
         this.trucksService = trucksService;
         this.driversService = driversService;
         this.citiesService = citiesService;
         this.truckValidator = truckValidator;
+        this.amqpTemplate = amqpTemplate;
     }
 
     @InitBinder
@@ -51,6 +55,7 @@ public class TrucksController {
     public String deleteTruck(@PathVariable("id") long id, Truck truck) {
 
         trucksService.deleteTruck(truck);
+        amqpTemplate.convertAndSend("queue1", "truck");
         return "redirect:/trucks/list";
     }
 
@@ -74,6 +79,7 @@ public class TrucksController {
             return "trucks/create";
         }
         trucksService.createAndUpdate(truck);
+        amqpTemplate.convertAndSend("queue1", "truck");
         return "redirect:/trucks/list";
     }
 
@@ -96,6 +102,7 @@ public class TrucksController {
             return "trucks/edit";
         }
         trucksService.createAndUpdate(truck);
+        amqpTemplate.convertAndSend("queue1", "truck");
         return "redirect:/trucks/list";
     }
 }

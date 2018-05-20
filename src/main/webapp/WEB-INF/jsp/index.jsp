@@ -7,7 +7,16 @@
     <div class="page-header">
         <h1></h1>
     </div>
-    </br>
+    <%--<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">--%>
+
+    <%--<canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="2073" height="875" style="display: block; width: 2073px; height: 875px;"></canvas>--%>
+
+
+    <%--</main>--%>
+    <%--</div>--%>
+    <%--</div>--%>
+    <%--</br>--%>
+
     <form:form action="orders/search" method="POST" modelAttribute="order">
         <label for="uniqueNumber">Узнать статус заказа:</label>
         <input type="number" path="uniqueNumber" id="uniqueNumber" name="uniqueNumber"
@@ -21,21 +30,10 @@
         <input type="number" path="number" id="number" name="number" placeholder="Введите номер груза"/>
         <input type="submit" value="Search"/>
     </form:form>
-    <a href="<c:url value='/drivers/list' />">Drivers List</a>
-    <br/>
-    <a href="<c:url value='/trucks/list' />">Trucks List</a>
-    <br/>
-    <a href="<c:url value='/cities/list' />">Cities List</a>
-    <br/>
-    <a href="<c:url value='/cargo/list' />">Cargo List</a>
-    <br/>
-    <a href="<c:url value='/waypoints/list' />">Waypoints List</a>
-    <br/>
-    <a href="<c:url value='/orders/list' />">Orders List</a>
-    <br/>
-    <br/>
-    <br/>
+
     <a href="<c:url value='/cargo/status' />">Cargo's status</a>
     <br/>
     <a href="<c:url value='/orders/status' />">Order's status</a>
+
 </t:wrapper>
+

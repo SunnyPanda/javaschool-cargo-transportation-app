@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <t:wrapper>
     </br>
@@ -38,7 +39,24 @@
                 <%--</td>--%>
                 <%--</tr>--%>
         </table>
+        <div>
+            <div class="span-4">
+                <label for="orderTime">Check In:</label>
+            </div>
+            <div class="last">
+                <p><form:input path="orderTime"/></p>
+                <script type="text/javascript">
+                    Spring.addDecoration(new Spring.ElementDecoration({
+                        elementId: "orderTime",
+                        widgetType: "dijit.form.DateTextBox",
+                        widgetAttrs: {datePattern: "MM-dd-yyyy", required: true}
+                    }));
+                </script>
+
+            </div>
+        </div>
     </form:form>
+
 </t:wrapper>
 
 <%--<tr>--%>

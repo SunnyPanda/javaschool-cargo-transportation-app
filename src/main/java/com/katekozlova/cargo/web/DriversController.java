@@ -8,6 +8,7 @@ import com.katekozlova.cargo.data.entity.CargoStatus;
 import com.katekozlova.cargo.data.entity.City;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Waypoint;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,12 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+//import org.apache.log4j.Logger;
+
 @Controller
 @RequestMapping(value = "/drivers")
 @SessionAttributes("driver")
 public class DriversController {
 
-    Logger logger = Logger.getLogger(SampleController.class);
+    // Logger logger = Logger.getLogger(DriversController.class);
 
     private final DriversService driversService;
     private final CitiesService citiesService;
@@ -32,12 +35,15 @@ public class DriversController {
 
     private final DriverValidator driverValidator;
 
+    private final AmqpTemplate amqpTemplate;
+
     @Autowired
-    public DriversController(DriversService driversService, CitiesService citiesService, CargoService cargoService, DriverValidator driverValidator) {
+    public DriversController(DriversService driversService, CitiesService citiesService, CargoService cargoService, DriverValidator driverValidator, AmqpTemplate amqpTemplate) {
         this.driversService = driversService;
         this.citiesService = citiesService;
         this.cargoService = cargoService;
         this.driverValidator = driverValidator;
+        this.amqpTemplate = amqpTemplate;
     }
 
     @InitBinder
@@ -55,6 +61,7 @@ public class DriversController {
     @GetMapping(value = "/delete/{id}")
     public String deleteDriver(@PathVariable("id") long id, Driver driver) {
         driversService.deleteDriver(driver);
+        amqpTemplate.convertAndSend("queue1", "driver");
         return "redirect:/drivers/list";
     }
 
@@ -76,6 +83,7 @@ public class DriversController {
             return "drivers/create";
         }
         driversService.create(driver);
+        amqpTemplate.convertAndSend("queue1", "driver");
         return "redirect:/drivers/list";
     }
 
@@ -97,6 +105,7 @@ public class DriversController {
             return "drivers/edit";
         }
         driversService.update(driver);
+        amqpTemplate.convertAndSend("queue1", "driver");
         return "redirect:/drivers/list";
     }
 

@@ -2,6 +2,7 @@ package com.katekozlova.cargo.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,6 +37,16 @@ public class Order {
     @Column
     @JsonIgnore
     private Long travelTime;
+
+    private DateTime orderTime;
+
+    public DateTime getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(DateTime orderTime) {
+        this.orderTime = orderTime;
+    }
 
     public long getId() {
         return id;

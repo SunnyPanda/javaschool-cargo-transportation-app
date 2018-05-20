@@ -8,6 +8,7 @@ import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Order;
 import com.katekozlova.cargo.data.entity.Truck;
 import com.katekozlova.cargo.data.entity.Waypoint;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +27,14 @@ public class OrderCreateController {
     private final OrderService orderService;
     private final WaypointService waypointService;
     private final OrderValidator orderValidator;
+    private final AmqpTemplate amqpTemplate;
 
     @Autowired
-    public OrderCreateController(OrderService orderService, WaypointService waypointService, OrderValidator orderValidator) {
+    public OrderCreateController(OrderService orderService, WaypointService waypointService, OrderValidator orderValidator, AmqpTemplate amqpTemplate) {
         this.orderService = orderService;
         this.waypointService = waypointService;
         this.orderValidator = orderValidator;
+        this.amqpTemplate = amqpTemplate;
     }
 
     @InitBinder
