@@ -33,14 +33,14 @@ public class PersistenceConfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setUrl("jdbc:h2:file:~/test");
-//        dataSource.setUsername("sa");
-//        dataSource.setPassword("");
-//        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/cargo?serverTimezone=UTC");
-        dataSource.setUsername("root");
-        dataSource.setPassword("vhfrj,jhtw");
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:h2:file:~/test");
+        dataSource.setUsername("sa");
+        dataSource.setPassword("");
+        dataSource.setDriverClassName("org.h2.Driver");
+//        dataSource.setUrl("jdbc:mysql://localhost:3306/cargo?serverTimezone=UTC");
+//        dataSource.setUsername("root");
+//        dataSource.setPassword("vhfrj,jhtw");
+//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         return dataSource;
     }
 
