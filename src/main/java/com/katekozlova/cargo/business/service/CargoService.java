@@ -1,5 +1,6 @@
 package com.katekozlova.cargo.business.service;
 
+import com.katekozlova.cargo.data.entity.BookingStatus;
 import com.katekozlova.cargo.data.entity.Cargo;
 import com.katekozlova.cargo.data.entity.CargoStatus;
 import com.katekozlova.cargo.data.repository.CargoRepository;
@@ -36,5 +37,13 @@ public class CargoService {
         Cargo cargo = cargoRepository.findById(cargoId);
         cargo.setCargoStatus(cargoStatus);
         cargoRepository.save(cargo);
+    }
+
+    public List<Cargo> getCargoByBookingStatus(BookingStatus bookingStatus) {
+        return cargoRepository.findByBookingStatus(bookingStatus);
+    }
+
+    public Cargo saveCargo(Cargo cargo) {
+        return cargoRepository.save(cargo);
     }
 }

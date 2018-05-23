@@ -40,6 +40,12 @@ public class Order {
 
     private DateTime orderTime;
 
+    @Enumerated
+    private OrderCreateStatus orderCreateStatus;
+
+    @OneToMany(mappedBy = "order")
+    private List<Cargo> cargo;
+
     public DateTime getOrderTime() {
         return orderTime;
     }

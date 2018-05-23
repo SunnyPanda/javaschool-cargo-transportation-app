@@ -68,10 +68,10 @@ public class Waypoint {
     public String toString() {
         return "Waypoint{" +
                 "id=" + id +
-//                ", city=" + city +
-//                ", cargo=" + cargo +
+                ", city=" + city +
+                ", cargo=" + cargo +
 //                ", order=" + order +
-//                ", waypointType=" + waypointType +
+                ", waypointType=" + waypointType +
                 '}';
     }
 }

@@ -61,7 +61,7 @@ public class OrdersController {
 
     @GetMapping(value = "/{id}/trucks")
     public ModelAndView getTrucks(@PathVariable("id") long id, Model model) {
-        List<Truck> trucks = orderService.getTrucks(id);
+        List<Truck> trucks = orderService.getTrucks(orderService.findById(id));
         Order order = orderService.findById(id);
         model.addAttribute("order", order);
         return new ModelAndView("orders/trucks", "trucks", trucks);
@@ -164,5 +164,8 @@ public class OrdersController {
         return new ModelAndView("orders/status", "orders", orders);
     }
 
-
+    @GetMapping(value = "/create")
+    public String createNewOrder() {
+        return "orders/create";
+    }
 }

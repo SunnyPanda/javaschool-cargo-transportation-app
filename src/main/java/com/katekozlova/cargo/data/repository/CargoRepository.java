@@ -1,5 +1,6 @@
 package com.katekozlova.cargo.data.repository;
 
+import com.katekozlova.cargo.data.entity.BookingStatus;
 import com.katekozlova.cargo.data.entity.Cargo;
 import org.springframework.stereotype.Repository;
 
@@ -29,7 +30,8 @@ public class CargoRepository {
     }
 
     public List<Cargo> findAll() {
-        final TypedQuery<Cargo> query = entityManager.createQuery("select c from Cargo c", Cargo.class);
+        final TypedQuery<Cargo> query = entityManager
+                .createQuery("select c from Cargo c", Cargo.class);
         return query.getResultList();
     }
 
@@ -40,5 +42,12 @@ public class CargoRepository {
             entityManager.merge(cargo);
         }
         return cargo;
+    }
+
+    public List<Cargo> findByBookingStatus(BookingStatus bookingStatus) {
+        final TypedQuery<Cargo> query = entityManager
+                .createQuery("select c from Cargo c where c.order is null and c.bookingStatus = :bookingStatus", Cargo.class);
+        query.setParameter("bookingStatus", bookingStatus);
+        return query.getResultList();
     }
 }

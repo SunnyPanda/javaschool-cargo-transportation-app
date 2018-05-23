@@ -58,6 +58,11 @@ public class Driver {
     @JsonIgnore
     private DateTime shiftBegin;
 
+    @Column(name = "booking_status")
+    @JsonIgnore
+    @Enumerated
+    private BookingStatus bookingStatus;
+
     public long getId() {
         return id;
     }
@@ -159,5 +164,13 @@ public class Driver {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public BookingStatus getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(BookingStatus bookingStatus) {
+        this.bookingStatus = bookingStatus;
     }
 }

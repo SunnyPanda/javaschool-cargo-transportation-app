@@ -4,7 +4,7 @@
 
 <t:wrapper>
     <div class="page-header mt-5">
-        <h1>Welcome to the Orders Page</h1>
+        <h1>Orders List</h1>
     </div>
     <br/>
     <table class="table table-striped table-hover">
@@ -39,5 +39,5 @@
         </c:forEach>
         </tbody>
     </table>
-    <a class="btn btn-primary" href="<c:url value='/orders/create/step1'/>" role="button">New Order</a>
+    <a class="btn btn-primary" href="<c:url value='/orders/create/number'/>" role="button">New Order</a>
 </t:wrapper>

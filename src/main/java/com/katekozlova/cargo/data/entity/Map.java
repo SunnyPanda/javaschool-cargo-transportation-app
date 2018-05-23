@@ -1,9 +1,6 @@
 package com.katekozlova.cargo.data.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 @Entity
 public class Map {
@@ -13,5 +10,14 @@ public class Map {
     @GeneratedValue(generator = "map_generator")
     private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "city_from_id")
+    private City cityFrom;
 
+    @ManyToOne
+    @JoinColumn(name = "city_to_id")
+    private City cityTo;
+
+
+    private String status;
 }

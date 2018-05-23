@@ -1,11 +1,12 @@
 package com.katekozlova.cargo.data.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Data
+//@Data
 @Table(name = "cargo")
 public class Cargo {
     @Id
@@ -25,4 +26,81 @@ public class Cargo {
     @Column(name = "status")
     @Enumerated
     private CargoStatus cargoStatus;
+
+    @OneToMany(mappedBy = "cargo", cascade = CascadeType.ALL)
+    private List<Waypoint> waypoints;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    @JsonIgnore
+    private Order order;
+
+    @Column(name = "booking_status")
+    @JsonIgnore
+    @Enumerated
+    private BookingStatus bookingStatus;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getNumber() {
+        return number;
+    }
+
+    public void setNumber(long number) {
+        this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getWeight() {
+        return weight;
+    }
+
+    public void setWeight(long weight) {
+        this.weight = weight;
+    }
+
+    public CargoStatus getCargoStatus() {
+        return cargoStatus;
+    }
+
+    public void setCargoStatus(CargoStatus cargoStatus) {
+        this.cargoStatus = cargoStatus;
+    }
+
+    public List<Waypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(List<Waypoint> waypoints) {
+        this.waypoints = waypoints;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public BookingStatus getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(BookingStatus bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
 }

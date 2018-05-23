@@ -1,9 +1,6 @@
 package com.katekozlova.cargo.config;
 
-import com.katekozlova.cargo.business.converter.CityConverter;
-import com.katekozlova.cargo.business.converter.DriverConverter;
-import com.katekozlova.cargo.business.converter.TruckConverter;
-import com.katekozlova.cargo.business.converter.WaypointConverter;
+import com.katekozlova.cargo.business.converter.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -26,10 +23,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public DriverConverter driverConverter;
 
     @Autowired
-    TruckConverter truckConverter;
+    public TruckConverter truckConverter;
 
     @Autowired
-    WaypointConverter waypointConverter;
+    public WaypointConverter waypointConverter;
+
+    @Autowired
+    public CargoConverter cargoConverter;
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -47,6 +47,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addConverter(driverConverter);
         registry.addConverter(truckConverter);
         registry.addConverter(waypointConverter);
+        registry.addConverter(cargoConverter);
     }
 
     @Bean

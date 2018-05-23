@@ -57,11 +57,27 @@ public class OrderService {
         return driverRepository.findByOrder(id);
     }
 
-    public List<Truck> getTrucks(long id) {
+    public static long getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException {
 
-        return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE,
-                findMaxCargoWeight(getOrderWaypoints(id)));
-        //truckRepository.findTrucksByTruckStateAndOrderIsNull(TruckState.SERVICEABLE);
+        //set up key
+        GeoApiContext distCalcer = new GeoApiContext.Builder()
+                .apiKey(API_KEY)
+                .build();
+
+        DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer);
+        DistanceMatrix result = req.origins(addrOne)
+                .destinations(addrTwo)
+                .mode(TravelMode.DRIVING)
+                .avoid(DirectionsApi.RouteRestriction.TOLLS)
+                .language("en-US")
+                //.units(Unit.METRIC)
+                .await();
+
+        long distApart = result.rows[0].elements[0].distance.inMeters;
+        //long timeApart = result.rows[0].elements[0].duration.
+        System.out.println("distApart = " + distApart);
+
+        return distApart / 1000;
     }
 
     public Order create(Order order) {
@@ -69,9 +85,12 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public Order saveWaipoints(Order order) {
-        getOrderIdToWaypoint(order);
-        return orderRepository.save(order);
+    public List<Truck> getTrucks(Order order) {
+
+//        return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE,
+//                findMaxCargoWeight(getOrderWaypoints(id)));
+        return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, findMaxCargoWeight(order.getWaypoints()));
+        //truckRepository.findTrucksByTruckStateAndOrderIsNull(TruckState.SERVICEABLE);
     }
 
     public Order saveTruckToOrder(Order order) {
@@ -106,10 +125,18 @@ public class OrderService {
         return appropriateDrivers;
     }
 
-    public Order saveDriversToOrder(Order order) {
-        getOrderToDriver(order);
-        getTruckToDriver(order);
-        return orderRepository.save(order);
+    public Order saveWaipoints(Order order, Waypoint waypoint) {
+        try {
+            order.getWaypoints().add(waypoint);
+        } catch (NullPointerException e) {
+            List<Waypoint> waypoints = new ArrayList<>();
+            waypoints.add(waypoint);
+            order.setWaypoints(waypoints);
+        }
+
+        //getOrderIdToWaypoint(order);
+        //return orderRepository.save(order);
+        return order;
     }
 
 
@@ -163,26 +190,10 @@ public class OrderService {
         }
     }
 
-    public static long getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException {
-
-        //set up key
-        GeoApiContext distCalcer = new GeoApiContext.Builder()
-                .apiKey(API_KEY)
-                .build();
-
-        DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(distCalcer);
-        DistanceMatrix result = req.origins(addrOne)
-                .destinations(addrTwo)
-                .mode(TravelMode.DRIVING)
-                .avoid(DirectionsApi.RouteRestriction.TOLLS)
-                .language("en-US")
-                //.units(Unit.METRIC)
-                .await();
-
-        long distApart = result.rows[0].elements[0].distance.inMeters;
-        System.out.println("distApart = " + distApart);
-
-        return distApart;
+    public void saveDriversToOrder(Order order) {
+        getOrderToDriver(order);
+        getTruckToDriver(order);
+        // return orderRepository.save(order);
     }
 
     public void getOrderIdToWaypoint(Order order) {
@@ -224,21 +235,34 @@ public class OrderService {
 
     public long getTravelTime(List<Waypoint> waypoints) {
         long travelDistance = 0;
-        try {
-            getDriveDist("St Petersburg", "Moscow");
-        } catch (ApiException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        long tempDistance = 0;
+
         MapDistance mapDistance;
         for (int i = 0; i < waypoints.size() - 1; i++) {
-            mapDistance = mapDistanceRepository.findMapDistanceBetweenTwoCities(waypoints.get(i).getCity(),
-                    waypoints.get(i + 1).getCity());
-            travelDistance += mapDistance.getDisrance();
+//            mapDistance = mapDistanceRepository.findMapDistanceBetweenTwoCities(waypoints.get(i).getCity(),
+//                    waypoints.get(i + 1).getCity());
+//            travelDistance += mapDistance.getDisrance();
+            try {
+                tempDistance = getDriveDist(waypoints.get(i).getCity().getName(), waypoints.get(i + 1).getCity().getName());
+            } catch (ApiException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            travelDistance += tempDistance;
         }
+        System.out.println("travelDistance = " + travelDistance);
         return travelDistance / TRUCK_SPEED;
+    }
+
+    public void saveOrder(Order order) {
+        orderRepository.save(order);
+        order.setOrderStatus(OrderStatus.NO);
+        getOrderIdToWaypoint(order);
+        saveTruckToOrder(order);
+        saveDriversToOrder(order);
+        orderRepository.save(order);
     }
 }

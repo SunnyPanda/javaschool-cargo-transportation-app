@@ -5,66 +5,45 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <t:wrapper>
-    </br>
-    <div class="page-header">
-        <h2>New Order</h2>
-    </div>
-    <form:form action="/orders/create/waypoint" method="POST" modelAttribute="order">
-        <table>
-            <tr>
-                <td><label for="uniqueNumber">Номер заказа: </label></td>
-                <td><form:input path="uniqueNumber" id="uniqueNumber"/></td>
-                <td><form:errors path="uniqueNumber" cssClass="error"/></td>
-            </tr>
-            </br>
-            <tr>
-                <td colspan="3">
-                    <input type="submit" value="Next"/>
-                </td>
-            </tr>
-                <%--<tr>--%>
 
-                <%--<td><label for="waypoints">Выберите маршрутную точку:</label></td>--%>
-                <%--<td><form:select path="waypoints" id="waypoints">--%>
-                <%--<form:options items="${waypoints}"/>--%>
-                <%--</form:select></td>--%>
-                <%--<td colspan="3"><input type="submit" value="Выбрать"/></td>--%>
-                <%--</form:form>--%>
-                <%--</tr>--%>
+    <div class="container">
+        <div class="py-5 text-left">
+            <h2>New Order Form</h2>
+        </div>
 
-                <%--<form:form method="POST" modelAttribute="order">--%>
-                <%--<tr>--%>
-                <%--<td colspan="3">--%>
-                <%--<input type="submit" value="Register"/>--%>
-                <%--</td>--%>
-                <%--</tr>--%>
-        </table>
-        <div>
-            <div class="span-4">
-                <label for="orderTime">Check In:</label>
-            </div>
-            <div class="last">
-                <p><form:input path="orderTime"/></p>
-                <script type="text/javascript">
-                    Spring.addDecoration(new Spring.ElementDecoration({
-                        elementId: "orderTime",
-                        widgetType: "dijit.form.DateTextBox",
-                        widgetAttrs: {datePattern: "MM-dd-yyyy", required: true}
-                    }));
-                </script>
-
+        <div class="row">
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-1">Step 1</h4>
+                <form:form action="/orders/create/waypoint" method="GET" modelAttribute="order">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="uniqueNumber">Order's unique number: </label>
+                            <form:input path="uniqueNumber" id="uniqueNumber"/>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <a class="btn btn-primary" href="/orders/list" role="button">Back to Order's List</a>
+                    <button class="btn btn-primary" type="submit">Next Step</button>
+                </form:form>
             </div>
         </div>
-    </form:form>
+    </div>
 
 </t:wrapper>
 
-<%--<tr>--%>
-<%--<td><label for="driverStatus">Status: </label></td>--%>
-<%--<td>--%>
-<%--<form:select path="driverStatus" id="driverStatus">--%>
-<%--<form:options items="${statusValues}"/>--%>
-<%--</form:select>--%>
-<%--</td>--%>
-<%--<td><form:errors path="driverStatus" cssClass="error"/></td>--%>
-<%--</tr>--%>
+<%--<div>--%>
+<%--<div class="span-4">--%>
+<%--<label for="orderTime">Check In:</label>--%>
+<%--</div>--%>
+<%--<div class="last">--%>
+<%--<p><form:input path="orderTime"/></p>--%>
+<%--<script type="text/javascript">--%>
+<%--Spring.addDecoration(new Spring.ElementDecoration({--%>
+<%--elementId: "orderTime",--%>
+<%--widgetType: "dijit.form.DateTextBox",--%>
+<%--widgetAttrs: {datePattern: "MM-dd-yyyy", required: true}--%>
+<%--}));--%>
+<%--</script>--%>
+
+<%--</div>--%>
+<%--</div>--%>

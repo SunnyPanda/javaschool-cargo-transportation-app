@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+//@Data
 @Table(name = "cities")
 public class City {
 
@@ -21,6 +22,9 @@ public class City {
 
     @OneToMany(mappedBy = "currentCity", cascade = CascadeType.REMOVE)
     private List<Truck> trucks;
+
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    private List<Waypoint> waypoints;
 
     public long getId() {
         return id;
@@ -44,6 +48,14 @@ public class City {
 
     public void setDrivers(List<Driver> drivers) {
         this.drivers = drivers;
+    }
+
+    public List<Waypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(List<Waypoint> waypoints) {
+        this.waypoints = waypoints;
     }
 }
 
