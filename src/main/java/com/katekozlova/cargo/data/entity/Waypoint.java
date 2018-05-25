@@ -1,6 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "waypoints")
@@ -73,5 +74,23 @@ public class Waypoint {
 //                ", order=" + order +
                 ", waypointType=" + waypointType +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Waypoint waypoint = (Waypoint) o;
+        return id == waypoint.id &&
+                Objects.equals(city, waypoint.city) &&
+                Objects.equals(cargo, waypoint.cargo) &&
+                Objects.equals(order, waypoint.order) &&
+                waypointType == waypoint.waypointType;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, city, cargo, order, waypointType);
     }
 }

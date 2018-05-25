@@ -5,6 +5,7 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "trucks")
@@ -121,5 +122,26 @@ public class Truck {
 
     public void setBookingStatus(BookingStatus bookingStatus) {
         this.bookingStatus = bookingStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Truck truck = (Truck) o;
+        return id == truck.id &&
+                shiftSize == truck.shiftSize &&
+                capacity == truck.capacity &&
+                Objects.equals(regNumber, truck.regNumber) &&
+                truckState == truck.truckState &&
+                Objects.equals(drivers, truck.drivers) &&
+                Objects.equals(currentCity, truck.currentCity) &&
+                Objects.equals(order, truck.order);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, regNumber, shiftSize, capacity, truckState, drivers, currentCity, order);
     }
 }

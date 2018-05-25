@@ -51,12 +51,7 @@ public class DriversService {
         return driverRepository.findByStatus(driverStatus);
     }
 
-    public List<Driver> findByTruck(long id) {
 
-        List<Driver> drivers = driverRepository.findByCurrentTruck(driverRepository
-                .findById(id).getCurrentTruck());
-        return drivers.stream().filter(driver -> driver.getId() != id).collect(Collectors.toList());
-    }
 
 //    @Scheduled(fixedRate = 30000, initialDelay = 20000)
 //    @Transactional

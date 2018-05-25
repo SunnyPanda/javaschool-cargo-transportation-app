@@ -79,7 +79,7 @@ public class TrucksController {
             return "trucks/create";
         }
         trucksService.createAndUpdate(truck);
-        amqpTemplate.convertAndSend("queue1", "truck");
+        amqpTemplate.convertAndSend("queue", "truck");
         return "redirect:/trucks/list";
     }
 

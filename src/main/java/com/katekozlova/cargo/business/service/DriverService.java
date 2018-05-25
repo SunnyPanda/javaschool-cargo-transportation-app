@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -46,5 +47,12 @@ public class DriverService {
         }
         driver.setDriverStatus(DriverStatus.REST);
         driverRepository.save(driver);
+    }
+
+    public List<Driver> findByTruck(long id) {
+
+        List<Driver> drivers = driverRepository.findByCurrentTruck(driverRepository
+                .findById(id).getCurrentTruck());
+        return drivers.stream().filter(driver -> driver.getId() != id).collect(Collectors.toList());
     }
 }

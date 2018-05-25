@@ -1,21 +1,20 @@
 package com.katekozlova.cargo.business.service;
 
 import com.google.common.collect.ImmutableList;
-import com.katekozlova.cargo.data.entity.City;
-import com.katekozlova.cargo.data.entity.Order;
-import com.katekozlova.cargo.data.entity.Waypoint;
-import com.katekozlova.cargo.data.entity.WaypointType;
+import com.katekozlova.cargo.data.entity.*;
 import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Or;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -23,18 +22,22 @@ import static org.mockito.Mockito.when;
 public class WaypointServiceTest extends MockitoJUnit {
 
     private static final Waypoint waypoint;
+    private static final City city;
+    private static final Order order;
+    private static final Cargo cargo;
 
     static {
-        Order order = new Order();
+        order = new Order();
         waypoint = new Waypoint();
+        cargo = new Cargo();
         order.setId(45);
-        final City city = new City();
+        city = new City();
         city.setId(3);
         city.setName("St. Petersburg");
         waypoint.setId(7);
         waypoint.setCity(city);
-        waypoint.setOrder(order);
         waypoint.setWaypointType(WaypointType.SHIPMENT);
+        waypoint.setOrder(order);
     }
 
     @Mock
@@ -57,8 +60,13 @@ public class WaypointServiceTest extends MockitoJUnit {
 
     @Test
     public void createWaypoint() {
-        service.createWaypoint(waypoint);
-        verify(waypointRepository).save(waypoint);
+
+        Waypoint tempWaypoint = new Waypoint();
+        tempWaypoint.setCity(city);
+        tempWaypoint.setWaypointType(WaypointType.SHIPMENT);
+
+        when(waypointRepository.save(tempWaypoint)).thenReturn(waypoint);
+        assertEquals(waypoint, service.createWaypoint(tempWaypoint));
     }
 
     @Test

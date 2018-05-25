@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "drivers", uniqueConstraints = @UniqueConstraint(columnNames = "personal_number"))
@@ -172,5 +173,27 @@ public class Driver {
 
     public void setBookingStatus(BookingStatus bookingStatus) {
         this.bookingStatus = bookingStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Driver driver = (Driver) o;
+        return id == driver.id &&
+                personalNumber == driver.personalNumber &&
+                hoursPerMonth == driver.hoursPerMonth &&
+                Objects.equals(firstName, driver.firstName) &&
+                Objects.equals(lastName, driver.lastName) &&
+                driverStatus == driver.driverStatus &&
+                Objects.equals(currentCity, driver.currentCity) &&
+                Objects.equals(currentTruck, driver.currentTruck) &&
+                Objects.equals(order, driver.order);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, personalNumber, firstName, lastName, hoursPerMonth, driverStatus, currentCity, currentTruck, order);
     }
 }

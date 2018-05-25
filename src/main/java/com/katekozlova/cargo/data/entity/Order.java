@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
@@ -121,5 +122,24 @@ public class Order {
                 ", drivers=" + drivers +
                 ", travelTime=" + travelTime +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id &&
+                uniqueNumber == order.uniqueNumber &&
+                orderStatus == order.orderStatus &&
+                Objects.equals(waypoints, order.waypoints) &&
+                Objects.equals(truck, order.truck) &&
+                Objects.equals(drivers, order.drivers);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, uniqueNumber, orderStatus, waypoints, truck, drivers);
     }
 }

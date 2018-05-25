@@ -40,7 +40,7 @@ public class DriverController {
             message = "no";
             return "drivers/id";
         }
-        List<Driver> coDrivers = driversService.findByTruck(id);
+        List<Driver> coDrivers = driverService.findByTruck(id);
         List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         message = "yes";
         model.addAttribute("driver", driver);
@@ -53,7 +53,7 @@ public class DriverController {
     @PostMapping(value = "/id/confirm")
     public String confirmStatus(Driver driver, ModelMap model) {
         driversService.updateDriver(driver);
-        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
+        List<Driver> coDrivers = driverService.findByTruck(driver.getId());
         List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
@@ -64,7 +64,7 @@ public class DriverController {
     @PostMapping(value = "/id/shiftbegin")
     public String shiftBegin(Driver driver, ModelMap model) {
         driverService.setShiftBeginTime(driver);
-        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
+        List<Driver> coDrivers = driverService.findByTruck(driver.getId());
         List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
@@ -82,7 +82,7 @@ public class DriverController {
     @PostMapping(value = "/id/load/{id}")
     public String loadCargo(@PathVariable("id") long cargoId, Driver driver, ModelMap model) {
         cargoService.setCargoStatus(cargoId, CargoStatus.SHIPPED);
-        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
+        List<Driver> coDrivers = driverService.findByTruck(driver.getId());
         List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
@@ -93,7 +93,7 @@ public class DriverController {
     @PostMapping(value = "/id/unload/{id}")
     public String unloadCargo(@PathVariable("id") long cargoId, Driver driver, ModelMap model) {
         cargoService.setCargoStatus(cargoId, CargoStatus.DELIVERED);
-        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
+        List<Driver> coDrivers = driverService.findByTruck(driver.getId());
         List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
