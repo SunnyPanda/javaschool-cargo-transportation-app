@@ -31,16 +31,14 @@ public class OrderService {
     private final WaypointRepository waypointRepository;
     private final DriverRepository driverRepository;
     private final TruckRepository truckRepository;
-    private final MapDistanceRepository mapDistanceRepository;
 
     @Autowired
     public OrderService(OrderRepository orderRepository, WaypointRepository waypointRepository, DriverRepository driverRepository,
-                        TruckRepository truckRepository, MapDistanceRepository mapDistanceRepository) {
+                        TruckRepository truckRepository) {
         this.orderRepository = orderRepository;
         this.waypointRepository = waypointRepository;
         this.driverRepository = driverRepository;
         this.truckRepository = truckRepository;
-        this.mapDistanceRepository = mapDistanceRepository;
     }
 
     public List<Order> getAllOrders() {

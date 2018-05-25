@@ -59,7 +59,7 @@ public class DriversController {
     @GetMapping(value = "/delete/{id}")
     public String deleteDriver(@PathVariable("id") long id, Driver driver) {
         driversService.deleteDriver(driver);
-        amqpTemplate.convertAndSend("queue1", "driver");
+        amqpTemplate.convertAndSend("queue", "driver");
         return "redirect:/drivers/list";
     }
 

@@ -16,10 +16,6 @@ public class TruckValidator implements Validator {
     }
 
     public void validate(Object obj, Errors e) {
-        // ValidationUtils.rejectIfEmpty(e, "regNumber", "truck.regNumber.empty");
-//        ValidationUtils.rejectIfEmpty(e, "shiftSize", "truck.shiftSize.empty");
-//        ValidationUtils.rejectIfEmpty(e, "capacity", "truck.capacity.empty");
-        // ValidationUtils.rejectIfEmpty(e, "currentCity", "truck.currentCity.empty");
 
         Truck truck = (Truck) obj;
 

@@ -55,7 +55,7 @@ public class TrucksController {
     public String deleteTruck(@PathVariable("id") long id, Truck truck) {
 
         trucksService.deleteTruck(truck);
-        amqpTemplate.convertAndSend("queue1", "truck");
+        amqpTemplate.convertAndSend("queue", "truck");
         return "redirect:/trucks/list";
     }
 
@@ -102,7 +102,7 @@ public class TrucksController {
             return "trucks/edit";
         }
         trucksService.createAndUpdate(truck);
-        amqpTemplate.convertAndSend("queue1", "truck");
+        amqpTemplate.convertAndSend("queue", "truck");
         return "redirect:/trucks/list";
     }
 }

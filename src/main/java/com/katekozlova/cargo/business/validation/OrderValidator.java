@@ -34,19 +34,13 @@ public class OrderValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        System.out.println("OrderValidator.validate");
-        System.out.println("target = [" + target + "], errors = [" + errors + "]");
         final Order order = (Order) target;
         final Map<Cargo, Set<WaypointType>> cargos = new HashMap<>();
 
-        System.out.println("order" + order.getWaypoints());
         for (Waypoint waypoint : order.getWaypoints()) {
             final Cargo cargo = waypoint.getCargo();
-            System.out.println("cargo" + cargo);
             final WaypointType waypointType = waypoint.getWaypointType();
-            System.out.println("waypointType = " + waypointType);
             final Set<WaypointType> waypointTypes = cargos.get(cargo);
-            System.out.println("waypointTypes = " + waypointTypes);
             if (waypointTypes == null) {
                 cargos.put(cargo, Sets.newHashSet(waypointType));
             } else {
@@ -54,11 +48,8 @@ public class OrderValidator implements Validator {
             }
         }
 
-        System.out.println("cargos = " + cargos);
-
         for (Set<WaypointType> waypointTypes : cargos.values()) {
             if (!waypointTypes.containsAll(Arrays.asList(WaypointType.values()))) {
-                System.out.println("ошибка");
                 errors.rejectValue("waypoints", "order.waypoints.error", "Атата");
             }
         }

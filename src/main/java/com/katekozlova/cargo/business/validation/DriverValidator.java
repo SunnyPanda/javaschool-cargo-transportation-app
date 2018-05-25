@@ -18,8 +18,6 @@ public class DriverValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 //        ValidationUtils.rejectIfEmpty(errors, "personalNumber", "driver.personalNumber.empty");
-//        ValidationUtils.rejectIfEmpty(errors, "firstName", "driver.firstName.empty");
-//        ValidationUtils.rejectIfEmpty(errors, "lastName", "driver.lastName.empty");
 
         Driver driver = (Driver) target;
 
