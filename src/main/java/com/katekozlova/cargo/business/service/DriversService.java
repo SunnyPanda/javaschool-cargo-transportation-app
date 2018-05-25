@@ -20,18 +20,13 @@ import java.util.stream.Collectors;
 public class DriversService {
 
     private final DriverRepository driverRepository;
-    private final WaypointRepository waypointRepository;
-    private final OrderService orderService;
 
     @Autowired
-    public DriversService(DriverRepository driverRepository, WaypointRepository waypointRepository, OrderService orderService) {
+    public DriversService(DriverRepository driverRepository) {
         this.driverRepository = driverRepository;
-        this.waypointRepository = waypointRepository;
-        this.orderService = orderService;
     }
 
     public List<Driver> getAllDrivers() {
-        System.out.println("We're in service");
         return Lists.newArrayList(driverRepository.findAll());
     }
 
@@ -39,16 +34,16 @@ public class DriversService {
         driverRepository.delete(driver);
     }
 
-    public Driver update(Driver driver) {
+    public Driver updateDriver(Driver driver) {
         return driverRepository.save(driver);
     }
 
-    public Driver create(Driver driver) {
+    public Driver createDriver(Driver driver) {
         driver.setDriverStatus(DriverStatus.REST);
         return driverRepository.save(driver);
     }
 
-    public Driver findById(long id) {
+    public Driver findDriverById(long id) {
         return driverRepository.findById(id);
     }
 
@@ -63,50 +58,11 @@ public class DriversService {
         return drivers.stream().filter(driver -> driver.getId() != id).collect(Collectors.toList());
     }
 
-    public List<Waypoint> getCargoByWaypoints(long orderId) {
-        return waypointRepository.findWaypointsByOrderWaypointType(orderId, WaypointType.SHIPMENT);
-    }
-
-    public void setShiftBeginTime(Driver driver) {
-
-        driver.setShiftBegin(new DateTime());
-        driver.setDriverStatus(DriverStatus.IN_SHIFT);
-        driverRepository.save(driver);
-        System.out.println("driver.getShiftBegin() = " + driver.getShiftBegin());
-    }
-
-    public List<Driver> findByTruck(Truck truck) {
-        return driverRepository.findByCurrentTruck(truck);
-    }
-
-    public void setShiftEnd(Driver driver) {
-        final DateTime shiftEnd = new DateTime();
-        DateTime firstDayOfMonth = shiftEnd.dayOfMonth().withMinimumValue();
-        if (DateTimeComparator.getDateOnlyInstance().compare(firstDayOfMonth, driver.getShiftBegin()) < 0) {
-            driver.setHoursPerMonth(driver.getHoursPerMonth() + driver.getOrder().getTravelTime());
-        } else {
-            driver.setHoursPerMonth(0);
-            final long hoursBetween = Hours.hoursBetween(firstDayOfMonth, shiftEnd).getHours();
-            driver.setHoursPerMonth(hoursBetween);
-        }
-        driver.setDriverStatus(DriverStatus.REST);
-//        driver.setCurrentTruck(null);
-//        driver.setOrder(null);
-        driverRepository.save(driver);
-    }
-
 //    @Scheduled(fixedRate = 30000, initialDelay = 20000)
 //    @Transactional
 //    public void scheduleTask() {
 //        driverRepository.updateDriver();
 //        System.out.println("Траляля");
-//    }
-
-//    public void setExistingDriversTravelTime () {
-//        List<Driver> drivers = driverRepository.findAll();
-//        for (Driver driver: drivers) {
-//            driver.setTr
-//        }
 //    }
 }
 

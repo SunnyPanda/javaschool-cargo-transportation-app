@@ -1,9 +1,8 @@
 package com.katekozlova.cargo.business.service;
 
-import com.katekozlova.cargo.data.entity.BookingStatus;
-import com.katekozlova.cargo.data.entity.Cargo;
-import com.katekozlova.cargo.data.entity.CargoStatus;
+import com.katekozlova.cargo.data.entity.*;
 import com.katekozlova.cargo.data.repository.CargoRepository;
+import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +14,12 @@ import java.util.List;
 public class CargoService {
 
     private final CargoRepository cargoRepository;
+    private final WaypointRepository waypointRepository;
 
     @Autowired
-    public CargoService(CargoRepository cargoRepository) {
+    public CargoService(CargoRepository cargoRepository, WaypointRepository waypointRepository) {
         this.cargoRepository = cargoRepository;
+        this.waypointRepository = waypointRepository;
     }
 
     public List<Cargo> getAllCargo() {
@@ -29,10 +30,6 @@ public class CargoService {
         return cargoRepository.findByNumber(cargoNumber);
     }
 
-    public Cargo getCargoById(long cargoId) {
-        return cargoRepository.findById(cargoId);
-    }
-
     public void setCargoStatus(long cargoId, CargoStatus cargoStatus) {
         Cargo cargo = cargoRepository.findById(cargoId);
         cargo.setCargoStatus(cargoStatus);
@@ -41,5 +38,9 @@ public class CargoService {
 
     public List<Cargo> getFreeCargo() {
         return cargoRepository.findByNullOrder();
+    }
+
+    public List<Waypoint> getCargoByWaypoints(long orderId) {
+        return waypointRepository.findWaypointsByOrderWaypointType(orderId, WaypointType.SHIPMENT);
     }
 }
