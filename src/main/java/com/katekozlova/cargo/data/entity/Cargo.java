@@ -131,7 +131,7 @@ public class Cargo {
                 ", weight=" + weight +
                 ", cargoStatus=" + cargoStatus +
 //                ", waypoints=" + waypoints +
-//                ", order=" + order +
+                ", order=" + order +
 //                ", bookingStatus=" + bookingStatus +
                 '}';
 

@@ -36,7 +36,6 @@ public class WaypointRepository {
         return waypoint;
     }
 
-    //List<Waypoint> findByOrderId(Long orderId);
     public List<Waypoint> findByOrder(long orderId) {
         final TypedQuery<Waypoint> query = entityManager
                 .createQuery("select w from Waypoint w where w.order.id = :orderId", Waypoint.class);
@@ -44,17 +43,12 @@ public class WaypointRepository {
         return query.getResultList();
     }
 
-    //List<Waypoint> findWaypointsByOrderIsNull();
     public List<Waypoint> findWaypointsByNullOrder() {
         final TypedQuery<Waypoint> query = entityManager
                 .createQuery("select w from Waypoint w where w.order is null", Waypoint.class);
         return query.getResultList();
     }
 
-    // Waypoint findWaypointsByCargoIdAndWaypointTypeAndOrderId(long cargoId, WaypointType waypointType, long orderId);
-    //Waypoint findWaypointByOrderIdAndCargoIdAndWaypointType(Long orderId, long cargoId, WaypointType waypointType);
-
-    //List<Waypoint> findWaypointsByOrderIdAndWaypointType(long id, WaypointType waypointType);
     public List<Waypoint> findWaypointsByOrderWaypointType(long orderId, WaypointType waypointType) {
         final TypedQuery<Waypoint> query = entityManager
                 .createQuery("select w from Waypoint w where w.order.id = :orderId and w.waypointType = :waypointType", Waypoint.class);

@@ -14,12 +14,10 @@ import java.util.List;
 public class CargoService {
 
     private final CargoRepository cargoRepository;
-    private final WaypointRepository waypointRepository;
 
     @Autowired
-    public CargoService(CargoRepository cargoRepository, WaypointRepository waypointRepository) {
+    public CargoService(CargoRepository cargoRepository) {
         this.cargoRepository = cargoRepository;
-        this.waypointRepository = waypointRepository;
     }
 
     public List<Cargo> getAllCargo() {
@@ -40,7 +38,4 @@ public class CargoService {
         return cargoRepository.findByNullOrder();
     }
 
-    public List<Waypoint> getCargoByWaypoints(long orderId) {
-        return waypointRepository.findWaypointsByOrderWaypointType(orderId, WaypointType.SHIPMENT);
-    }
 }

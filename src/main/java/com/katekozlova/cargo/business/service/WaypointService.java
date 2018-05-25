@@ -1,6 +1,7 @@
 package com.katekozlova.cargo.business.service;
 
 import com.katekozlova.cargo.data.entity.Waypoint;
+import com.katekozlova.cargo.data.entity.WaypointType;
 import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,9 @@ public class WaypointService {
 
     public Waypoint createWaypoint(Waypoint waypoint) {
         return waypointRepository.save(waypoint);
+    }
+
+    public List<Waypoint> getCargoByWaypoints(long orderId) {
+        return waypointRepository.findWaypointsByOrderWaypointType(orderId, WaypointType.SHIPMENT);
     }
 }

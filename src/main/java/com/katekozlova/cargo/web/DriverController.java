@@ -1,9 +1,6 @@
 package com.katekozlova.cargo.web;
 
-import com.katekozlova.cargo.business.service.CargoService;
-import com.katekozlova.cargo.business.service.DriverService;
-import com.katekozlova.cargo.business.service.DriversService;
-import com.katekozlova.cargo.business.service.OrderService;
+import com.katekozlova.cargo.business.service.*;
 import com.katekozlova.cargo.data.entity.CargoStatus;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Waypoint;
@@ -24,13 +21,15 @@ public class DriverController {
     private final DriverService driverService;
     private final CargoService cargoService;
     private final OrderService orderService;
+    private final WaypointService waypointService;
 
     @Autowired
-    public DriverController(DriversService driversService, DriverService driverService, CargoService cargoService, OrderService orderService) {
+    public DriverController(DriversService driversService, DriverService driverService, CargoService cargoService, OrderService orderService, WaypointService waypointService) {
         this.driversService = driversService;
         this.driverService = driverService;
         this.cargoService = cargoService;
         this.orderService = orderService;
+        this.waypointService = waypointService;
     }
 
     @GetMapping(value = "/info/{id}")
@@ -42,7 +41,7 @@ public class DriverController {
             return "drivers/id";
         }
         List<Driver> coDrivers = driversService.findByTruck(id);
-        List<Waypoint> waypoints = cargoService.getCargoByWaypoints(driver.getOrder().getId());
+        List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         message = "yes";
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
@@ -55,7 +54,7 @@ public class DriverController {
     public String confirmStatus(Driver driver, ModelMap model) {
         driversService.updateDriver(driver);
         List<Driver> coDrivers = driversService.findByTruck(driver.getId());
-        List<Waypoint> waypoints = cargoService.getCargoByWaypoints(driver.getOrder().getId());
+        List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
         model.addAttribute("waypoints", waypoints);
@@ -66,7 +65,7 @@ public class DriverController {
     public String shiftBegin(Driver driver, ModelMap model) {
         driverService.setShiftBeginTime(driver);
         List<Driver> coDrivers = driversService.findByTruck(driver.getId());
-        List<Waypoint> waypoints = cargoService.getCargoByWaypoints(driver.getOrder().getId());
+        List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
         model.addAttribute("waypoints", waypoints);
@@ -84,7 +83,7 @@ public class DriverController {
     public String loadCargo(@PathVariable("id") long cargoId, Driver driver, ModelMap model) {
         cargoService.setCargoStatus(cargoId, CargoStatus.SHIPPED);
         List<Driver> coDrivers = driversService.findByTruck(driver.getId());
-        List<Waypoint> waypoints = cargoService.getCargoByWaypoints(driver.getOrder().getId());
+        List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
         model.addAttribute("waypoints", waypoints);
@@ -95,7 +94,7 @@ public class DriverController {
     public String unloadCargo(@PathVariable("id") long cargoId, Driver driver, ModelMap model) {
         cargoService.setCargoStatus(cargoId, CargoStatus.DELIVERED);
         List<Driver> coDrivers = driversService.findByTruck(driver.getId());
-        List<Waypoint> waypoints = cargoService.getCargoByWaypoints(driver.getOrder().getId());
+        List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
         model.addAttribute("driver", driver);
         model.addAttribute("coDrivers", coDrivers);
         model.addAttribute("waypoints", waypoints);
