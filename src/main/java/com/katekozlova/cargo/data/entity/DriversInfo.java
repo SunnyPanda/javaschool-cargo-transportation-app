@@ -1,5 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
+import java.util.Objects;
+
 public class DriversInfo {
 
     private long allDrivers;
@@ -43,5 +45,21 @@ public class DriversInfo {
                 ", availableDrivers=" + availableDrivers +
                 ", unavailableDrivers=" + unavailableDrivers +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DriversInfo that = (DriversInfo) o;
+        return allDrivers == that.allDrivers &&
+                availableDrivers == that.availableDrivers &&
+                unavailableDrivers == that.unavailableDrivers;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(allDrivers, availableDrivers, unavailableDrivers);
     }
 }

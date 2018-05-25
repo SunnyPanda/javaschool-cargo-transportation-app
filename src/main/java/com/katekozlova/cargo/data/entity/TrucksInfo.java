@@ -1,5 +1,7 @@
 package com.katekozlova.cargo.data.entity;
 
+import java.util.Objects;
+
 public class TrucksInfo {
 
     private long allTrucks;
@@ -54,5 +56,22 @@ public class TrucksInfo {
                 ", onOrderTrucks=" + onOrderTrucks +
                 ", brokenTrucks=" + brokenTrucks +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TrucksInfo that = (TrucksInfo) o;
+        return allTrucks == that.allTrucks &&
+                availableTrucks == that.availableTrucks &&
+                onOrderTrucks == that.onOrderTrucks &&
+                brokenTrucks == that.brokenTrucks;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(allTrucks, availableTrucks, onOrderTrucks, brokenTrucks);
     }
 }

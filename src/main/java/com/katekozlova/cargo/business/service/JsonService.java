@@ -16,15 +16,12 @@ public class JsonService {
 
     private final OrderRepository orderRepository;
     private final DriverRepository driverRepository;
-    private final CargoRepository cargoRepository;
     private final TruckRepository truckRepository;
 
     @Autowired
-    public JsonService(OrderRepository orderRepository, DriverRepository driverRepository, CargoRepository cargoRepository,
-                       TruckRepository truckRepository) {
+    public JsonService(OrderRepository orderRepository, DriverRepository driverRepository, TruckRepository truckRepository) {
         this.orderRepository = orderRepository;
         this.driverRepository = driverRepository;
-        this.cargoRepository = cargoRepository;
         this.truckRepository = truckRepository;
     }
 

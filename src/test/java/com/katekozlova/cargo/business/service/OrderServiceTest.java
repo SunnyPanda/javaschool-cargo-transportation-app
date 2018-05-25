@@ -159,15 +159,7 @@ public class OrderServiceTest extends MockitoJUnit {
     @Test
     public void getTrucks() {
 
-//        Waypoint waypoint1 = new Waypoint();
-//        Waypoint waypoint2 = new Waypoint();
-//        Waypoint waypoint3 = new Waypoint();
-//        Waypoint waypoint4 = new Waypoint();
-        List<Waypoint> waypoints = new ArrayList<>();
-        waypoints.add(waypoint1);
-        waypoints.add(waypoint2);
-        waypoints.add(waypoint3);
-        waypoints.add(waypoint4);
+        List<Waypoint> waypoints = ImmutableList.of(waypoint1, waypoint2, waypoint3, waypoint4);
         order.setWaypoints(waypoints);
         List<Truck> trucks = ImmutableList.of(truck);
 
@@ -184,11 +176,7 @@ public class OrderServiceTest extends MockitoJUnit {
 
     @Test
     public void getDrivers() {
-        List<Waypoint> waypoints = new ArrayList<>();
-        waypoints.add(waypoint1);
-        waypoints.add(waypoint2);
-        waypoints.add(waypoint3);
-        waypoints.add(waypoint4);
+        List<Waypoint> waypoints = ImmutableList.of(waypoint1, waypoint2, waypoint3, waypoint4);
         order.setWaypoints(waypoints);
 
         List<Driver> drivers = ImmutableList.of(driver);
@@ -200,11 +188,7 @@ public class OrderServiceTest extends MockitoJUnit {
     public void saveOrder() {
         List<Driver> drivers = ImmutableList.of(driver);
         order.setDrivers(drivers);
-        List<Waypoint> waypoints = new ArrayList<>();
-        waypoints.add(waypoint1);
-        waypoints.add(waypoint2);
-        waypoints.add(waypoint3);
-        waypoints.add(waypoint4);
+        List<Waypoint> waypoints = ImmutableList.of(waypoint1, waypoint2, waypoint3, waypoint4);
         order.setWaypoints(waypoints);
         service.saveOrder(order);
         verify(orderRepository).save(order);
