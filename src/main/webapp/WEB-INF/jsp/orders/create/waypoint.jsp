@@ -70,7 +70,7 @@
             </c:forEach>
         </table>
     </div>
-
+    <form:errors path="waypoints" cssClass="error"/>
 
     <form:form action="/orders/addtruck" method="GET" modelAttribute="order">
         <hr class="mb-4">

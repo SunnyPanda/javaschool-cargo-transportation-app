@@ -13,7 +13,7 @@
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-1">Step 3</h4>
                 <form:form action="/orders/savetruck" method="POST" modelAttribute="order">
-                    <%--<td>#{order.truck.regNumber}</td>--%>
+                    <td>${order.truck.regNumber}</td>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="truck">Choose truck: </label>

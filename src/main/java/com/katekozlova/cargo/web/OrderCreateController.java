@@ -14,13 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -47,64 +45,56 @@ public class OrderCreateController {
         this.cargoService = cargoService;
     }
 
-//    @InitBinder
-//    protected void initBinder(WebDataBinder binder) {
-//        binder.addValidators(orderValidator);
-//    }
+    @InitBinder("order")
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(orderValidator);
+    }
 
     @GetMapping(value = "/create/number")
     public String createOrder(Model model) {
         Order order = new Order();
-        logger.trace("Entering application.");
-        //System.out.println("1. order = " + order);
         model.addAttribute("order", order);
         return "orders/create/step1";
     }
 
     @GetMapping(value = "/create/waypoint")
     public String createWaypoints(Order order, Model model) {
-        //orderService.create(order);
-        //List<Waypoint> waypoints = waypointService.findFreeWaypoints();
-        System.out.println("2. order = " + order);
         Waypoint waypoint = new Waypoint();
         final List<City> cities = citiesService.getAllCities();
         final List<Cargo> cargo = cargoService.getCargoByBookingStatus(BookingStatus.NO);
-        //model.addAttribute("order", order);
         model.addAttribute("waypoint", waypoint);
         model.addAttribute("city", cities);
         model.addAttribute("cargo", cargo);
         model.addAttribute("waypointType", WaypointType.values());
-        //model.addAttribute("freewaypoints", waypoints);
         return "orders/create/waypoint";
     }
 
     @PostMapping(value = "/save")
-    public String saveWaypoint(@Validated Order order, Waypoint waypoint, BindingResult bindingResult, Model model) {
-        System.out.println("order = [" + order + "], waypoint = [" + waypoint + "], bindingResult = [" + bindingResult + "], model = [" + model + "]");
-        System.out.println("1. waypoint = " + waypoint);
+    public String saveWaypoint(Order order, Waypoint waypoint, Model model) {
         waypoint = waypointService.createWaypoint(waypoint);
-        System.out.println("2. waypoint = " + waypoint);
         orderService.saveWaipoints(order, waypoint);
-//        if (bindingResult.hasErrors()) {
-//            System.out.println("Произошла ошибка");
-//            return "orders/create/waypoint";
-//        }
-        System.out.println("4. order = " + order);
+
         final List<City> cities = citiesService.getAllCities();
         final List<Cargo> cargo = cargoService.getCargoByBookingStatus(BookingStatus.NO);
-        //model.addAttribute("order", order);
         model.addAttribute("waypoint", waypoint);
         model.addAttribute("city", cities);
         model.addAttribute("cargo", cargo);
         model.addAttribute("waypointType", WaypointType.values());
-//        List<Waypoint> freeWaypoints = waypointService.findFreeWaypoints();
-//        model.addAttribute("order", order);
-//        model.addAttribute("freewaypoints", freeWaypoints);
         return "orders/create/waypoint";
     }
 
     @GetMapping(value = "/addtruck")
-    public String addTruck(Order order, Model model) {
+    public String addTruck(@Valid Order order, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            final List<City> cities = citiesService.getAllCities();
+            final List<Cargo> cargo = cargoService.getCargoByBookingStatus(BookingStatus.NO);
+            model.addAttribute("waypoint", new Waypoint());
+            model.addAttribute("city", cities);
+            model.addAttribute("cargo", cargo);
+            model.addAttribute("waypointType", WaypointType.values());
+            System.out.println("Произошла ошибка");
+            return "orders/create/waypoint";
+        }
         List<Truck> trucks = orderService.getTrucks(order);
         model.addAttribute("order", order);
         model.addAttribute("trucks", trucks);
@@ -114,7 +104,6 @@ public class OrderCreateController {
     @PostMapping(value = "/savetruck")
     public String saveTruck(Order order, Model model) {
         //orderService.saveTruckToOrder(order);
-        System.out.println("order = " + order);
         List<Truck> trucks = orderService.getTrucks(order);
         model.addAttribute("order", order);
         model.addAttribute("trucks", trucks);

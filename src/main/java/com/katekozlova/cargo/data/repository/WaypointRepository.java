@@ -28,8 +28,6 @@ public class WaypointRepository {
     }
 
     public Waypoint save(Waypoint waypoint) {
-        System.out.println("WaypointRepository.save");
-        System.out.println("waypoint = [" + waypoint + "]");
         if (waypoint.getId() == 0) {
             entityManager.persist(waypoint);
         } else {

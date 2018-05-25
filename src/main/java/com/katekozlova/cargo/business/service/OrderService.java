@@ -265,4 +265,11 @@ public class OrderService {
         saveDriversToOrder(order);
         orderRepository.save(order);
     }
+
+    public void setExistingOrdersTravelTime() {
+        List<Order> orders = orderRepository.findAll();
+        for (Order order : orders) {
+            order.setTravelTime(50);
+        }
+    }
 }

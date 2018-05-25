@@ -3,11 +3,10 @@ package com.katekozlova.cargo.web;
 import com.katekozlova.cargo.business.service.CargoService;
 import com.katekozlova.cargo.business.service.CitiesService;
 import com.katekozlova.cargo.business.service.DriversService;
+import com.katekozlova.cargo.business.service.OrderService;
 import com.katekozlova.cargo.business.validation.DriverValidator;
-import com.katekozlova.cargo.data.entity.CargoStatus;
 import com.katekozlova.cargo.data.entity.City;
 import com.katekozlova.cargo.data.entity.Driver;
-import com.katekozlova.cargo.data.entity.Waypoint;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,16 +31,18 @@ public class DriversController {
     private final DriversService driversService;
     private final CitiesService citiesService;
     private final CargoService cargoService;
+    private final OrderService orderService;
 
     private final DriverValidator driverValidator;
 
     private final AmqpTemplate amqpTemplate;
 
     @Autowired
-    public DriversController(DriversService driversService, CitiesService citiesService, CargoService cargoService, DriverValidator driverValidator, AmqpTemplate amqpTemplate) {
+    public DriversController(DriversService driversService, CitiesService citiesService, CargoService cargoService, OrderService orderService, DriverValidator driverValidator, AmqpTemplate amqpTemplate) {
         this.driversService = driversService;
         this.citiesService = citiesService;
         this.cargoService = cargoService;
+        this.orderService = orderService;
         this.driverValidator = driverValidator;
         this.amqpTemplate = amqpTemplate;
     }
@@ -107,68 +108,6 @@ public class DriversController {
         driversService.update(driver);
         amqpTemplate.convertAndSend("queue1", "driver");
         return "redirect:/drivers/list";
-    }
-
-    @GetMapping(value = "/info/{id}")
-    public String driversInfo(@PathVariable("id") long id, Driver driver, ModelMap model) {
-        driver = driversService.findById(id);
-        List<Driver> coDrivers = driversService.findByTruck(id);
-        List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
-        model.addAttribute("driver", driver);
-        model.addAttribute("coDrivers", coDrivers);
-        model.addAttribute("waypoints", waypoints);
-        return "drivers/id";
-    }
-
-    @PostMapping(value = "/id/confirm")
-    public String confirmStatus(Driver driver, ModelMap model) {
-        driversService.update(driver);
-        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
-        List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
-        model.addAttribute("driver", driver);
-        model.addAttribute("coDrivers", coDrivers);
-        model.addAttribute("waypoints", waypoints);
-        return "drivers/id";
-    }
-
-    @PostMapping(value = "/id/shiftbegin")
-    public String shiftBegin(Driver driver, ModelMap model) {
-        driversService.setShiftBeginTime(driver);
-        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
-        List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
-        model.addAttribute("driver", driver);
-        model.addAttribute("coDrivers", coDrivers);
-        model.addAttribute("waypoints", waypoints);
-        return "drivers/id";
-    }
-
-    @PostMapping(value = "/id/shiftend")
-    public String shiftEnd(Driver driver, ModelMap model) {
-        driversService.setShiftEnd(driver);
-        model.addAttribute("driver", driver);
-        return "drivers/id";
-    }
-
-    @PostMapping(value = "/id/load/{id}")
-    public String loadCargo(@PathVariable("id") long cargoId, Driver driver, ModelMap model) {
-        cargoService.setCargoStatus(cargoId, CargoStatus.SHIPPED);
-        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
-        List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
-        model.addAttribute("driver", driver);
-        model.addAttribute("coDrivers", coDrivers);
-        model.addAttribute("waypoints", waypoints);
-        return "drivers/id";
-    }
-
-    @PostMapping(value = "/id/unload/{id}")
-    public String unloadCargo(@PathVariable("id") long cargoId, Driver driver, ModelMap model) {
-        cargoService.setCargoStatus(cargoId, CargoStatus.DELIVERED);
-        List<Driver> coDrivers = driversService.findByTruck(driver.getId());
-        List<Waypoint> waypoints = driversService.getCargoByWaypoints(driver.getOrder().getId());
-        model.addAttribute("driver", driver);
-        model.addAttribute("coDrivers", coDrivers);
-        model.addAttribute("waypoints", waypoints);
-        return "drivers/id";
     }
 }
 

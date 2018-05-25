@@ -8,76 +8,85 @@
         <h1>Driver</h1>
     </div>
     <br/>
-    <form:form method="GET" modelAttribute="driver">
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Personal Number</th>
-                <th scope="col">Co-drivers</th>
-                <th scope="col">Truck</th>
-                <th scope="col">Order</th>
-                <th scope="col">Waypoints</th>
-            </tr>
-            </thead>
-            <tbody>
-                <%--<c:set "driver" scope="session" value="driver" />--%>
-            <tr>
-                <td>${driver.personalNumber}</td>
-                <td>
-                    <c:forEach items="${coDrivers}" var="coDriver" varStatus="status">
-                        ${coDriver.personalNumber}
+    <c:choose>
+        <c:when test="${message=='no'}">
+            <td>You do not have current orders</td>
+            <br/>
+        </c:when>
+        <c:otherwise>
+            <form:form method="GET" modelAttribute="driver">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Personal Number</th>
+                        <th scope="col">Co-drivers</th>
+                        <th scope="col">Truck</th>
+                        <th scope="col">Order</th>
+                        <th scope="col">Waypoints</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <%--<c:set "driver" scope="session" value="driver" />--%>
+                    <tr>
+                        <td>${driver.personalNumber}</td>
+                        <td>
+                            <c:forEach items="${coDrivers}" var="coDriver" varStatus="status">
+                                ${coDriver.personalNumber}
+                            </c:forEach>
+                        </td>
+                        <td>${driver.currentTruck.regNumber}</td>
+                        <td>${driver.order.uniqueNumber}</td>
+                        <td><a href="<c:url value='/drivers/waypoints/${driver.id}'/>">waypoints</a></td>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form:form>
+            <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftbegin">
+                <td colspan="3"><input type="submit" value="Заступил в смену"/></td>
+            </form:form>
+            <form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm">
+                <tr>
+                    <td>
+                        <form:select path="driverStatus">
+                            <form:option value="BEHIND_THE_WHEEL">Behind the wheel</form:option>
+                            <%--<form:option value="IN_SHIFT">Второй водитель</form:option>--%>
+                            <%--<form:option value="IN_SHIFT">Погрузочно-разгрузочные работы</form:option>--%>
+                            <form:option value="IN_SHIFT">Rest</form:option>
+                        </form:select>
+                    </td>
+                    <td colspan="3"><input type="submit" value="Confirm"/></td>
+                </tr>
+            </form:form>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Cargo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <c:forEach items="${waypoints}" var="waypoint" varStatus="status">
+                            ${waypoint.cargo.number}
+                            ${waypoint.cargo.name}
+                        <form:form method="POST" modelAttribute="driver" action="/drivers/id/load/${waypoint.cargo.id}">
+                    <td colspan="1"><input type="submit" value="Получил"/></td>
+                    </form:form>
+                    <form:form method="POST" modelAttribute="driver" action="/drivers/id/unload/${waypoint.cargo.id}">
+                        <td colspan="1"><input type="submit" value="Выгрузил"/></td>
+                    </form:form>
                     </c:forEach>
-                </td>
-                <td>${driver.currentTruck.regNumber}</td>
-                <td>${driver.order.uniqueNumber}</td>
-                <td><a href="<c:url value='/orders/waypoints/${driver.order.id}'/>">waypoints</a></td>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </form:form>
-    <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftbegin">
-        <td colspan="3"><input type="submit" value="Заступил в смену"/></td>
-    </form:form>
-    <form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm">
-        <tr>
-            <td>
-                <form:select path="driverStatus">
-                    <form:option value="BEHIND_THE_WHEEL">За рулём</form:option>
-                    <form:option value="IN_SHIFT">Второй водитель</form:option>
-                    <form:option value="IN_SHIFT">Погрузочно-разгрузочные работы</form:option>
-                    <form:option value="IN_SHIFT">Отдых</form:option>
-                </form:select>
-            </td>
-            <td colspan="3"><input type="submit" value="Confirm"/></td>
-        </tr>
-    </form:form>
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Cargo</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <c:forEach items="${waypoints}" var="waypoint" varStatus="status">
-                        ${waypoint.cargo.number}
-                        ${waypoint.cargo.name}
-                    <form:form method="POST" modelAttribute="driver" action="/drivers/id/load/${waypoint.cargo.id}">
-                <td colspan="1"><input type="submit" value="Получил"/></td>
-                </form:form>
-                <form:form method="POST" modelAttribute="driver" action="/drivers/id/unload/${waypoint.cargo.id}">
-                    <td colspan="1"><input type="submit" value="Выгрузил"/></td>
-                </form:form>
-                    </c:forEach>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftend">
-        <td colspan="3"><input type="submit" value="Окончил смену"/></td>
-    </form:form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftend">
+                <td colspan="3"><input type="submit" value="Окончил смену"/></td>
+            </form:form>
+            <br/>
+        </c:otherwise>
+    </c:choose>
 </t:wrapper>
 
 <%--<tr>--%>

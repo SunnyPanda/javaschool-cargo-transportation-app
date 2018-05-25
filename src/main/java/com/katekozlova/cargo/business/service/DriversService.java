@@ -90,8 +90,8 @@ public class DriversService {
             driver.setHoursPerMonth(hoursBetween);
         }
         driver.setDriverStatus(DriverStatus.REST);
-        driver.setCurrentTruck(null);
-        driver.setOrder(null);
+//        driver.setCurrentTruck(null);
+//        driver.setOrder(null);
         driverRepository.save(driver);
     }
 
@@ -100,6 +100,13 @@ public class DriversService {
 //    public void scheduleTask() {
 //        driverRepository.updateDriver();
 //        System.out.println("Траляля");
+//    }
+
+//    public void setExistingDriversTravelTime () {
+//        List<Driver> drivers = driverRepository.findAll();
+//        for (Driver driver: drivers) {
+//            driver.setTr
+//        }
 //    }
 }
 

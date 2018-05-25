@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 //@Data
@@ -102,5 +103,37 @@ public class Cargo {
 
     public void setBookingStatus(BookingStatus bookingStatus) {
         this.bookingStatus = bookingStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cargo cargo = (Cargo) o;
+        return id == cargo.id &&
+                number == cargo.number &&
+                weight == cargo.weight &&
+                Objects.equals(name, cargo.name) &&
+                cargoStatus == cargo.cargoStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, number, name, weight, cargoStatus);
+    }
+
+    @Override
+    public String toString() {
+        return "Cargo{" +
+                "id=" + id +
+                ", number=" + number +
+                ", name='" + name + '\'' +
+                ", weight=" + weight +
+                ", cargoStatus=" + cargoStatus +
+//                ", waypoints=" + waypoints +
+//                ", order=" + order +
+//                ", bookingStatus=" + bookingStatus +
+                '}';
+
     }
 }
