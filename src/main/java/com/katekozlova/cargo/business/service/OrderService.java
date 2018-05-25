@@ -25,6 +25,7 @@ import java.util.List;
 public class OrderService {
 
     private static final long TRUCK_SPEED = 70;
+    private static final String API_KEY = "AIzaSyADJkrdtuvmf2VbH6Ruj0Y_Ftse3fyg3x4";
 
     private final OrderRepository orderRepository;
     private final WaypointRepository waypointRepository;
@@ -33,7 +34,8 @@ public class OrderService {
     private final MapDistanceRepository mapDistanceRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, WaypointRepository waypointRepository, DriverRepository driverRepository, TruckRepository truckRepository, MapDistanceRepository mapDistanceRepository) {
+    public OrderService(OrderRepository orderRepository, WaypointRepository waypointRepository, DriverRepository driverRepository,
+                        TruckRepository truckRepository, MapDistanceRepository mapDistanceRepository) {
         this.orderRepository = orderRepository;
         this.waypointRepository = waypointRepository;
         this.driverRepository = driverRepository;
@@ -45,8 +47,12 @@ public class OrderService {
         return Lists.newArrayList(orderRepository.findAll());
     }
 
-    public List<Order> getAll() {
-        return Lists.newArrayList(orderRepository.findAllOrders());
+    public Order findById(long id) {
+        return orderRepository.findById(id);
+    }
+
+    public Order findByUniqueNumber(long uniqueNumber) {
+        return orderRepository.findByUniqueNumber(uniqueNumber);
     }
 
     public List<Waypoint> getOrderWaypoints(long id) {
@@ -75,7 +81,6 @@ public class OrderService {
 
         long distApart = result.rows[0].elements[0].distance.inMeters;
         //long timeApart = result.rows[0].elements[0].duration.
-        System.out.println("distApart = " + distApart);
 
         return distApart / 1000;
     }
@@ -87,21 +92,13 @@ public class OrderService {
 
     public List<Truck> getTrucks(Order order) {
 
-//        return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE,
-//                findMaxCargoWeight(getOrderWaypoints(id)));
         return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, findMaxCargoWeight(order.getWaypoints()));
-        //truckRepository.findTrucksByTruckStateAndOrderIsNull(TruckState.SERVICEABLE);
     }
 
     public Order saveTruckToOrder(Order order) {
         order.getTruck().setOrder(order);
         truckRepository.save(order.getTruck());
         return orderRepository.save(order);
-    }
-
-    public void addTruckToOrder(long orderId, long truckId) {
-        orderRepository.findByUniqueNumber(orderId).setTruck(truckRepository.findById(truckId));
-        //truckRepository.findTruckById(truckId).setOrder(orderRepository.findOrderByUniqueNumber(number));
     }
 
     public List<Driver> getDrivers(Order order) {
@@ -121,7 +118,6 @@ public class OrderService {
                 appropriateDrivers.add(driver);
             }
         }
-        System.out.println("appropriateDrivers = " + appropriateDrivers);
         return appropriateDrivers;
     }
 
@@ -133,15 +129,7 @@ public class OrderService {
             waypoints.add(waypoint);
             order.setWaypoints(waypoints);
         }
-
-        //getOrderIdToWaypoint(order);
-        //return orderRepository.save(order);
         return order;
-    }
-
-
-    public Order findById(long id) {
-        return orderRepository.findById(id);
     }
 
     public long findMaxCargoWeight(List<Waypoint> waypoints) {
@@ -157,24 +145,6 @@ public class OrderService {
         }
         return maxWeight;
     }
-
-    public Order findByUniqueNumber(long uniqueNumber) {
-        return orderRepository.findByUniqueNumber(uniqueNumber);
-    }
-
-//    public boolean checkWaypoints(List<Waypoint> waypoints) {
-//        for ( Waypoint waypoint : waypoints ) {
-//            if (waypoint.getWaypointType ( ) == WaypointType.SHIPMENT) {
-//                waypointRepository.findWaypointsByCargoIdAndWaypointType ( waypoint.getCargo ( ).getId ( ), WaypointType.LANDING );
-//            } else {
-//                waypointRepository.findWaypointsByCargoIdAndWaypointType ( waypoint.getCargo ( ).getId ( ), WaypointType.SHIPMENT );
-//            }
-//        }
-//
-//        return true;
-//    }
-
-    private static final String API_KEY = "AIzaSyADJkrdtuvmf2VbH6Ruj0Y_Ftse3fyg3x4";
 
     public void getOrderToDriver(Order order) {
         for (Driver driver : order.getDrivers()) {
@@ -193,7 +163,6 @@ public class OrderService {
     public void saveDriversToOrder(Order order) {
         getOrderToDriver(order);
         getTruckToDriver(order);
-        // return orderRepository.save(order);
     }
 
     public void getOrderIdToWaypoint(Order order) {
@@ -202,6 +171,43 @@ public class OrderService {
             waypointRepository.save(waypoint);
         }
     }
+
+    public long getTravelTime(List<Waypoint> waypoints) {
+        long travelDistance = 0;
+        long tempDistance = 0;
+
+        for (int i = 0; i < waypoints.size() - 1; i++) {
+            try {
+                tempDistance = getDriveDist(waypoints.get(i).getCity().getName(), waypoints.get(i + 1).getCity().getName());
+            } catch (ApiException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            travelDistance += tempDistance;
+        }
+        return travelDistance / TRUCK_SPEED;
+    }
+
+    public void saveOrder(Order order) {
+        orderRepository.save(order);
+        getOrderIdToWaypoint(order);
+        saveTruckToOrder(order);
+        saveDriversToOrder(order);
+        orderRepository.save(order);
+    }
+
+    public void setExistingOrdersTravelTime() {
+        List<Order> orders = orderRepository.findAll();
+        for (Order order : orders) {
+            order.setTravelTime(50);
+        }
+    }
+}
+
+
 //    public GeoApiContext context = new GeoApiContext().setApiKey(API_KEY);
 //
 //
@@ -232,44 +238,3 @@ public class OrderService {
 //        }
 //        return null;
 //    }
-
-    public long getTravelTime(List<Waypoint> waypoints) {
-        long travelDistance = 0;
-        long tempDistance = 0;
-
-        MapDistance mapDistance;
-        for (int i = 0; i < waypoints.size() - 1; i++) {
-//            mapDistance = mapDistanceRepository.findMapDistanceBetweenTwoCities(waypoints.get(i).getCity(),
-//                    waypoints.get(i + 1).getCity());
-//            travelDistance += mapDistance.getDisrance();
-            try {
-                tempDistance = getDriveDist(waypoints.get(i).getCity().getName(), waypoints.get(i + 1).getCity().getName());
-            } catch (ApiException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            travelDistance += tempDistance;
-        }
-        System.out.println("travelDistance = " + travelDistance);
-        return travelDistance / TRUCK_SPEED;
-    }
-
-    public void saveOrder(Order order) {
-        orderRepository.save(order);
-        order.setOrderStatus(OrderStatus.NO);
-        getOrderIdToWaypoint(order);
-        saveTruckToOrder(order);
-        saveDriversToOrder(order);
-        orderRepository.save(order);
-    }
-
-    public void setExistingOrdersTravelTime() {
-        List<Order> orders = orderRepository.findAll();
-        for (Order order : orders) {
-            order.setTravelTime(50);
-        }
-    }
-}

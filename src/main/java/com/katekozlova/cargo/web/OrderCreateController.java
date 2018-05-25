@@ -58,7 +58,7 @@ public class OrderCreateController {
     }
 
     @GetMapping(value = "/create/waypoint")
-    public String createWaypoints(Order order, Model model) {
+    public String createWaypoints(Model model) {
         Waypoint waypoint = new Waypoint();
         final List<City> cities = citiesService.getAllCities();
         final List<Cargo> cargo = cargoService.getFreeCargo();
@@ -69,7 +69,7 @@ public class OrderCreateController {
         return "orders/create/waypoint";
     }
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/create/waypoint")
     public String saveWaypoint(Order order, Waypoint waypoint, Model model) {
         waypoint = waypointService.createWaypoint(waypoint);
         orderService.saveWaipoints(order, waypoint);
@@ -92,7 +92,6 @@ public class OrderCreateController {
             model.addAttribute("city", cities);
             model.addAttribute("cargo", cargo);
             model.addAttribute("waypointType", WaypointType.values());
-            System.out.println("Произошла ошибка");
             return "orders/create/waypoint";
         }
         List<Truck> trucks = orderService.getTrucks(order);
@@ -103,7 +102,6 @@ public class OrderCreateController {
 
     @PostMapping(value = "/savetruck")
     public String saveTruck(Order order, Model model) {
-        //orderService.saveTruckToOrder(order);
         List<Truck> trucks = orderService.getTrucks(order);
         model.addAttribute("order", order);
         model.addAttribute("trucks", trucks);
@@ -120,7 +118,6 @@ public class OrderCreateController {
 
     @PostMapping(value = "/savedriver")
     public String saveDriver(Order order, Model model) {
-        //orderService.saveDriversToOrder(order);
         System.out.println("order = " + order);
         List<Driver> drivers = orderService.getDrivers(order);
         model.addAttribute("order", order);

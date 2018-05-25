@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-1">Step 2</h4>
-                <form:form action="/orders/save" method="POST" modelAttribute="waypoint">
+                <form:form action="/orders/create/waypoint" method="POST" modelAttribute="waypoint">
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label for="city">City</label>
