@@ -22,13 +22,13 @@ public class CargoController {
     }
 
     @GetMapping(value = "/list")
-    public ModelAndView list() {
+    public ModelAndView List() {
         List<Cargo> cargo = cargoService.getAllCargo();
         return new ModelAndView("cargo/list", "cargo", cargo);
     }
 
     @GetMapping(value = "/status")
-    public ModelAndView getStatus() {
+    public ModelAndView status() {
         List<Cargo> cargo = cargoService.getAllCargo();
         return new ModelAndView("cargo/status", "cargo", cargo);
     }

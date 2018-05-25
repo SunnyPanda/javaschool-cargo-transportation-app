@@ -61,7 +61,7 @@ public class OrderCreateController {
     public String createWaypoints(Order order, Model model) {
         Waypoint waypoint = new Waypoint();
         final List<City> cities = citiesService.getAllCities();
-        final List<Cargo> cargo = cargoService.getCargoByBookingStatus(BookingStatus.NO);
+        final List<Cargo> cargo = cargoService.getFreeCargo();
         model.addAttribute("waypoint", waypoint);
         model.addAttribute("city", cities);
         model.addAttribute("cargo", cargo);
@@ -75,7 +75,7 @@ public class OrderCreateController {
         orderService.saveWaipoints(order, waypoint);
 
         final List<City> cities = citiesService.getAllCities();
-        final List<Cargo> cargo = cargoService.getCargoByBookingStatus(BookingStatus.NO);
+        final List<Cargo> cargo = cargoService.getFreeCargo();
         model.addAttribute("waypoint", waypoint);
         model.addAttribute("city", cities);
         model.addAttribute("cargo", cargo);
@@ -87,7 +87,7 @@ public class OrderCreateController {
     public String addTruck(@Valid Order order, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             final List<City> cities = citiesService.getAllCities();
-            final List<Cargo> cargo = cargoService.getCargoByBookingStatus(BookingStatus.NO);
+            final List<Cargo> cargo = cargoService.getFreeCargo();
             model.addAttribute("waypoint", new Waypoint());
             model.addAttribute("city", cities);
             model.addAttribute("cargo", cargo);

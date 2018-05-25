@@ -25,11 +25,11 @@ public class CargoService {
         return cargoRepository.findAll();
     }
 
-    public Cargo getByNumber(long cargoNumber) {
-        return cargoRepository.findCargoByNumber(cargoNumber);
+    public Cargo getCargoByNumber(long cargoNumber) {
+        return cargoRepository.findByNumber(cargoNumber);
     }
 
-    public Cargo getById(long cargoId) {
+    public Cargo getCargoById(long cargoId) {
         return cargoRepository.findById(cargoId);
     }
 
@@ -39,11 +39,7 @@ public class CargoService {
         cargoRepository.save(cargo);
     }
 
-    public List<Cargo> getCargoByBookingStatus(BookingStatus bookingStatus) {
-        return cargoRepository.findByBookingStatus(bookingStatus);
-    }
-
-    public Cargo saveCargo(Cargo cargo) {
-        return cargoRepository.save(cargo);
+    public List<Cargo> getFreeCargo() {
+        return cargoRepository.findByNullOrder();
     }
 }

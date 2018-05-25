@@ -22,7 +22,7 @@ public class CargoRepository {
         return query.getSingleResult();
     }
 
-    public Cargo findCargoByNumber(long number) {
+    public Cargo findByNumber(long number) {
         final TypedQuery<Cargo> query = entityManager
                 .createQuery("select c from Cargo c where c.number = :number", Cargo.class);
         query.setParameter("number", number);
@@ -44,10 +44,9 @@ public class CargoRepository {
         return cargo;
     }
 
-    public List<Cargo> findByBookingStatus(BookingStatus bookingStatus) {
+    public List<Cargo> findByNullOrder() {
         final TypedQuery<Cargo> query = entityManager
-                .createQuery("select c from Cargo c where c.order is null and c.bookingStatus = :bookingStatus", Cargo.class);
-        query.setParameter("bookingStatus", bookingStatus);
+                .createQuery("select c from Cargo c where c.order is null", Cargo.class);
         return query.getResultList();
     }
 }

@@ -49,7 +49,7 @@ public class IndexController {
 
     @PostMapping("/cargo/search")
     public String searchCargo(@RequestParam("number") long cargoNumber, Model model) {
-        model.addAttribute("cargo", this.cargoService.getByNumber(cargoNumber));
+        model.addAttribute("cargo", this.cargoService.getCargoByNumber(cargoNumber));
         return "cargo/search";
     }
 }
