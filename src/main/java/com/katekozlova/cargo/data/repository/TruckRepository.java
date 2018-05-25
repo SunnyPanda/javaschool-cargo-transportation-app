@@ -64,9 +64,8 @@ public class TruckRepository {
 
     public List<Truck> findByOrderTruckStateCapacity(TruckState truckState, long weight) {
         final TypedQuery<Truck> query = entityManager
-                .createQuery("select t from Truck t where t.order is null and t.bookingStatus =:bookingStatus " +
+                .createQuery("select t from Truck t where t.order is null" +
                         "and t.truckState = :truckState and t.capacity >= :weight", Truck.class);
-        query.setParameter("bookingStatus", BookingStatus.NO);
         query.setParameter("truckState", truckState);
         query.setParameter("weight", weight);
         return query.getResultList();

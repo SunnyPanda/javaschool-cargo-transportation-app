@@ -93,18 +93,23 @@ public class OrderService {
         return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, findMaxCargoWeight(order.getWaypoints()));
     }
 
-    public Order saveTruckToOrder(Order order) {
+//    public Order saveTruckToOrder(Order order) {
+//        order.getTruck().setOrder(order);
+//        truckRepository.save(order.getTruck());
+//        return orderRepository.save(order);
+//    }
+    public void saveTruckToOrder(Order order) {
         order.getTruck().setOrder(order);
         truckRepository.save(order.getTruck());
-        return orderRepository.save(order);
     }
 
     public List<Driver> getDrivers(Order order) {
-        return getDriversByHours(driverRepository.findByOrderAndCurrentCity(order.getTruck()
-                .getCurrentCity().getId()), order);
+        List<Driver> drivers = driverRepository.findByOrderAndCurrentCity(order.getTruck()
+                .getCurrentCity().getId());
+        return getDriversByHours(drivers, order);
     }
 
-    public List<Driver> getDriversByHours(List<Driver> drivers, Order order) {
+    private List<Driver> getDriversByHours(List<Driver> drivers, Order order) {
         List<Driver> appropriateDrivers = new ArrayList<>();
         final DateTime now = new DateTime();
         final DateTime endOfMonth = now.dayOfMonth().withMaximumValue().millisOfDay().withMaximumValue();
@@ -130,7 +135,7 @@ public class OrderService {
         return order;
     }
 
-    public long findMaxCargoWeight(List<Waypoint> waypoints) {
+    private long findMaxCargoWeight(List<Waypoint> waypoints) {
         long maxWeight = 0;
         long sumWeight = 0;
         for (Waypoint waypoint : waypoints) {
@@ -194,7 +199,7 @@ public class OrderService {
         getOrderIdToWaypoint(order);
         saveTruckToOrder(order);
         saveDriversToOrder(order);
-        orderRepository.save(order);
+//        orderRepository.save(order);
     }
 
     public void setExistingOrdersTravelTime() {

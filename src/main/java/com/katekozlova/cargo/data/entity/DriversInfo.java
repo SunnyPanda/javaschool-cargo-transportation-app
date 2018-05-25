@@ -30,6 +30,12 @@ public class DriversInfo {
         this.unavailableDrivers = unavailableDrivers;
     }
 
+    public DriversInfo(long allDrivers, long availableDrivers, long unavailableDrivers) {
+        this.allDrivers = allDrivers;
+        this.availableDrivers = availableDrivers;
+        this.unavailableDrivers = unavailableDrivers;
+    }
+
     @Override
     public String toString() {
         return "DriversInfo{" +

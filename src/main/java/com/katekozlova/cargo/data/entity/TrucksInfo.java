@@ -39,6 +39,13 @@ public class TrucksInfo {
         this.brokenTrucks = brokenTrucks;
     }
 
+    public TrucksInfo(long allTrucks, long availableTrucks, long onOrderTrucks, long brokenTrucks) {
+        this.allTrucks = allTrucks;
+        this.availableTrucks = availableTrucks;
+        this.onOrderTrucks = onOrderTrucks;
+        this.brokenTrucks = brokenTrucks;
+    }
+
     @Override
     public String toString() {
         return "TrucksInfo{" +
