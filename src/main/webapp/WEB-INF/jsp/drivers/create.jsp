@@ -57,10 +57,12 @@
 
         <div class="mb-3">
             <label for="hoursPerMonth">Hours/month</label>
-            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
-            <div class="invalid-feedback">
-                Please enter your shipping address.
-            </div>
+            <form:input class="form-control" path="hoursPerMonth" id="hoursPerMonth"/>
+            <form:errors path="hoursPerMonth" cssClass="error"/>
+                <%--<input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">--%>
+                <%--<div class="invalid-feedback">--%>
+                <%--Please enter your shipping address.--%>
+                <%--</div>--%>
         </div>
 
         <div class="mb-3">
@@ -118,7 +120,7 @@
 
             <tr>
                 <td><label for="hoursPerMonth">Hours/month: </label></td>
-                <td><form:input path="hoursPerMonth" id="hoursPerMonth"/></td>
+                    <%--<td><form:input path="hoursPerMonth" id="hoursPerMonth"/></td>--%>
                 <td><form:errors path="hoursPerMonth" cssClass="error"/></td>
             </tr>
             <tr>
