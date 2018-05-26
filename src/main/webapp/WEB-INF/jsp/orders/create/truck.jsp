@@ -12,16 +12,17 @@
         <div class="row">
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-1">Step 3</h4>
+                <hr class="mb-4">
                 <form:form action="/orders/savetruck" method="POST" modelAttribute="order">
                     <td>${order.truck.regNumber}</td>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="truck">Choose truck: </label>
-                            <form:select path="truck" items="${trucks}" itemValue="id" itemLabel="regNumber"/>
+                            <form:select class="custom-select d-block w-100" path="truck" items="${trucks}" itemValue="id" itemLabel="regNumber"/>
                         </div>
                     </div>
                     <div class="mb-4">
-                        <button class="btn btn-secondary" type="submit">Add truck</button>
+                        <button class="btn btn-success" type="submit">Add truck</button>
                     </div>
                     <%--<div class="col-md-6 mb-3">--%>
                     <%--<label for="output">Your truck: </label>--%>
@@ -38,7 +39,7 @@
 
     <form:form action="/orders/adddriver" method="GET" modelAttribute="order">
         <hr class="mb-4">
-        <a class="btn btn-primary" href="/orders/create/waypoint" role="button">Previous Step</a>
+        <a class="btn btn-secondary" href="/orders/create/waypoint" role="button">Previous Step</a>
         <button class="btn btn-primary" type="submit">Next Step</button>
     </form:form>
 </t:wrapper>

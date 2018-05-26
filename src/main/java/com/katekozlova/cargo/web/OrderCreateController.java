@@ -60,10 +60,7 @@ public class OrderCreateController {
     }
 
     @GetMapping(value = "/create/waypoint")
-    public String createWaypoints(@Validated Order order, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "orders/step1";
-        }
+    public String createWaypoints(Model model) {
         Waypoint waypoint = new Waypoint();
         final List<City> cities = citiesService.getAllCities();
         final List<Cargo> cargo = cargoService.getFreeCargo();
@@ -81,6 +78,7 @@ public class OrderCreateController {
 
         final List<City> cities = citiesService.getAllCities();
         final List<Cargo> cargo = cargoService.getFreeCargo();
+        model.addAttribute("order", order);
         model.addAttribute("waypoint", waypoint);
         model.addAttribute("city", cities);
         model.addAttribute("cargo", cargo);
@@ -89,14 +87,16 @@ public class OrderCreateController {
     }
 
     @GetMapping(value = "/addtruck")
-    public String addTruck(@Valid Order order, BindingResult bindingResult, Model model) {
+    public String addTruck(@Validated Order order, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             final List<City> cities = citiesService.getAllCities();
             final List<Cargo> cargo = cargoService.getFreeCargo();
+            model.addAttribute("order", order);
             model.addAttribute("waypoint", new Waypoint());
             model.addAttribute("city", cities);
             model.addAttribute("cargo", cargo);
             model.addAttribute("waypointType", WaypointType.values());
+            System.out.println("Error!");
             return "orders/create/waypoint";
         }
         List<Truck> trucks = orderService.getTrucks(order);

@@ -38,11 +38,11 @@ public class OrderValidator implements Validator {
         final Order order = (Order) target;
         final Map<Cargo, Set<WaypointType>> cargos = new HashMap<>();
 
-        Pattern personalNumberPattern = Pattern.compile("\\d+");
-        long number = order.getUniqueNumber();
-        if (!(personalNumberPattern.matcher(Long.toString(number))).matches() || number <= 0) {
-            errors.rejectValue("uniqueNumber", "order.uniqueNumber.invalid");
-        }
+//        Pattern personalNumberPattern = Pattern.compile("\\d+");
+//        long number = order.getUniqueNumber();
+//        if (!(personalNumberPattern.matcher(Long.toString(number))).matches() || number <= 0) {
+//            errors.rejectValue("uniqueNumber", "order.uniqueNumber.invalid");
+//        }
 
         for (Waypoint waypoint : order.getWaypoints()) {
             final Cargo cargo = waypoint.getCargo();
@@ -57,7 +57,7 @@ public class OrderValidator implements Validator {
 
         for (Set<WaypointType> waypointTypes : cargos.values()) {
             if (!waypointTypes.containsAll(Arrays.asList(WaypointType.values()))) {
-                errors.rejectValue("waypoints", "order.waypoints.error", "Атата");
+                errors.rejectValue("waypoints", "order.waypoints.invalid");
             }
         }
     }

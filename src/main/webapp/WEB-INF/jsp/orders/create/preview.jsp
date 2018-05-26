@@ -26,7 +26,7 @@
     </table>
     <form:form action="/orders/save" method="GET" modelAttribute="order">
         <hr class="mb-4">
-        <a class="btn btn-primary" href="/orders/adddriver" role="button">Previous Step</a>
+        <a class="btn btn-secondary" href="/orders/adddriver" role="button">Previous Step</a>
         <button class="btn btn-primary" type="submit">Finish</button>
     </form:form>
 </t:wrapper>

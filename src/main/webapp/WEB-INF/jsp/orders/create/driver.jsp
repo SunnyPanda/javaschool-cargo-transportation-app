@@ -13,17 +13,18 @@
         <div class="row">
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-1">Step 4</h4>
+                <hr class="mb-4">
                 <form:form action="/orders/savedriver" method="POST" modelAttribute="order">
                     <%--<td>#{order.truck.regNumber}</td>--%>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="drivers">Choose drivers: </label>
-                            <form:select path="drivers" items="${drivers}" itemValue="id" itemLabel="personalNumber"
+                            <form:select class="custom-select d-block w-100" path="drivers" items="${drivers}" itemValue="id" itemLabel="personalNumber"
                                          multiple="true"/>
                         </div>
                     </div>
                     <div class="mb-4">
-                        <button class="btn btn-secondary" type="submit">Add drivers</button>
+                        <button class="btn btn-success" type="submit">Add drivers</button>
                     </div>
                     <%--<div class="col-md-6 mb-3">--%>
                     <%--<label for="output">Your truck: </label>--%>
@@ -40,7 +41,7 @@
 
     <form:form action="/orders/preview" method="GET" modelAttribute="order">
         <hr class="mb-4">
-        <a class="btn btn-primary" href="/orders/addtruck" role="button">Previous Step</a>
+        <a class="btn btn-secondary" href="/orders/addtruck" role="button">Previous Step</a>
         <button class="btn btn-primary" type="submit">Order's Preview</button>
     </form:form>
     <%--</br>--%>

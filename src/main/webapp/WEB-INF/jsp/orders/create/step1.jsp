@@ -14,6 +14,7 @@
         <div class="row">
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-1">Step 1</h4>
+                <hr class="mb-4">
                 <form:form action="/orders/create/waypoint" method="GET" modelAttribute="order">
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -25,7 +26,7 @@
                         </div>
                     </div>
                     <hr class="mb-4">
-                    <a class="btn btn-primary" href="/orders/list" role="button">Back to Order's List</a>
+                    <a class="btn btn-secondary" href="/orders/list" role="button">Back to Order's List</a>
                     <button class="btn btn-primary" type="submit">Next Step</button>
                 </form:form>
             </div>
