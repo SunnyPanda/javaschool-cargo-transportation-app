@@ -4,12 +4,15 @@ language: java
 # - jruby
 # - rbx-3
 
+sudo: false
+install: true
+
 dist: trusty
 
- addons:
-    apt:
-      update: true
-
+# addons:
+#    apt:
+#      update: true
+addons:
     sonarcloud:
         organization: "sunnypanda-github"
         token:
@@ -17,3 +20,6 @@ dist: trusty
     script:
       # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
       - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
+      jdk:
+        - oraclejdk8
