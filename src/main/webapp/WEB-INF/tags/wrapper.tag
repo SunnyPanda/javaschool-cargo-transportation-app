@@ -6,10 +6,10 @@
 <head>
     <style>
         #map {
-            height: 100%;
+            height: 45%;
             float: left;
-            width: 70%;
-            height: 100%;
+            width: 100%;
+            height: 45%;
         }
     </style>
     <title>Cargo Transportation</title>
@@ -37,8 +37,6 @@
 <%--</div>--%>
 <%--</div>--%>
 
-<br>
-<br>
 <br>
 <br>
 <div class="container-fluid">

@@ -3,10 +3,12 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:wrapper>
-    <div class="page-header mt-5">
-        <h1>Waypoints for This Order</h1>
-    </div>
-    <br/>
+    <div class="container">
+        <div class="py-5 text-left">
+            <h2>Waypoints</h2>
+            <hr class="mb-4">
+        </div>
+        <a class="btn btn-primary" href="/orders/list" role="button">Back</a>
     <table class="table table-striped table-hover">
         <thead>
         <tr>
@@ -25,10 +27,10 @@
         </c:forEach>
         </tbody>
     </table>
-    <hr class="mb-4">
-    <a class="btn btn-primary" href="/orders/list" role="button">Back</a>
+
 
     <div id="map"></div>
+    </div>
     <script>
         function initMap() {
             console.log("initMap");
@@ -41,12 +43,12 @@
             var directionsDisplay = new google.maps.DirectionsRenderer;
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 6,
-                center: {lat: 41.85, lng: -87.65}
+                center: {lat: 55.804, lng: 37.789}
             });
 
             directionsDisplay.setMap(map);
 
-            $.getJSON("/jsontest", function (data) {
+            $.getJSON("/api/waypoints/${order.id}", function (data) {
                 calculateAndDisplayRoute(directionsService, directionsDisplay, data);
             });
         }

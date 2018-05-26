@@ -38,9 +38,9 @@ public class JsonController {
         return jsonService.generateTrucksJson();
     }
 
-    @GetMapping(value = "/jsontest", produces = "application/json")
+    @GetMapping(value = "/api/waypoints/{id}", produces = "application/json")
     @ResponseBody
-    public String[] route() {
-        return jsonService.route(1);
+    public String[] route(@PathVariable("id") long id) {
+        return jsonService.route(id);
     }
 }

@@ -40,9 +40,12 @@ public class OrdersController {
     }
 
     @GetMapping(value = "/waypoints/{id}")
-    public ModelAndView getWaypoints(@PathVariable("id") long id) {
+    public String getWaypoints(@PathVariable("id") long id, Model model) {
+        Order order = orderService.findById(id);
         List<Waypoint> waypoints = orderService.getOrderWaypoints(id);
-        return new ModelAndView("orders/waypoints", "waypoints", waypoints);
+        model.addAttribute("order", order);
+        model.addAttribute("waypoints", waypoints);
+        return "orders/waypoints";
     }
 
     @GetMapping(value = "/drivers/{id}")
