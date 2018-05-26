@@ -1,22 +1,15 @@
 language: java
 dist: trusty
 
-#script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-#script: mvn test -B
-#rvm:
-# - 2.2
-# - jruby
-# - rbx-3
-
 #sudo: false
 #install: true
-#
-#dist: trusty
 
 # addons:
 #    apt:
 #      update: true
 addons:
+    apt:
+        update: true
     sonarcloud:
         organization: "sunnypanda-github"
         token:
