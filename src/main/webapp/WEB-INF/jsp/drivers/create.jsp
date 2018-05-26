@@ -13,26 +13,35 @@
             <div class="mb-3">
                 <label for="personalNumber">Unique number</label>
                 <form:input class="form-control" path="personalNumber" id="personalNumber"/>
-                <form:errors path="personalNumber" cssClass="error"/>
+                <p class="text-danger">
+                    <form:errors class="text-danger" path="personalNumber" cssClass="error"/>
+                </p>
 
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName">First name</label>
                     <form:input class="form-control" path="firstName" id="firstName"/>
-                    <form:errors path="firstName" cssClass="error"/>
+                    <p class="text-danger">
+                        <form:errors path="firstName" cssClass="error"/>
+                    </p>
+
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Last name</label>
                     <form:input class="form-control" path="lastName" id="firstName"/>
-                    <form:errors path="lastName" cssClass="error"/>
+                    <p class="text-danger">
+                        <form:errors class="text-danger" path="lastName" cssClass="error"/>
+                    </p>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="hoursPerMonth">Hours/month</label>
                 <form:input class="form-control" path="hoursPerMonth" id="hoursPerMonth"/>
-                <form:errors path="hoursPerMonth" cssClass="error"/>
+                <p class="text-danger">
+                    <form:errors class="text-danger" path="hoursPerMonth" cssClass="error"/>
+                </p>
             </div>
 
             <div class="mb-3">

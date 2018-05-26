@@ -26,13 +26,13 @@ public class TruckValidator implements Validator {
 
         Pattern shiftSizePattern = Pattern.compile("\\d");
         long shift = truck.getShiftSize();
-        if (!(shiftSizePattern.matcher(Long.toString(shift))).matches() && shift > 0 && shift < 5) {
-            e.rejectValue("siftSize", "driver.siftSize.invalid");
+        if (!(shiftSizePattern.matcher(Long.toString(shift))).matches() || shift <= 0 || shift > 5) {
+            e.rejectValue("shiftSize", "driver.siftSize.invalid");
         }
 
         Pattern capacityPattern = Pattern.compile("\\d+");
         long capacity = truck.getCapacity();
-        if (!(shiftSizePattern.matcher(Long.toString(capacity))).matches()) {
+        if (!(capacityPattern.matcher(Long.toString(capacity))).matches() || capacity <= 0) {
             e.rejectValue("capacity", "driver.capacity.invalid");
         }
     }
