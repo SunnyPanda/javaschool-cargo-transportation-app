@@ -1,5 +1,8 @@
 language: java
-rvm:
- - 2.2
- - jruby
- - rbx-3
+#rvm:
+# - 2.2
+# - jruby
+# - rbx-3
+
+script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script: mvn test -B
