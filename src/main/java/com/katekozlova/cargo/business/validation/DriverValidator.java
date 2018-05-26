@@ -22,7 +22,8 @@ public class DriverValidator implements Validator {
         Driver driver = (Driver) target;
 
         Pattern personalNumberPattern = Pattern.compile("\\d+");
-        if (!(personalNumberPattern.matcher(Long.toString(driver.getPersonalNumber()))).matches()) {
+        long number = driver.getPersonalNumber();
+        if (!(personalNumberPattern.matcher(Long.toString(driver.getPersonalNumber()))).matches() || number <= 0) {
             errors.rejectValue("personalNumber", "driver.personalNumber.invalid");
         }
 
@@ -38,7 +39,7 @@ public class DriverValidator implements Validator {
 
         Pattern hoursPerMonthPattern = Pattern.compile("\\d+");
         long hours = driver.getHoursPerMonth();
-        if (!(hoursPerMonthPattern.matcher(Long.toString(hours))).matches() && hours > 176) {
+        if (!(hoursPerMonthPattern.matcher(Long.toString(hours))).matches() || hours > 176 || hours < 0) {
             errors.rejectValue("hoursPerMonth", "driver.hoursPerMonth.invalid");
         }
     }

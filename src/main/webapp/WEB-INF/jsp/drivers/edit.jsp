@@ -11,7 +11,7 @@
         <form:form method="POST" modelAttribute="driver">
             <div class="col-md-8 order-md-1">
             <div class="mb-3">
-                <label for="personalNumber">Unique number</label>
+                <label for="personalNumber">Personal number</label>
                 <form:input class="form-control" path="personalNumber" id="personalNumber"/>
                 <form:errors path="personalNumber" cssClass="error"/>
 
@@ -35,7 +35,7 @@
                 <form:errors path="hoursPerMonth" cssClass="error"/>
             </div>
 
-            <div class="col-md-5 mb-3">
+            <div class=mb-3">
                 <label for="currentCity">City</label>
                     <form:select class="custom-select d-block w-100" path="currentCity">
                         <form:option value="${driver.currentCity}" />
