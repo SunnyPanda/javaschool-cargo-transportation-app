@@ -48,18 +48,18 @@ insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (5
 insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (6, 4, 3, 3, 1);
 insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (7, 4, 4, 4, 0);
 insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (8, 5, 4, 4, 1);
+-- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (9, 1, 8, 1, 0);
+-- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (10, 4, 8, 1, 1);
+insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (11, 3, 9, 1, 0);
+insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (12, 2, 9, 1, 1);
+-- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (13, 5, 10, 0);
+-- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (14, 1, 10, 1);
 -- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (9, 5, 5, 5, 0);
 -- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (10, 6, 5, 5, 1);
 -- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (11, 6, 6, 6, 0);
 -- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (12, 7, 6, 6, 1);
 -- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (13, 7, 7, 7, 0);
 -- insert into waypoints (id, city_id, cargo_id, order_id, waypoint_type) values (14, 8, 7, 7, 1);
-insert into waypoints (id, city_id, cargo_id, waypoint_type) values (9, 1, 8, 0);
-insert into waypoints (id, city_id, cargo_id, waypoint_type) values (10, 4, 8, 1);
-insert into waypoints (id, city_id, cargo_id, waypoint_type) values (11, 3, 9, 0);
-insert into waypoints (id, city_id, cargo_id, waypoint_type) values (12, 2, 9, 1);
-insert into waypoints (id, city_id, cargo_id, waypoint_type) values (13, 5, 10, 0);
-insert into waypoints (id, city_id, cargo_id, waypoint_type) values (14, 1, 10, 1);
 
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id, order_id, booking_status) values (1, 'AA11111', 2, 35, 0, 1, 1, 1);
 insert into trucks (id, reg_number, shift_size, capacity, state, current_city_id, order_id, booking_status) values (2, 'BB22222', 1, 100, 0, 2, 2, 1);

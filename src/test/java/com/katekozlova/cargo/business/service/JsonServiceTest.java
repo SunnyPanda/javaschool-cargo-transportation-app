@@ -27,12 +27,14 @@ public class JsonServiceTest {
     private DriverRepository driverRepository;
     @Mock
     private TruckRepository truckRepository;
+    @Mock
+    private OrderService orderService;
 
     private JsonService service;
 
     @Before
     public void setUp() throws Exception {
-        service = new JsonService(orderRepository, driverRepository, truckRepository);
+        service = new JsonService(orderRepository, driverRepository, truckRepository, orderService);
     }
 
     @Test

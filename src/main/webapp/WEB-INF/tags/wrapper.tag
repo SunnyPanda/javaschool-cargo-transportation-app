@@ -4,10 +4,19 @@
 
 <html>
 <head>
+    <style>
+        #map {
+            height: 100%;
+            float: left;
+            width: 70%;
+            height: 100%;
+        }
+    </style>
     <title>Cargo Transportation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="<c:url value="/static/css/site.css"/>"/>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <header>
@@ -17,6 +26,7 @@
             <button class="btn btn-outline-danger" type="submit">Выйти</button>
         </form:form>
     </nav>
+
 </header>
 <%--<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">--%>
 <%--<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">--%>

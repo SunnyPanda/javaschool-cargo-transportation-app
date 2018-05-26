@@ -1,6 +1,8 @@
 package com.katekozlova.cargo.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.NaturalId;
 import org.joda.time.DateTime;
 
@@ -26,6 +28,7 @@ public class Order {
     private OrderStatus orderStatus;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore
     private List<Waypoint> waypoints;
 

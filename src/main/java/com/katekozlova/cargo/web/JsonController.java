@@ -1,13 +1,11 @@
 package com.katekozlova.cargo.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.maps.model.DirectionsResult;
 import com.katekozlova.cargo.business.service.*;
 import com.katekozlova.cargo.data.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +36,11 @@ public class JsonController {
     @ResponseBody
     public TrucksInfo generateTrucksJson() {
         return jsonService.generateTrucksJson();
+    }
+
+    @GetMapping(value = "/jsontest", produces = "application/json")
+    @ResponseBody
+    public String[] route() {
+        return jsonService.route(1);
     }
 }

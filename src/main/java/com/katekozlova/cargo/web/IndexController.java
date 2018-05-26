@@ -54,4 +54,9 @@ public class IndexController {
         model.addAttribute("cargo", this.cargoService.getCargoByNumber(cargoNumber));
         return "cargo/search";
     }
+
+    @GetMapping(value = "/test")
+    public String test() {
+        return "/test";
+    }
 }
