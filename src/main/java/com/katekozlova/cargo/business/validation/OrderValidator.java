@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 @Component
 public class OrderValidator implements Validator {
@@ -36,6 +37,12 @@ public class OrderValidator implements Validator {
     public void validate(Object target, Errors errors) {
         final Order order = (Order) target;
         final Map<Cargo, Set<WaypointType>> cargos = new HashMap<>();
+
+        Pattern personalNumberPattern = Pattern.compile("\\d+");
+        long number = order.getUniqueNumber();
+        if (!(personalNumberPattern.matcher(Long.toString(number))).matches() || number <= 0) {
+            errors.rejectValue("uniqueNumber", "order.uniqueNumber.invalid");
+        }
 
         for (Waypoint waypoint : order.getWaypoints()) {
             final Cargo cargo = waypoint.getCargo();

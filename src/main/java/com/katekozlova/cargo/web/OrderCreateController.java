@@ -7,6 +7,7 @@ import com.katekozlova.cargo.business.service.OrderService;
 import com.katekozlova.cargo.business.service.WaypointService;
 import com.katekozlova.cargo.business.validation.OrderValidator;
 import com.katekozlova.cargo.data.entity.*;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -58,7 +60,10 @@ public class OrderCreateController {
     }
 
     @GetMapping(value = "/create/waypoint")
-    public String createWaypoints(Model model) {
+    public String createWaypoints(@Validated Order order, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "orders/step1";
+        }
         Waypoint waypoint = new Waypoint();
         final List<City> cities = citiesService.getAllCities();
         final List<Cargo> cargo = cargoService.getFreeCargo();

@@ -19,6 +19,9 @@
                         <div class="col-md-6 mb-3">
                             <label for="uniqueNumber">Order's unique number: </label>
                             <form:input path="uniqueNumber" id="uniqueNumber"/>
+                            <p class="text-danger">
+                                <form:errors class="text-danger" path="uniqueNumber" cssClass="error"/>
+                            </p>
                         </div>
                     </div>
                     <hr class="mb-4">

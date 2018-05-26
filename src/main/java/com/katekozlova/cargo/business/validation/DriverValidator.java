@@ -17,13 +17,12 @@ public class DriverValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-//        ValidationUtils.rejectIfEmpty(errors, "personalNumber", "driver.personalNumber.empty");
 
         Driver driver = (Driver) target;
 
         Pattern personalNumberPattern = Pattern.compile("\\d+");
         long number = driver.getPersonalNumber();
-        if (!(personalNumberPattern.matcher(Long.toString(driver.getPersonalNumber()))).matches() || number <= 0) {
+        if (!(personalNumberPattern.matcher(Long.toString(number))).matches() || number <= 0) {
             errors.rejectValue("personalNumber", "driver.personalNumber.invalid");
         }
 
