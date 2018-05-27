@@ -5,7 +5,6 @@ import com.katekozlova.cargo.business.service.CargoService;
 import com.katekozlova.cargo.business.service.CitiesService;
 import com.katekozlova.cargo.business.service.OrderService;
 import com.katekozlova.cargo.business.service.WaypointService;
-import com.katekozlova.cargo.business.validation.OrderTruckValidator;
 import com.katekozlova.cargo.business.validation.OrderValidator;
 import com.katekozlova.cargo.data.entity.*;
 import org.slf4j.Logger;
@@ -35,20 +34,18 @@ public class OrderCreateController {
     private final CargoService cargoService;
 
     private final OrderValidator orderValidator;
-    private final OrderTruckValidator orderTruckValidator;
 
     private final AmqpTemplate amqpTemplate;
 
     @Autowired
     public OrderCreateController(OrderService orderService, WaypointService waypointService, OrderValidator orderValidator,
-                                 AmqpTemplate amqpTemplate, CitiesService citiesService, CargoService cargoService, OrderTruckValidator orderTruckValidator) {
+                                 AmqpTemplate amqpTemplate, CitiesService citiesService, CargoService cargoService) {
         this.orderService = orderService;
         this.waypointService = waypointService;
         this.orderValidator = orderValidator;
         this.amqpTemplate = amqpTemplate;
         this.citiesService = citiesService;
         this.cargoService = cargoService;
-        this.orderTruckValidator = orderTruckValidator;
     }
 
     @InitBinder("order")
@@ -57,11 +54,6 @@ public class OrderCreateController {
         binder.addValidators(orderValidator);
     }
 
-//    @InitBinder("checkTruck")
-//    protected void truckInitBinder(WebDataBinder binder) {
-//        binder.addValidators(orderTruckValidator);
-//        logger.error("orderTruckValidator");
-//    }
 
     @GetMapping(value = "/create/number")
     public String createOrder(Model model) {

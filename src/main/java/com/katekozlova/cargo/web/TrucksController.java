@@ -24,7 +24,6 @@ import java.util.List;
 public class TrucksController {
 
     private final TrucksService trucksService;
-    private final DriversService driversService;
     private final CitiesService citiesService;
 
     private final TruckValidator truckValidator;
@@ -32,9 +31,8 @@ public class TrucksController {
     private final AmqpTemplate amqpTemplate;
 
     @Autowired
-    public TrucksController(TrucksService trucksService, DriversService driversService, CitiesService citiesService, TruckValidator truckValidator, AmqpTemplate amqpTemplate) {
+    public TrucksController(TrucksService trucksService, CitiesService citiesService, TruckValidator truckValidator, AmqpTemplate amqpTemplate) {
         this.trucksService = trucksService;
-        this.driversService = driversService;
         this.citiesService = citiesService;
         this.truckValidator = truckValidator;
         this.amqpTemplate = amqpTemplate;

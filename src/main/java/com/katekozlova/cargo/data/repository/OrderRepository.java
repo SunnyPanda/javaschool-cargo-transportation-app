@@ -33,7 +33,6 @@ public class OrderRepository {
         return order;
     }
 
-    //Order findOrderById(Long id);
     public Order findById(long orderId) {
         final TypedQuery<Order> query = entityManager
                 .createQuery("select o from Order o where o.id = :orderId", Order.class);
@@ -41,7 +40,6 @@ public class OrderRepository {
         return query.getSingleResult();
     }
 
-    //Order findOrderByUniqueNumber(long uniqueNumber);
     public Order findByUniqueNumber(long uniqueNumber) {
         final TypedQuery<Order> query = entityManager
                 .createQuery("select o from Order o where o.uniqueNumber = :uniqueNumber", Order.class);

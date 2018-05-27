@@ -17,7 +17,4 @@ public class Map {
     @ManyToOne
     @JoinColumn(name = "city_to_id")
     private City cityTo;
-
-
-    private String status;
 }

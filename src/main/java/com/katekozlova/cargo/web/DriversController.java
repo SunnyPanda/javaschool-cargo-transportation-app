@@ -1,8 +1,6 @@
 package com.katekozlova.cargo.web;
 
-import com.katekozlova.cargo.business.service.CargoService;
 import com.katekozlova.cargo.business.service.CitiesService;
-import com.katekozlova.cargo.business.service.DriverService;
 import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.business.validation.DriverValidator;
 import com.katekozlova.cargo.data.entity.City;
@@ -19,28 +17,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-//import org.apache.log4j.Logger;
-
 @Controller
 @RequestMapping(value = "/drivers")
 @SessionAttributes("driver")
 public class DriversController {
 
-    // Logger logger = Logger.getLogger(DriversController.class);
-
     private final DriversService driversService;
     private final CitiesService citiesService;
-    private final CargoService cargoService;
 
     private final DriverValidator driverValidator;
 
     private final AmqpTemplate amqpTemplate;
 
     @Autowired
-    public DriversController(DriversService driversService, CitiesService citiesService, CargoService cargoService, DriverValidator driverValidator, AmqpTemplate amqpTemplate) {
+    public DriversController(DriversService driversService, CitiesService citiesService, DriverValidator driverValidator, AmqpTemplate amqpTemplate) {
         this.driversService = driversService;
         this.citiesService = citiesService;
-        this.cargoService = cargoService;
         this.driverValidator = driverValidator;
         this.amqpTemplate = amqpTemplate;
     }
@@ -58,9 +50,6 @@ public class DriversController {
 
     @GetMapping(value = "/delete/{id}")
     public String deleteDriver(@PathVariable("id") long id, Driver driver) {
-//        if (bindingResult.hasErrors()) {
-//            return "redirect:/drivers/list";
-//        }
         driversService.deleteDriver(driver);
         amqpTemplate.convertAndSend("queue", "driver");
         return "redirect:/drivers/list";

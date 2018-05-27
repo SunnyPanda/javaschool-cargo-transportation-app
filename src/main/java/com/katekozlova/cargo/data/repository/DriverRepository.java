@@ -69,7 +69,6 @@ public class DriverRepository {
         return query.getResultList();
     }
 
-    //List<Driver> findDriverByOrderIsNullAndCurrentCityId(Long id);
     public List<Driver> findByOrderAndCurrentCity(long cityId) {
         final TypedQuery<Driver> query = entityManager
                 .createQuery("select d from Driver d where d.order is null and d.currentCity.id = :cityId", Driver.class);
@@ -77,9 +76,6 @@ public class DriverRepository {
         return query.getResultList();
     }
 
-    //    @Modifying
-//    @Query("update Driver d SET d.hoursPerMonth = 0")
-//    void updateDriver();
     public void updateHoursPerMonth() {
         entityManager.createQuery("update Driver d set d.hoursPerMonth = 0", Driver.class);
     }

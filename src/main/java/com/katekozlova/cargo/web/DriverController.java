@@ -37,7 +37,6 @@ public class DriverController {
         driver = driversService.findDriverById(id);
         String message;
         if (driver.getOrder() == null) {
-            message = "no";
             return "drivers/id";
         }
         List<Driver> coDrivers = driverService.findByTruck(id);

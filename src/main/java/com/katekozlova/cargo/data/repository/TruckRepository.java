@@ -52,7 +52,6 @@ public class TruckRepository {
     public List<Truck> findByOrder() {
         final TypedQuery<Truck> query = entityManager
                 .createQuery("select t from Truck t where t.order is not null", Truck.class);
-        //query.setParameter("truckState", truckState);
         return query.getResultList();
     }
 
