@@ -42,12 +42,15 @@ public class Order {
     @JsonIgnore
     private Long travelTime;
 
+    @JsonIgnore
     private DateTime orderTime;
 
     @Enumerated
+    @JsonIgnore
     private OrderCreateStatus orderCreateStatus;
 
     @OneToMany(mappedBy = "order")
+    @JsonIgnore
     private List<Cargo> cargo;
 
     public DateTime getOrderTime() {

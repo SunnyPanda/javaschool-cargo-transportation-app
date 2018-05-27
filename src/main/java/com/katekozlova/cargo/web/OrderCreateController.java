@@ -143,6 +143,8 @@ public class OrderCreateController {
     public String saveOrder(Order order) {
         orderService.saveOrder(order);
         amqpTemplate.convertAndSend("queue", "order");
+        amqpTemplate.convertAndSend("queue", "driver");
+        amqpTemplate.convertAndSend("queue", "truck");
         return "redirect:/orders/list";
     }
 
