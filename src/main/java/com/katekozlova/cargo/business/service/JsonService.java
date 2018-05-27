@@ -1,27 +1,21 @@
 package com.katekozlova.cargo.business.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.collect.Iterables;
-import com.google.maps.DirectionsApi;
-import com.google.maps.DirectionsApiRequest;
-import com.google.maps.GeoApiContext;
-import com.google.maps.model.DirectionsResult;
-import com.google.maps.model.LatLng;
-import com.google.maps.model.TravelMode;
 import com.katekozlova.cargo.data.entity.*;
-import com.katekozlova.cargo.data.repository.CargoRepository;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.OrderRepository;
 import com.katekozlova.cargo.data.repository.TruckRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class JsonService {
+
+    static final Logger logger = LoggerFactory.getLogger(JsonService.class);
 
     private final OrderRepository orderRepository;
     private final DriverRepository driverRepository;
@@ -38,7 +32,7 @@ public class JsonService {
     }
 
     public List<Order> generateOrdersJson() {
-
+        logger.info("list of orders was requested");
         return orderRepository.findAll();
     }
 
@@ -46,7 +40,9 @@ public class JsonService {
         List<Driver> allDrivers = driverRepository.findAll();
         List<Driver> availableDrivers = driverRepository.findByStatus(DriverStatus.REST);
         final long unavailableDrivers = Math.subtractExact(allDrivers.size(), availableDrivers.size());
-        return new DriversInfo(allDrivers.size(), availableDrivers.size(), unavailableDrivers);
+        DriversInfo driversInfo = new DriversInfo(allDrivers.size(), availableDrivers.size(), unavailableDrivers);
+        logger.info("information about drivers was requested: {}", driversInfo);
+        return driversInfo;
     }
 
     public TrucksInfo generateTrucksJson() {
@@ -54,8 +50,9 @@ public class JsonService {
         List<Truck> brokenTrucks = truckRepository.findByState(TruckState.DEFECTIVE);
         List<Truck> onOrderTrucks = truckRepository.findByOrder();
         List<Truck> availableTrucks = truckRepository.findByOrderTruckState(TruckState.SERVICEABLE);
-
-        return new TrucksInfo(allTrucks.size(), availableTrucks.size(), onOrderTrucks.size(), brokenTrucks.size());
+        TrucksInfo trucksInfo = new TrucksInfo(allTrucks.size(), availableTrucks.size(), onOrderTrucks.size(), brokenTrucks.size());
+        logger.info("information about trucks was requested: {}", trucksInfo);
+        return trucksInfo;
     }
 
     public String[] route(long id) {
@@ -69,29 +66,7 @@ public class JsonService {
         for (Waypoint waypoint: waypoints) {
             waypointList.add(waypoint.getCity().getName());
         }
-
+        logger.info("list of cities from order's waypoints was requested: {}", waypointList);
         return waypointList.toArray(new String[0]);
-
-//        System.out.println("waypoints" + waypoints);
-//        GeoApiContext context = new GeoApiContext.Builder()
-//                .apiKey("AIzaSyAVIHJyzMB3OZ9HPs8oQJHGHorJboK2zog")
-//                .build();
-//
-//         DirectionsResult result = DirectionsApi.newRequest(context)
-//                .origin(waypoints.get(0).getCity().getName())
-//                .destination(waypoints.get(waypoints.size() - 1 ).getCity().getName())
-//                .waypoints(waypoints(waypoints))
-//                .mode(TravelMode.DRIVING)
-//                .awaitIgnoreError();
-//
-//         return result;
-    }
-
-    private String[] waypoints(List<Waypoint> waypointList){
-        List<String> waypoints = new ArrayList<>();
-        for (int i = 1; i < waypointList.size() - 2; i++) {
-            waypoints.add(waypointList.get(i).getCity().getName());
-        }
-        return waypoints.toArray(new String[0]);
     }
 }

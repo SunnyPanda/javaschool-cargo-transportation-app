@@ -12,6 +12,8 @@ import com.katekozlova.cargo.data.entity.*;
 import com.katekozlova.cargo.data.repository.*;
 import org.joda.time.DateTime;
 import org.joda.time.Hours;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,8 @@ import java.util.List;
 @Service
 @Transactional
 public class OrderService {
+
+    static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     private static final long TRUCK_SPEED = 70;
     private static final String API_KEY = "AIzaSyADJkrdtuvmf2VbH6Ruj0Y_Ftse3fyg3x4";
@@ -85,7 +89,9 @@ public class OrderService {
 
     public Order create(Order order) {
         order.setOrderStatus(OrderStatus.NO);
-        return orderRepository.save(order);
+        order = orderRepository.save(order);
+        logger.info("order was created: {}", order);
+        return order;
     }
 
     public List<Truck> getTrucks(Order order) {
@@ -98,9 +104,12 @@ public class OrderService {
 //        truckRepository.save(order.getTruck());
 //        return orderRepository.save(order);
 //    }
+
     public void saveTruckToOrder(Order order) {
         order.getTruck().setOrder(order);
+        Truck tempTruck = order.getTruck();
         truckRepository.save(order.getTruck());
+        logger.info("truck was changed(set order): {}", tempTruck);
     }
 
     public List<Driver> getDrivers(Order order) {
@@ -132,6 +141,7 @@ public class OrderService {
             waypoints.add(waypoint);
             order.setWaypoints(waypoints);
         }
+        logger.info("order was changed(set waypoints): {}", order);
         return order;
     }
 
@@ -153,6 +163,7 @@ public class OrderService {
         for (Driver driver : order.getDrivers()) {
             driver.setOrder(order);
             driverRepository.save(driver);
+            logger.info("driver was changed(setOrder): {}", driver);
         }
     }
 
@@ -160,6 +171,7 @@ public class OrderService {
         for (Driver driver : order.getDrivers()) {
             driver.setCurrentTruck(order.getTruck());
             driverRepository.save(driver);
+            logger.info("driver was changed(setTruck): {}", driver);
         }
     }
 
@@ -172,6 +184,7 @@ public class OrderService {
         for (Waypoint waypoint : order.getWaypoints()) {
             waypoint.setOrder(order);
             waypointRepository.save(waypoint);
+            logger.info("waypoint was changed(setOrder): {}", waypoint);
         }
     }
 
@@ -196,6 +209,7 @@ public class OrderService {
 
     public void saveOrder(Order order) {
         orderRepository.save(order);
+        logger.info("order was created: {}", order);
         getOrderIdToWaypoint(order);
         saveTruckToOrder(order);
         saveDriversToOrder(order);
@@ -206,6 +220,7 @@ public class OrderService {
         List<Order> orders = orderRepository.findAll();
         for (Order order : orders) {
             order.setTravelTime(50);
+            logger.info("order was changed(setTravelTime): {}", order);
         }
     }
 }

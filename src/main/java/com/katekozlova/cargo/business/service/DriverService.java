@@ -7,6 +7,8 @@ import com.katekozlova.cargo.data.repository.DriverRepository;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeComparator;
 import org.joda.time.Hours;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class DriverService {
+
+    static final Logger logger = LoggerFactory.getLogger(DriverService.class);
 
     private final DriverRepository driverRepository;
 
@@ -30,7 +34,7 @@ public class DriverService {
         driver.setShiftBegin(new DateTime());
         driver.setDriverStatus(DriverStatus.IN_SHIFT);
         driverRepository.save(driver);
-        System.out.println("driver.getShiftBegin() = " + driver.getShiftBegin());
+        logger.info("driver was changed(set driverStatus): {}" + driver);
     }
 
 
@@ -47,6 +51,7 @@ public class DriverService {
         }
         driver.setDriverStatus(DriverStatus.REST);
         driverRepository.save(driver);
+        logger.info("driver was changed(set driverStatus): {}", driver);
     }
 
     public List<Driver> findByTruck(long id) {

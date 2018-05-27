@@ -8,6 +8,8 @@ import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeComparator;
 import org.joda.time.Hours;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class DriversService {
+
+    static final Logger logger = LoggerFactory.getLogger(DriversService.class);
 
     private final DriverRepository driverRepository;
 
@@ -31,16 +35,22 @@ public class DriversService {
     }
 
     public void deleteDriver(Driver driver) {
+        Driver tempDriver = driver;
         driverRepository.delete(driver);
+        logger.info("driver was deleted: {}", tempDriver);
     }
 
     public Driver updateDriver(Driver driver) {
-        return driverRepository.save(driver);
+        driver = driverRepository.save(driver);
+        logger.info("driver was updated: {}", driver);
+        return driver;
     }
 
     public Driver createDriver(Driver driver) {
         driver.setDriverStatus(DriverStatus.REST);
-        return driverRepository.save(driver);
+        driver = driverRepository.save(driver);
+        logger.info("new driver was created: {}", driver);
+        return driver;
     }
 
     public Driver findDriverById(long id) {

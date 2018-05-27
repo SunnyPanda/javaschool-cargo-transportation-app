@@ -57,5 +57,13 @@ public class City {
     public void setWaypoints(List<Waypoint> waypoints) {
         this.waypoints = waypoints;
     }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
 

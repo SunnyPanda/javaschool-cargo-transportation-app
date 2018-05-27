@@ -144,4 +144,16 @@ public class Truck {
 
         return Objects.hash(id, regNumber, shiftSize, capacity, truckState, drivers, currentCity, order);
     }
+
+    @Override
+    public String toString() {
+        return "Truck{" +
+                "id=" + id +
+                ", regNumber='" + regNumber + '\'' +
+                ", shiftSize=" + shiftSize +
+                ", capacity=" + capacity +
+                ", truckState=" + truckState +
+                ", currentCity=" + currentCity +
+                '}';
+    }
 }

@@ -6,6 +6,8 @@ import com.katekozlova.cargo.data.entity.Truck;
 import com.katekozlova.cargo.data.entity.TruckState;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.TruckRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,8 @@ import java.util.List;
 @Service
 @Transactional
 public class TrucksService {
+
+    static final Logger logger = LoggerFactory.getLogger(TrucksService.class);
 
     private final TruckRepository truckRepository;
     private final DriverRepository driverRepository;
@@ -37,11 +41,20 @@ public class TrucksService {
                 driver.setCurrentTruck(null);
             }
         }
+        Truck tempTruck = truck;
         truckRepository.delete(truck);
+        logger.info("truck was deleted: {}", tempTruck);
     }
 
     public Truck createAndUpdate(Truck truck) {
-        return truckRepository.save(truck);
+        long id = truck.getId();
+        truck = truckRepository.save(truck);
+        if (id == 0) {
+            logger.info("truck was created: {}", truck);
+        } else {
+            logger.info("truck was updated: {}", truck);
+        }
+        return truck;
     }
 
     public Truck findById(long id) {
