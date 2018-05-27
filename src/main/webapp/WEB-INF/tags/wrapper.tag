@@ -13,7 +13,8 @@
         }
     </style>
     <title>Cargo Transportation</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="<c:url value="/static/css/site.css"/>"/>
     <script src="/static/js/jquery-3.3.1.min.js"></script>
@@ -28,18 +29,8 @@
     </nav>
 
 </header>
-<%--<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">--%>
-<%--<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">--%>
-<%--<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>--%>
-<%--</div>--%>
-<%--<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">--%>
-<%--<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>--%>
-<%--</div>--%>
-<%--</div>--%>
 
-<br>
-<br>
-<div class="container-fluid">
+<main class="container">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
@@ -136,7 +127,7 @@
         </main>
 
     </div>
-</div>
+</main>
 
 <footer class="footer">
     <div class="container">

@@ -3,18 +3,13 @@ html {
     min-height: 100%;
 }
 
-    #map {
-
-    }
-
-
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
 
 body > .container {
-    padding: 60px 15px 0;
+    padding: 100px 15px 0;
 }
 
 .footer {
