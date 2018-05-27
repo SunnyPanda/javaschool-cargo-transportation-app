@@ -7,9 +7,8 @@ import com.katekozlova.cargo.business.service.OrderService;
 import com.katekozlova.cargo.business.service.WaypointService;
 import com.katekozlova.cargo.business.validation.OrderValidator;
 import com.katekozlova.cargo.data.entity.*;
-import com.sun.org.apache.xpath.internal.operations.Or;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -28,11 +26,12 @@ import java.util.List;
 @SessionAttributes(names = {"order"})
 public class OrderCreateController {
 
+    static final Logger logger = LoggerFactory.getLogger(OrderCreateController.class);
+
     private final OrderService orderService;
     private final WaypointService waypointService;
     private final OrderValidator orderValidator;
     private final AmqpTemplate amqpTemplate;
-    private static final Logger logger = LogManager.getLogger(OrderCreateController.class);
     private final CitiesService citiesService;
     private final CargoService cargoService;
 

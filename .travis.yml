@@ -4,9 +4,6 @@ dist: trusty
 #sudo: false
 #install: true
 
-# addons:
-#    apt:
-#      update: true
 addons:
     apt:
         update: true
@@ -19,6 +16,3 @@ script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 #      - mvn sonar:sonar -Dsonar.organization=sunnypanda-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=b62d3dcc518e6311fcf14f1625ac5b38ae8c061e
-#
-#      jdk:
-#        - oraclejdk8
