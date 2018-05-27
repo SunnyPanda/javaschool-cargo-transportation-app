@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Last name</label>
-                    <form:input class="form-control" path="lastName" id="firstName"/>
+                    <form:input class="form-control" path="lastName" id="lastName"/>
                     <p class="text-danger">
                         <form:errors class="text-danger" path="lastName" cssClass="error"/>
                     </p>

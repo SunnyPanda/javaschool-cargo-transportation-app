@@ -14,11 +14,15 @@
                 <h4 class="mb-1">Step 3</h4>
                 <hr class="mb-4">
                 <form:form action="/orders/savetruck" method="POST" modelAttribute="order">
-                    <td>${order.truck.regNumber}</td>
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
+                            <label>${order.truck.regNumber}</label>
                             <label for="truck">Choose truck: </label>
                             <form:select class="custom-select d-block w-100" path="truck" items="${trucks}" itemValue="id" itemLabel="regNumber"/>
+                            <p class="text-danger">
+                                <form:errors class="text-danger" path="truck" cssClass="error"/>
+                            </p>
                         </div>
                     </div>
                     <div class="mb-4">

@@ -5,6 +5,7 @@ import com.katekozlova.cargo.business.service.CargoService;
 import com.katekozlova.cargo.business.service.CitiesService;
 import com.katekozlova.cargo.business.service.OrderService;
 import com.katekozlova.cargo.business.service.WaypointService;
+import com.katekozlova.cargo.business.validation.OrderTruckValidator;
 import com.katekozlova.cargo.business.validation.OrderValidator;
 import com.katekozlova.cargo.data.entity.*;
 import org.slf4j.Logger;
@@ -30,26 +31,37 @@ public class OrderCreateController {
 
     private final OrderService orderService;
     private final WaypointService waypointService;
-    private final OrderValidator orderValidator;
-    private final AmqpTemplate amqpTemplate;
     private final CitiesService citiesService;
     private final CargoService cargoService;
 
+    private final OrderValidator orderValidator;
+    private final OrderTruckValidator orderTruckValidator;
+
+    private final AmqpTemplate amqpTemplate;
+
     @Autowired
     public OrderCreateController(OrderService orderService, WaypointService waypointService, OrderValidator orderValidator,
-                                 AmqpTemplate amqpTemplate, CitiesService citiesService, CargoService cargoService) {
+                                 AmqpTemplate amqpTemplate, CitiesService citiesService, CargoService cargoService, OrderTruckValidator orderTruckValidator) {
         this.orderService = orderService;
         this.waypointService = waypointService;
         this.orderValidator = orderValidator;
         this.amqpTemplate = amqpTemplate;
         this.citiesService = citiesService;
         this.cargoService = cargoService;
+        this.orderTruckValidator = orderTruckValidator;
     }
 
     @InitBinder("order")
     protected void initBinder(WebDataBinder binder) {
+        logger.error("orderValidator");
         binder.addValidators(orderValidator);
     }
+
+//    @InitBinder("checkTruck")
+//    protected void truckInitBinder(WebDataBinder binder) {
+//        binder.addValidators(orderTruckValidator);
+//        logger.error("orderTruckValidator");
+//    }
 
     @GetMapping(value = "/create/number")
     public String createOrder(Model model) {
@@ -74,7 +86,6 @@ public class OrderCreateController {
     public String saveWaypoint(Order order, Waypoint waypoint, Model model) {
         waypoint = waypointService.createWaypoint(waypoint);
         orderService.saveWaipoints(order, waypoint);
-
         final List<City> cities = citiesService.getAllCities();
         final List<Cargo> cargo = cargoService.getFreeCargo();
         model.addAttribute("order", order);
@@ -95,9 +106,10 @@ public class OrderCreateController {
             model.addAttribute("city", cities);
             model.addAttribute("cargo", cargo);
             model.addAttribute("waypointType", WaypointType.values());
-            System.out.println("Error!");
+            logger.error("Error!");
             return "orders/create/waypoint";
         }
+        logger.error("waypoints: {}", order.getWaypoints());
         List<Truck> trucks = orderService.getTrucks(order);
         model.addAttribute("order", order);
         model.addAttribute("trucks", trucks);
@@ -113,7 +125,14 @@ public class OrderCreateController {
     }
 
     @GetMapping(value = "/adddriver")
-    public String addDriver(Order order, Model model) {
+    public String addDriver(@Validated Order order, Model model, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logger.error("error occurred");
+            List<Truck> trucks = orderService.getTrucks(order);
+            model.addAttribute("order", order);
+            model.addAttribute("trucks", trucks);
+           return  "orders/create/truck";
+        }
         List<Driver> drivers = orderService.getDrivers(order);
         model.addAttribute("order", order);
         model.addAttribute("drivers", drivers);
@@ -122,7 +141,6 @@ public class OrderCreateController {
 
     @PostMapping(value = "/savedriver")
     public String saveDriver(Order order, Model model) {
-        System.out.println("order = " + order);
         List<Driver> drivers = orderService.getDrivers(order);
         model.addAttribute("order", order);
         model.addAttribute("drivers", drivers);
@@ -132,6 +150,7 @@ public class OrderCreateController {
     @GetMapping(value = "/save")
     public String saveOrder(Order order) {
         orderService.saveOrder(order);
+        amqpTemplate.convertAndSend("queue", "order");
         return "redirect:/orders/list";
     }
 

@@ -2,11 +2,10 @@ package com.katekozlova.cargo.business.validation;
 
 
 import com.google.common.collect.Sets;
-import com.katekozlova.cargo.data.entity.Cargo;
-import com.katekozlova.cargo.data.entity.Order;
-import com.katekozlova.cargo.data.entity.Waypoint;
-import com.katekozlova.cargo.data.entity.WaypointType;
+import com.katekozlova.cargo.data.entity.*;
 import com.katekozlova.cargo.data.repository.WaypointRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -20,6 +19,8 @@ import java.util.regex.Pattern;
 
 @Component
 public class OrderValidator implements Validator {
+
+    static final Logger logger = LoggerFactory.getLogger(OrderValidator.class);
 
     private final WaypointRepository waypointRepository;
 

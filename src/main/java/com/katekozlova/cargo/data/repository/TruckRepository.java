@@ -43,8 +43,8 @@ public class TruckRepository {
 
     public List<Truck> findByState(TruckState truckState) {
         final TypedQuery<Truck> query = entityManager
-                .createQuery("select t from Truck t where t.truckState = :truckState", Truck.class);
-        query.setParameter("truckState", truckState);
+                .createQuery("select t from Truck t where t.truckState = :state", Truck.class);
+        query.setParameter("state", truckState);
         return query.getResultList();
     }
 
@@ -58,16 +58,16 @@ public class TruckRepository {
 
     public List<Truck> findByOrderTruckState(TruckState truckState) {
         final TypedQuery<Truck> query = entityManager
-                .createQuery("select t from Truck t where t.order is null and t.truckState = :truckState", Truck.class);
-        query.setParameter("truckState", truckState);
+                .createQuery("select t from Truck t where t.order is null and t.truckState = :state", Truck.class);
+        query.setParameter("state", truckState);
         return query.getResultList();
     }
 
     public List<Truck> findByOrderTruckStateCapacity(TruckState truckState, long weight) {
         final TypedQuery<Truck> query = entityManager
                 .createQuery("select t from Truck t where t.order is null " +
-                        "and t.truckState = :truckState and t.capacity >= :weight", Truck.class);
-        query.setParameter("truckState", truckState);
+                        "and t.truckState = :state and t.capacity >= :weight", Truck.class);
+        query.setParameter("state", truckState);
         query.setParameter("weight", weight);
         return query.getResultList();
     }

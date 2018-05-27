@@ -41,5 +41,9 @@ public class DriverValidator implements Validator {
         if (!(hoursPerMonthPattern.matcher(Long.toString(hours))).matches() || hours > 176 || hours < 0) {
             errors.rejectValue("hoursPerMonth", "driver.hoursPerMonth.invalid");
         }
+
+//        if (driver.getOrder() != null) {
+//            errors.rejectValue("delete","driver.hastruck");
+//        }
     }
 }
