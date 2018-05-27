@@ -100,11 +100,6 @@ public class OrderService {
         return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, findMaxCargoWeight(order.getWaypoints()));
     }
 
-//    public Order saveTruckToOrder(Order order) {
-//        order.getTruck().setOrder(order);
-//        truckRepository.save(order.getTruck());
-//        return orderRepository.save(order);
-//    }
 
     public void saveTruckToOrder(Order order) {
         order.getTruck().setOrder(order);
@@ -225,35 +220,3 @@ public class OrderService {
         }
     }
 }
-
-
-//    public GeoApiContext context = new GeoApiContext().setApiKey(API_KEY);
-//
-//
-//    public DistanceMatrix estimateRouteTime(DateTime time, Boolean isForCalculateArrivalTime, DirectionsApi.RouteRestriction routeRestriction, String departure, String arrival) {
-//        try {
-//            DistanceMatrixApiRequest req = DistanceMatrixApi.newRequest(context);
-////            if (isForCalculateArrivalTime) {
-////                req.departureTime(time);
-////            } else {
-////                req.arrivalTime(time);
-////            }
-////            if (routeRestriction == null) {
-////                routeRestriction = DirectionsApi.RouteRestriction.TOLLS;
-////            }
-//            DistanceMatrix trix = req.units(Unit.METRIC)
-//                    .origins(departure)
-//                    .destinations(arrival)
-//                    .mode(TravelMode.DRIVING)
-//                   // .avoid(routeRestriction)
-//                   // .language("fr-FR")
-//                    .await();
-//            return trix;
-//
-//        } catch (ApiException e) {
-//            System.out.println(e.getMessage());
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return null;
-//    }

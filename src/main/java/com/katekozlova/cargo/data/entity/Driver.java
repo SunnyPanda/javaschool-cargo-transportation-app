@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "drivers", uniqueConstraints = @UniqueConstraint(columnNames = "personal_number"))
-public class Driver {
+public class Driver implements Serializable {
 
     @Id
     @SequenceGenerator(name = "driver_generator", sequenceName = "driver_sequence", initialValue = 20)

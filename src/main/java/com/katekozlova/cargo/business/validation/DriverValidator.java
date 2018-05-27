@@ -42,8 +42,5 @@ public class DriverValidator implements Validator {
             errors.rejectValue("hoursPerMonth", "driver.hoursPerMonth.invalid");
         }
 
-//        if (driver.getOrder() != null) {
-//            errors.rejectValue("delete","driver.hastruck");
-//        }
     }
 }
