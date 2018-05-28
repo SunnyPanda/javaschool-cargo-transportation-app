@@ -16,17 +16,17 @@
         <tbody>
         <tr>
             <th scope="row">${order.uniqueNumber}</th>
-            <td><a href="<c:url value='/orders/waypoints'/>">waypoints</a></td>
+            <td><a href="<c:url value='/manager/orders/waypoints'/>">waypoints</a></td>
             </td>
             <td>${order.truck.regNumber}</td>
-            <td><a href="<c:url value='/orders/drivers'/>">drivers</a></td>
+            <td><a href="<c:url value='/manager/orders/drivers'/>">drivers</a></td>
             </td>
         </tr>
         </tbody>
     </table>
-    <form:form action="/orders/save" method="GET" modelAttribute="order">
+    <form:form action="/manager/orders/save" method="GET" modelAttribute="order">
         <hr class="mb-4">
-        <a class="btn btn-secondary" href="/orders/adddriver" role="button">Previous Step</a>
+        <a class="btn btn-secondary" href="/manager/orders/adddriver" role="button">Previous Step</a>
         <button class="btn btn-primary" type="submit">Finish</button>
     </form:form>
 </t:wrapper>

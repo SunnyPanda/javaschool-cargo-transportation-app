@@ -11,7 +11,7 @@
             <hr class="mb-4">
         </div>
         <%--<a class="btn btn-primary" href="<c:url value='/trucks/create'/>" role="button">New Truck</a>--%>
-        <form:form action="/trucks/create" method="GET">
+        <form:form action="/manager/trucks/create" method="GET">
             <button class="btn btn-primary" type="submit">New Truck</button>
         </form:form>
         <table class="table table-striped table-hover">
@@ -34,8 +34,8 @@
                         <td>${truck.capacity}</td>
                         <td>${truck.truckState.toString()}</td>
                         <td>${truck.currentCity.name}</td>
-                        <td><a class="btn btn-secondary" href="/trucks/edit/${truck.id}" role="button">edit</a></td>
-                        <td><a class="btn btn-secondary" href="/trucks/delete/${truck.id}" role="button">delete</a></td>
+                        <td><a class="btn btn-secondary" href="/manager/trucks/edit/${truck.id}" role="button">edit</a></td>
+                        <td><a class="btn btn-secondary" href="/manager/trucks/delete/${truck.id}" role="button">delete</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

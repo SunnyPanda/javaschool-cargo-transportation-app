@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/waypoints")
+@RequestMapping(value = "/manager/waypoints")
 public class WaypointController {
 
     private final WaypointService waypointService;

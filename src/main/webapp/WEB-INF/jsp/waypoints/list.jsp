@@ -7,7 +7,7 @@
         <h1>Welcome to the Waypoints Page</h1>
     </div>
     <br/>
-    <a class="btn btn-primary" href="<c:url value='/waypoints/create'/>" role="button">New Waypoint</a>
+    <a class="btn btn-primary" href="<c:url value='/manager/waypoints/create'/>" role="button">New Waypoint</a>
     <table class="table table-striped table-hover">
         <thead>
         <tr>

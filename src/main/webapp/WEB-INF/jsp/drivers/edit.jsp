@@ -49,7 +49,7 @@
                 <form:select class="custom-select d-block w-100" path="currentCity" items="${cities}" itemLabel="name" itemValue="id"/>
             </div>
             <hr class="mb-4">
-            <a class="btn btn-secondary" href="/drivers/list" role="button">Back</a>
+            <a class="btn btn-secondary" href="/manager/drivers/list" role="button">Back</a>
             <button class="btn btn-primary" type="submit">Create</button>
         </form:form>
     </div>

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/cargo")
+@RequestMapping(value = "/manager/cargo")
 public class CargoController {
 
     private final CargoService cargoService;
@@ -44,7 +44,7 @@ public class CargoController {
 //        if (bindingResult.hasErrors()) {
 //            return "orders/list";
 //        }
-        return "redirect:/cargo/search/" + number;
+        return "redirect:/manager/cargo/search/" + number;
     }
 
     @GetMapping(value = "/search/{number}")

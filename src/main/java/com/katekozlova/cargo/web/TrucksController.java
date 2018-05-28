@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/trucks")
+@RequestMapping(value = "/manager/trucks")
 public class TrucksController {
 
     private final TrucksService trucksService;
@@ -54,7 +54,7 @@ public class TrucksController {
 
         trucksService.deleteTruck(truck);
         amqpTemplate.convertAndSend("queue", "truck");
-        return "redirect:/trucks/list";
+        return "redirect:/manager/trucks/list";
     }
 
     @GetMapping(value = {"/create"})
@@ -78,7 +78,7 @@ public class TrucksController {
         }
         trucksService.createAndUpdate(truck);
         amqpTemplate.convertAndSend("queue", "truck");
-        return "redirect:/trucks/list";
+        return "redirect:/manager/trucks/list";
     }
 
     @GetMapping(value = {"/edit/{id}"})
@@ -101,6 +101,6 @@ public class TrucksController {
         }
         trucksService.createAndUpdate(truck);
         amqpTemplate.convertAndSend("queue", "truck");
-        return "redirect:/trucks/list";
+        return "redirect:/manager/trucks/list";
     }
 }

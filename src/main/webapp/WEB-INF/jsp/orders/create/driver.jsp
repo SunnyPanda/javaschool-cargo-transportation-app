@@ -12,9 +12,9 @@
 
         <div class="row">
             <div class="col-md-8 order-md-1">
-                <h4 class="mb-1">Step 4</h4>
+                <h4 class="mb-1">Step 3</h4>
                 <hr class="mb-4">
-                <form:form action="/orders/savedriver" method="POST" modelAttribute="order">
+                <form:form action="/manager/orders/savedriver" method="POST" modelAttribute="order">
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -42,9 +42,9 @@
     </div>
 
 
-    <form:form action="/orders/create/number" method="GET" modelAttribute="order">
+    <form:form action="/manager/orders/create/number" method="GET" modelAttribute="order">
         <hr class="mb-4">
-        <a class="btn btn-secondary" href="/orders/addtruck" role="button">Previous Step</a>
+        <a class="btn btn-secondary" href="/manager/orders/addtruck" role="button">Previous Step</a>
         <button class="btn btn-primary" type="submit">Next</button>
     </form:form>
     <%--</br>--%>

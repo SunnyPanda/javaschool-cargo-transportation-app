@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/orders")
+@RequestMapping(value = "/manager/orders")
 public class OrdersController {
 
     private final OrderService orderService;
@@ -38,7 +38,7 @@ public class OrdersController {
 
     @PostMapping(value = "/search")
     public String searchOrder(@RequestParam("uniqueNumber") long uniqueNumber) {
-        return "redirect:/orders/search/" + uniqueNumber;
+        return "redirect:/manager/orders/search/" + uniqueNumber;
     }
 
     @GetMapping(value = "/search/{unique-number}")

@@ -34,5 +34,5 @@
         </tbody>
     </table>
     <hr class="mb-4">
-    <a class="btn btn-primary" href="/orders/list" role="button">Back</a>
+    <a class="btn btn-primary" href="/manager/orders/list" role="button">Back</a>
 </t:wrapper>

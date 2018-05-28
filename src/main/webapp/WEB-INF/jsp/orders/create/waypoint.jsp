@@ -13,7 +13,7 @@
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-1">Step 1</h4>
                 <hr class="mb-4">
-                <form:form action="/orders/create/waypoint" method="POST" modelAttribute="waypoint">
+                <form:form action="/manager/orders/create/waypoint" method="POST" modelAttribute="waypoint">
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label for="city">City</label>
@@ -83,9 +83,9 @@
                 <%--<form:errors path="${order.waypoints}" cssClass="error"/>--%>
             <%--</p>--%>
         </div>
-        <form:form action="/orders/addtruck" method="GET" modelAttribute="order">
+        <form:form action="/manager/orders/addtruck" method="GET" modelAttribute="order">
             <hr class="mb-4">
-            <a class="btn btn-secondary" href="/orders/list" role="button">Previous Step</a>
+            <a class="btn btn-secondary" href="/manager/orders/list" role="button">Previous Step</a>
             <button class="btn btn-primary" type="submit">Next Step</button>
         </form:form>
     </div>

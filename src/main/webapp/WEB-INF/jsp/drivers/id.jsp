@@ -35,19 +35,19 @@
                         </td>
                         <td>${driver.currentTruck.regNumber}</td>
                         <td>${driver.order.uniqueNumber}</td>
-                        <td><a href="<c:url value='/drivers/waypoints/${driver.id}'/>">waypoints</a></td>
+                        <td><a href="<c:url value='/driver/waypoints/${driver.id}'/>">waypoints</a></td>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </form:form>
             <div>
-                <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftbegin">
+                <form:form method="POST" modelAttribute="driver" action="/driver/id/shiftbegin">
                     <button class="btn btn-primary" type="submit">Shift begin</button>
                 </form:form>
             </div>
 
-            <form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm">
+            <form:form method="POST" modelAttribute="driver" action="/driver/id/confirm">
                 <tr>
                     <td>
                         <form:select class="custom-select col-md-3 mb-3" path="driverStatus">
@@ -75,10 +75,10 @@
                     <tr>
                         <th scope="row">${waypoint.cargo.number}</th>
                         <td>${waypoint.cargo.name}</td>
-                        <td><form:form method="POST" modelAttribute="driver" action="/drivers/id/load/${waypoint.cargo.id}">
+                        <td><form:form method="POST" modelAttribute="driver" action="/driver/id/load/${waypoint.cargo.id}">
                             <button class="btn btn-secondary" type="submit">Received</button>
                         </form:form></td>
-                        <td> <form:form method="POST" modelAttribute="driver" action="/drivers/id/unload/${waypoint.cargo.id}">
+                        <td> <form:form method="POST" modelAttribute="driver" action="/driver/id/unload/${waypoint.cargo.id}">
                             <button class="btn btn-secondary" type="submit">Delivered</button>
                         </form:form></td>
                     </tr>
@@ -86,7 +86,7 @@
                 </tbody>
             </table>
             <div>
-                <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftend">
+                <form:form method="POST" modelAttribute="driver" action="/driver/id/shiftend">
                     <button class="btn btn-primary" type="submit">Shift End</button>
                 </form:form>
             </div>

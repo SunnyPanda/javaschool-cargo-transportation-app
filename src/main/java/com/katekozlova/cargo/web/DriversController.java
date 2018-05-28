@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/drivers")
+@RequestMapping(value = "/manager/drivers")
 @SessionAttributes("driver")
 public class DriversController {
 
@@ -53,7 +53,7 @@ public class DriversController {
     public String deleteDriver(@PathVariable("id") long id, Driver driver) {
         driversService.deleteDriver(driver);
         amqpTemplate.convertAndSend("queue", "driver");
-        return "redirect:/drivers/list";
+        return "redirect:/manager/drivers/list";
     }
 
     @GetMapping(value = {"/create"})
@@ -74,7 +74,7 @@ public class DriversController {
         }
         driversService.createDriver(driver);
         amqpTemplate.convertAndSend("queue", "driver");
-        return "redirect:/drivers/list";
+        return "redirect:/manager/drivers/list";
     }
 
     @GetMapping(value = {"/edit/{id}"})
@@ -95,7 +95,7 @@ public class DriversController {
         }
         driversService.updateDriver(driver);
         amqpTemplate.convertAndSend("queue", "driver");
-        return "redirect:/drivers/list";
+        return "redirect:/manager/drivers/list";
     }
 }
 

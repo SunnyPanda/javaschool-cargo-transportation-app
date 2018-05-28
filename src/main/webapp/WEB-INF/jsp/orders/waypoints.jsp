@@ -8,7 +8,7 @@
             <h2>Waypoints</h2>
             <hr class="mb-4">
         </div>
-        <a class="btn btn-primary" href="/orders/list" role="button">Back</a>
+        <a class="btn btn-primary" href="/manager/orders/list" role="button">Back</a>
     <table class="table table-striped table-hover">
         <thead>
         <tr>

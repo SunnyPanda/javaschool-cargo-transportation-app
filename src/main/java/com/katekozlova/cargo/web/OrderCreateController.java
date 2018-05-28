@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/orders")
+@RequestMapping(value = "/manager/orders")
 @SessionAttributes(names = {"order"})
 public class OrderCreateController {
 
@@ -157,7 +157,7 @@ public class OrderCreateController {
         amqpTemplate.convertAndSend("queue", "order");
         amqpTemplate.convertAndSend("queue", "driver");
         amqpTemplate.convertAndSend("queue", "truck");
-        return "redirect:/orders/list";
+        return "redirect:/manager/orders/list";
     }
 
     @GetMapping(value = "/preview")

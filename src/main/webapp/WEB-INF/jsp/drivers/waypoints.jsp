@@ -26,7 +26,7 @@
         </tbody>
     </table>
     <hr class="mb-4">
-    <a class="btn btn-primary" href="/drivers/info/${driver.id}" role="button">Back</a>
+    <a class="btn btn-primary" href="/driver/info/${driver.id}" role="button">Back</a>
     <div id="map"></div>
     </div>
     <script>

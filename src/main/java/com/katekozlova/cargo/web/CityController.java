@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/cities")
+@RequestMapping(value = "/manager/cities")
 public class CityController {
 
     private final CitiesService citiesService;

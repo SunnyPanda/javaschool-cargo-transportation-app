@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/drivers")
+@RequestMapping(value = "/driver")
 @SessionAttributes("driver")
 public class DriverController {
 

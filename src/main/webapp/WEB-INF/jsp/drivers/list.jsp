@@ -40,9 +40,9 @@
                     <td>${driver.driverStatus.toString()}</td>
                     <td>${driver.currentCity.name}</td>
                     <td>${driver.currentTruck.regNumber}</td>
-                    <td><a class="btn btn-secondary" href="/drivers/edit/${driver.id}" role="button">edit</a></td>
+                    <td><a class="btn btn-secondary" href="/manager/drivers/edit/${driver.id}" role="button">edit</a></td>
                     <td>
-                        <a class="btn btn-secondary" href="/drivers/delete/${driver.id}" role="button">delete</a>
+                        <a class="btn btn-secondary" href="/manager/drivers/delete/${driver.id}" role="button">delete</a>
                         <form:errors id="delete" cssClass="error" />
                     </td>
                 </tr>

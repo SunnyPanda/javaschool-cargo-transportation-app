@@ -17,23 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/")
 public class IndexController {
 
-    private final OrderService orderService;
-    private final CargoService cargoService;
-
-    @Autowired
-    public IndexController(OrderService orderService, CargoService cargoService) {
-        this.orderService = orderService;
-        this.cargoService = cargoService;
-    }
-
     @GetMapping
     public String index(HttpServletRequest request) {
         final AppUserPrincipal principal = (AppUserPrincipal) ((UsernamePasswordAuthenticationToken) request.getUserPrincipal()).getPrincipal();
         if (request.isUserInRole("DRIVER")) {
             final Driver driver = principal.getDriver();
-            return "redirect:drivers/info/" + driver.getId();
+            return "redirect:driver/info/" + driver.getId();
         } else {
-            return "redirect:orders/list";
+            return "redirect:manager/orders/list";
         }
     }
 
