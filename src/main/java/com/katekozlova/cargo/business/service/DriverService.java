@@ -52,7 +52,6 @@ public class DriverService {
         driver.setHoursPerMonth(driver.getHoursPerMonth() + 50);
         driver.setDriverStatus(DriverStatus.REST);
         driver.getOrder().setOrderStatus(OrderStatus.YES);
-        driver.getOrder().setTruck(null);
         orderRepository.save(driver.getOrder());
         driver.setOrder(null);
         logger.info("driver was changed(set driverStatus): {}", driver.getOrder());
