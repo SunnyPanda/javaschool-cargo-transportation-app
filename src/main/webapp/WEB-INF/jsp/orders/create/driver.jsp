@@ -15,12 +15,15 @@
                 <h4 class="mb-1">Step 4</h4>
                 <hr class="mb-4">
                 <form:form action="/orders/savedriver" method="POST" modelAttribute="order">
-                    <%--<td>#{order.truck.regNumber}</td>--%>
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="drivers">Choose drivers: </label>
+                            <label for="drivers">Choose ${order.truck.shiftSize} driver(s): </label>
                             <form:select class="custom-select d-block w-100" path="drivers" items="${drivers}" itemValue="id" itemLabel="personalNumber"
                                          multiple="true"/>
+                            <p class="text-danger">
+                                <form:errors path="drivers" cssClass="error"/>
+                            </p>
                         </div>
                     </div>
                     <div class="mb-4">

@@ -1,14 +1,15 @@
 package com.katekozlova.cargo.web;
 
 import com.katekozlova.cargo.business.service.CargoService;
+import com.katekozlova.cargo.business.validation.CargoValidator;
 import com.katekozlova.cargo.data.entity.Cargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,9 +20,17 @@ public class CargoController {
 
     private final CargoService cargoService;
 
+    private final CargoValidator cargoValidator;
+
     @Autowired
-    public CargoController(CargoService cargoService) {
+    public CargoController(CargoService cargoService, CargoValidator cargoValidator) {
         this.cargoService = cargoService;
+        this.cargoValidator = cargoValidator;
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(cargoValidator);
     }
 
     @GetMapping(value = "/list")
@@ -31,8 +40,17 @@ public class CargoController {
     }
 
     @PostMapping("/search")
-    public String searchCargo(@RequestParam("number") long cargoNumber, Model model) {
-        model.addAttribute("cargo", this.cargoService.getCargoByNumber(cargoNumber));
+    public String searchCargo(@RequestParam("number") long number, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "orders/list";
+//        }
+        return "redirect:/cargo/search/" + number;
+    }
+
+    @GetMapping(value = "/search/{number}")
+    public String searchCargoView(@PathVariable("number") long number, Model model) {
+        Cargo cargo = cargoService.getCargoByNumber(number);
+        model.addAttribute("cargo", cargo);
         return "cargo/search";
     }
 

@@ -56,7 +56,13 @@ public class OrderCreateController {
 
 
     @GetMapping(value = "/create/number")
-    public String createOrder(Order order, Model model) {
+    public String createOrder(@Validated Order order, Model model, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors("drivers")) {
+            List<Driver> drivers = orderService.getDrivers(order);
+            model.addAttribute("order", order);
+            model.addAttribute("drivers", drivers);
+            return "orders/create/driver";
+        }
         model.addAttribute("order", order);
         return "orders/create/step1";
     }
@@ -91,7 +97,7 @@ public class OrderCreateController {
 
     @GetMapping(value = "/addtruck")
     public String addTruck(@Validated Order order, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasFieldErrors("waypoints")) {
             final List<City> cities = citiesService.getAllCities();
             final List<Cargo> cargo = cargoService.getFreeCargo();
             model.addAttribute("order", order);
@@ -102,7 +108,6 @@ public class OrderCreateController {
             logger.error("Error!");
             return "orders/create/waypoint";
         }
-        logger.error("waypoints: {}", order.getWaypoints());
         List<Truck> trucks = orderService.getTrucks(order);
         model.addAttribute("order", order);
         model.addAttribute("trucks", trucks);
@@ -119,7 +124,7 @@ public class OrderCreateController {
 
     @GetMapping(value = "/adddriver")
     public String addDriver(@Validated Order order, Model model, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasFieldErrors("truck")) {
             logger.error("error occurred");
             List<Truck> trucks = orderService.getTrucks(order);
             model.addAttribute("order", order);
@@ -133,8 +138,14 @@ public class OrderCreateController {
     }
 
     @PostMapping(value = "/savedriver")
-    public String saveDriver(Order order, Model model) {
+    public String saveDriver(@Validated Order order, Model model, BindingResult bindingResult) {
         List<Driver> drivers = orderService.getDrivers(order);
+        if (bindingResult.hasFieldErrors("drivers")) {
+            model.addAttribute("order", order);
+            model.addAttribute("drivers", drivers);
+            return "orders/create/driver";
+        }
+//        List<Driver> drivers = orderService.getDrivers(order);
         model.addAttribute("order", order);
         model.addAttribute("drivers", drivers);
         return "orders/create/driver";

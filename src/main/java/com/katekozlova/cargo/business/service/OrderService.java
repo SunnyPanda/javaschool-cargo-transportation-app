@@ -95,8 +95,6 @@ public class OrderService {
     }
 
     public List<Truck> getTrucks(Order order) {
-
-        logger.error("waypoints: {}", order.getWaypoints());
         return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, findMaxCargoWeight(order.getWaypoints()));
     }
 
