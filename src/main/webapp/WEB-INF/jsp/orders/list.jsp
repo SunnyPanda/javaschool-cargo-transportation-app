@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5 mb-3">
-                <form:form action="/orders/search" method="POST" modelAttribute="order">
+                <form:form action="/manager/orders/search" method="POST" modelAttribute="order">
                     <label for="uniqueNumber">Searching for order status</label>
                     <input class="form-control" type="number" path="uniqueNumber" id="uniqueNumber" name="uniqueNumber"
                            placeholder="Enter the order unique number"/>
@@ -29,7 +29,7 @@
             <h2>Order's List</h2>
             <hr class="mb-4">
         </div>
-        <form:form action="/orders/create/waypoint" method="GET">
+        <form:form action="/manager/orders/create/waypoint" method="GET">
             <button class="btn btn-primary" type="submit">New Order</button>
         </form:form>
         <table class="table table-striped table-hover">
@@ -47,9 +47,9 @@
                 <tr>
                     <th scope="row">${order.uniqueNumber}</th>
                     <td>${order.orderStatus.toString()}</td>
-                    <td><a href="<c:url value='/orders/waypoints/${order.id}'/>">waypoints</a></td></td>
+                    <td><a href="<c:url value='/manager/orders/waypoints/${order.id}'/>">waypoints</a></td></td>
                     <td>${order.truck.regNumber}</td>
-                    <td><a href="<c:url value='/orders/drivers/${order.id}'/>">drivers</a></td></td>
+                    <td><a href="<c:url value='/manager/orders/drivers/${order.id}'/>">drivers</a></td></td>
                 </tr>
             </c:forEach>
             </tbody>

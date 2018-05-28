@@ -59,12 +59,12 @@ public class OrderValidator implements Validator {
             errors.rejectValue("truck", "order.truck.invalid");
         }
 
-        if (order.getDrivers() == null) {
-            logger.error("null driver");
-            errors.rejectValue("drivers", "order.drivers.null");
-        } else if (order.getDrivers().size() != order.getTruck().getShiftSize()) {
-            logger.error("need more drivers");
-            errors.rejectValue("drivers", "order.drivers.invalid");
-        }
+//        if (order.getDrivers() == null) {
+//            logger.error("null driver");
+//            errors.rejectValue("drivers", "order.drivers.null");
+//        } else if (order.getDrivers().size() != order.getTruck().getShiftSize()) {
+//            logger.error("need more drivers");
+//            errors.rejectValue("drivers", "order.drivers.invalid");
+//        }
     }
 }
