@@ -5,11 +5,28 @@
 
 <t:wrapper>
     <div class="container">
-        <div class="py-5 text-left">
+        <div class="row">
+            <div class="col-md-5 mb-3">
+                <form:form action="orders/search" method="POST" modelAttribute="order">
+                    <label for="uniqueNumber">Searching for order status</label>
+                    <input class="form-control" type="number" path="uniqueNumber" id="uniqueNumber" name="uniqueNumber"
+                           placeholder="Enter the order unique number"/>
+                    <button class="btn btn-secondary" type="submit">Search</button>
+                </form:form>
+            </div>
+            <div class="col-md-5 mb-3">
+                <form:form action="cargo/search" method="POST" modelAttribute="cargo">
+                    <label for="number">Searching for cargo status</label>
+                    <input class="form-control" type="number" path="number" id="number" name="number" placeholder="Enter the cargo number"/>
+                    <button class="btn btn-secondary" type="submit">Search</button>
+                </form:form>
+            </div>
+        </div>
+        <div class="py-3 text-left">
             <h2>Order's List</h2>
             <hr class="mb-4">
         </div>
-        <form:form action="/orders/create/number" method="GET">
+        <form:form action="/orders/create/waypoint" method="GET">
             <button class="btn btn-primary" type="submit">New Order</button>
         </form:form>
         <table class="table table-striped table-hover">

@@ -43,7 +43,6 @@ public class DriversController {
         binder.addValidators(driverValidator);
     }
 
-    @Secured("ROLE_USER")
     @GetMapping(value = "/list")
     public ModelAndView list() {
         List<Driver> drivers = driversService.getAllDrivers();

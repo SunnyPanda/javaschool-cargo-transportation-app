@@ -4,7 +4,7 @@
 
 <t:wrapper>
     <div class="page-header mt-5">
-        <h1>Waypoints for This Order</h1>
+        <h1>Waypoints</h1>
     </div>
     <br/>
     <table class="table table-striped table-hover">
@@ -27,4 +27,56 @@
     </table>
     <hr class="mb-4">
     <a class="btn btn-primary" href="/drivers/info/${driver.id}" role="button">Back</a>
+    <div id="map"></div>
+    </div>
+    <script>
+        function initMap() {
+            console.log("initMap");
+            // var uluru = {lat: -25.363, lng: 131.044};
+            // var map = new google.maps.Map(document.getElementById('map'), {
+            //     zoom: 4,
+            //     center: uluru
+            // });
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 6,
+                center: {lat: 55.804, lng: 37.789}
+            });
+
+            directionsDisplay.setMap(map);
+
+            $.getJSON("/api/waypoints/${driver.order.id}", function (data) {
+                calculateAndDisplayRoute(directionsService, directionsDisplay, data);
+            });
+        }
+
+        function calculateAndDisplayRoute(directionsService, directionsDisplay, routePoints) {
+            var destination = routePoints.pop();
+            var origin = routePoints.shift();
+            var waypoints = routePoints.map(function (waypointName) {
+                return {location: waypointName}
+            });
+
+            console.log("origin:", origin);
+            console.log("destination:", destination);
+            console.log("waypoints:", waypoints);
+
+            directionsService.route({
+                origin: origin,
+                destination: destination,
+                waypoints: waypoints,
+                travelMode: 'DRIVING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVIHJyzMB3OZ9HPs8oQJHGHorJboK2zog&callback=initMap">
+    </script>
 </t:wrapper>

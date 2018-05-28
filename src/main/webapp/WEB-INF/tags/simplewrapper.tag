@@ -4,9 +4,16 @@
 
 <head>
     <style>
-        body  {
-            background-image: url("/static/truck.png");
-            background-color: #cccccc;
+        /*body  {*/
+            /*background-image: url("/static/truck.png");*/
+            /*background-color: #117a8b;*/
+        /*}*/
+        body {
+            background: url("/static/images/truck.png") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
     </style>
     <meta charset="utf-8">

@@ -39,10 +39,10 @@
     </div>
 
 
-    <form:form action="/orders/preview" method="GET" modelAttribute="order">
+    <form:form action="/orders/create/number" method="GET" modelAttribute="order">
         <hr class="mb-4">
         <a class="btn btn-secondary" href="/orders/addtruck" role="button">Previous Step</a>
-        <button class="btn btn-primary" type="submit">Order's Preview</button>
+        <button class="btn btn-primary" type="submit">Next</button>
     </form:form>
     <%--</br>--%>
     <%--<div class="page-header">--%>

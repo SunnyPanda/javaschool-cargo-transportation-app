@@ -4,36 +4,33 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <t:wrapper>
-    <div class="page-header">
-        <h1></h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <form:form action="orders/search" method="POST" modelAttribute="order">
+                    <label for="uniqueNumber">Searching for order status</label>
+                    <input class="form-control" type="number" path="uniqueNumber" id="uniqueNumber" name="uniqueNumber"
+                           placeholder="Enter the order unique number"/>
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form:form>
+            </div>
+            <div class="col-md-6 mb-3">
+                <form:form action="cargo/search" method="POST" modelAttribute="cargo">
+                    <label for="number">Searching for cargo status</label>
+                    <input class="form-control" type="number" path="number" id="number" name="number" placeholder="Enter the cargo number"/>
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form:form>
+            </div>
+        </div>
+        <form:form action="/orders/create/number" method="GET">
+            <button class="btn btn-primary" type="submit">New Order</button>
+        </form:form>
+
     </div>
-    <%--<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">--%>
-
-    <%--<canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="2073" height="875" style="display: block; width: 2073px; height: 875px;"></canvas>--%>
 
 
-    <%--</main>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</br>--%>
-
-    <form:form action="orders/search" method="POST" modelAttribute="order">
-        <label for="uniqueNumber">Узнать статус заказа:</label>
-        <input type="number" path="uniqueNumber" id="uniqueNumber" name="uniqueNumber"
-               placeholder="Введите номер заказа"/>
-        <input type="submit" value="Search"/>
-    </form:form>
-    </br>
-    </br>
-    <form:form action="cargo/search" method="POST" modelAttribute="cargo">
-        <label for="number">Узнать статус груза:</label>
-        <input type="number" path="number" id="number" name="number" placeholder="Введите номер груза"/>
-        <input type="submit" value="Search"/>
-    </form:form>
-
-    <a href="<c:url value='/cargo/status' />">Cargo's status</a>
-    <br/>
-    <a href="<c:url value='/orders/status' />">Order's status</a>
+    <%--<label for="personalNumber">Personal number</label>--%>
+    <%--<form:input class="form-control" path="personalNumber" id="personalNumber"/>--%>
 
 </t:wrapper>
 

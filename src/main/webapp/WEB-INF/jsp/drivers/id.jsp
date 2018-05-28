@@ -3,11 +3,10 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<t:wrapper>
+<t:driverwrapper>
     <div class="page-header mt-5">
-        <h1>Driver</h1>
+        <h1>Driver ${driver.personalNumber}</h1>
     </div>
-    <br/>
     <c:choose>
         <c:when test="${message=='no'}">
             <td>You do not have current orders</td>
@@ -42,52 +41,58 @@
                     </tbody>
                 </table>
             </form:form>
-            <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftbegin">
-                <td colspan="3"><input type="submit" value="Заступил в смену"/></td>
-            </form:form>
+            <div>
+                <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftbegin">
+                    <button class="btn btn-primary" type="submit">Shift begin</button>
+                </form:form>
+            </div>
+
             <form:form method="POST" modelAttribute="driver" action="/drivers/id/confirm">
                 <tr>
                     <td>
-                        <form:select path="driverStatus">
+                        <form:select class="custom-select col-md-3 mb-3" path="driverStatus">
                             <form:option value="BEHIND_THE_WHEEL">Behind the wheel</form:option>
                             <%--<form:option value="IN_SHIFT">Второй водитель</form:option>--%>
                             <%--<form:option value="IN_SHIFT">Погрузочно-разгрузочные работы</form:option>--%>
                             <form:option value="IN_SHIFT">Rest</form:option>
                         </form:select>
                     </td>
-                    <td colspan="3"><input type="submit" value="Confirm"/></td>
+                    <button class="btn btn-success" type="submit">Confirm</button>
                 </tr>
             </form:form>
+            <h5>Cargo</h5>
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Cargo</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Receiving</th>
+                    <th scope="col">Delivery</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <c:forEach items="${waypoints}" var="waypoint" varStatus="status">
-                            ${waypoint.cargo.number}
-                            ${waypoint.cargo.name}
-                        <form:form method="POST" modelAttribute="driver" action="/drivers/id/load/${waypoint.cargo.id}">
-                    <td colspan="1"><input type="submit" value="Получил"/></td>
-                    </form:form>
-                    <form:form method="POST" modelAttribute="driver" action="/drivers/id/unload/${waypoint.cargo.id}">
-                        <td colspan="1"><input type="submit" value="Выгрузил"/></td>
-                    </form:form>
-                    </c:forEach>
-                    </td>
-                </tr>
+                <c:forEach items="${waypoints}" var="waypoint" varStatus="status">
+                    <tr>
+                        <th scope="row">${waypoint.cargo.number}</th>
+                        <td>${waypoint.cargo.name}</td>
+                        <td><form:form method="POST" modelAttribute="driver" action="/drivers/id/load/${waypoint.cargo.id}">
+                            <button class="btn btn-secondary" type="submit">Received</button>
+                        </form:form></td>
+                        <td> <form:form method="POST" modelAttribute="driver" action="/drivers/id/unload/${waypoint.cargo.id}">
+                            <button class="btn btn-secondary" type="submit">Delivered</button>
+                        </form:form></td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
-            <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftend">
-                <td colspan="3"><input type="submit" value="Окончил смену"/></td>
-            </form:form>
-            <br/>
+            <div>
+                <form:form method="POST" modelAttribute="driver" action="/drivers/id/shiftend">
+                    <button class="btn btn-primary" type="submit">Shift End</button>
+                </form:form>
+            </div>
         </c:otherwise>
     </c:choose>
-</t:wrapper>
+</t:driverwrapper>
 
 <%--<tr>--%>
 <%--<td colspan="3">--%>

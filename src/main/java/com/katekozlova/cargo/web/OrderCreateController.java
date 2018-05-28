@@ -56,17 +56,18 @@ public class OrderCreateController {
 
 
     @GetMapping(value = "/create/number")
-    public String createOrder(Model model) {
-        Order order = new Order();
+    public String createOrder(Order order, Model model) {
         model.addAttribute("order", order);
         return "orders/create/step1";
     }
 
     @GetMapping(value = "/create/waypoint")
     public String createWaypoints(Model model) {
+        Order order = new Order();
         Waypoint waypoint = new Waypoint();
         final List<City> cities = citiesService.getAllCities();
         final List<Cargo> cargo = cargoService.getFreeCargo();
+        model.addAttribute("order", order);
         model.addAttribute("waypoint", waypoint);
         model.addAttribute("city", cities);
         model.addAttribute("cargo", cargo);
@@ -139,7 +140,7 @@ public class OrderCreateController {
         return "orders/create/driver";
     }
 
-    @GetMapping(value = "/save")
+    @PostMapping(value = "/save")
     public String saveOrder(Order order) {
         orderService.saveOrder(order);
         amqpTemplate.convertAndSend("queue", "order");

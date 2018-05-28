@@ -6,7 +6,7 @@
 
 <t:wrapper>
     <div class="container">
-        <div class="py-5 text-left">
+        <div class="py-3 text-left">
             <h2>Truck's List</h2>
             <hr class="mb-4">
         </div>

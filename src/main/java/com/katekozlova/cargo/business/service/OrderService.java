@@ -105,7 +105,7 @@ public class OrderService {
         order.getTruck().setOrder(order);
         Truck tempTruck = order.getTruck();
         truckRepository.save(order.getTruck());
-        logger.info("truck was changed(set order): {}", tempTruck);
+        logger.info("truck was changed(set order): {}", tempTruck.getOrder());
     }
 
     public List<Driver> getDrivers(Order order) {
@@ -158,8 +158,9 @@ public class OrderService {
     public void getOrderToDriver(Order order) {
         for (Driver driver : order.getDrivers()) {
             driver.setOrder(order);
+            driver.setDriverStatus(DriverStatus.IN_SHIFT);
             driverRepository.save(driver);
-            logger.info("driver was changed(setOrder): {}", driver);
+            logger.info("driver was changed(setOrder): {}", driver.getOrder());
         }
     }
 
@@ -204,6 +205,7 @@ public class OrderService {
     }
 
     public void saveOrder(Order order) {
+        order.setOrderStatus(OrderStatus.NO);
         orderRepository.save(order);
         logger.info("order was created: {}", order);
         getOrderIdToWaypoint(order);

@@ -11,23 +11,25 @@
 
         <div class="row">
             <div class="col-md-8 order-md-1">
-                <h4 class="mb-1">Step 3</h4>
+                <h4 class="mb-1">Step 2</h4>
                 <hr class="mb-4">
                 <form:form action="/orders/savetruck" method="POST" modelAttribute="order">
-
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label>${order.truck.regNumber}</label>
-                            <label for="truck">Choose truck: </label>
-                            <form:select class="custom-select d-block w-100" path="truck" items="${trucks}" itemValue="id" itemLabel="regNumber"/>
+                                <label for="truck">Choose truck: </label>
+                                <form:select class="custom-select d-block w-100" path="truck" items="${trucks}" itemValue="id" itemLabel="regNumber"/>
                             <p class="text-danger">
                                 <form:errors class="text-danger" path="truck" cssClass="error"/>
                             </p>
+                            <div class="mb-4">
+                                <button class="btn btn-success" type="submit">Add truck</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Your choice: ${order.truck.regNumber} </label>
                         </div>
                     </div>
-                    <div class="mb-4">
-                        <button class="btn btn-success" type="submit">Add truck</button>
-                    </div>
+
                     <%--<div class="col-md-6 mb-3">--%>
                     <%--<label for="output">Your truck: </label>--%>
                     <%--&lt;%&ndash;<form:&ndash;%&gt;--%>

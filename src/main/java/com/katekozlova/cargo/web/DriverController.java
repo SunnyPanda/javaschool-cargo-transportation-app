@@ -4,6 +4,7 @@ import com.katekozlova.cargo.business.service.*;
 import com.katekozlova.cargo.data.entity.CargoStatus;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Waypoint;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +24,16 @@ public class DriverController {
     private final OrderService orderService;
     private final WaypointService waypointService;
 
+    private final AmqpTemplate amqpTemplate;
+
     @Autowired
-    public DriverController(DriversService driversService, DriverService driverService, CargoService cargoService, OrderService orderService, WaypointService waypointService) {
+    public DriverController(DriversService driversService, DriverService driverService, CargoService cargoService, OrderService orderService, WaypointService waypointService, AmqpTemplate amqpTemplate) {
         this.driversService = driversService;
         this.driverService = driverService;
         this.cargoService = cargoService;
         this.orderService = orderService;
         this.waypointService = waypointService;
+        this.amqpTemplate = amqpTemplate;
     }
 
     @GetMapping(value = "/info/{id}")
@@ -51,6 +55,7 @@ public class DriverController {
 
     @PostMapping(value = "/id/confirm")
     public String confirmStatus(Driver driver, ModelMap model) {
+        System.out.println("driver " + driver);
         driversService.updateDriver(driver);
         List<Driver> coDrivers = driverService.findByTruck(driver.getId());
         List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());
@@ -74,6 +79,9 @@ public class DriverController {
     @PostMapping(value = "/id/shiftend")
     public String shiftEnd(Driver driver, ModelMap model) {
         driverService.setShiftEnd(driver);
+        amqpTemplate.convertAndSend("queue", "order");
+        amqpTemplate.convertAndSend("queue", "driver");
+        amqpTemplate.convertAndSend("queue", "truck");
         model.addAttribute("driver", driver);
         return "drivers/id";
     }

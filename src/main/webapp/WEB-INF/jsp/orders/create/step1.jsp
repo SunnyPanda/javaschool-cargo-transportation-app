@@ -15,7 +15,7 @@
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-1">Step 1</h4>
                 <hr class="mb-4">
-                <form:form action="/orders/create/waypoint" method="GET" modelAttribute="order">
+                <form:form action="/orders/save" method="POST" modelAttribute="order">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="uniqueNumber">Order's unique number: </label>
@@ -26,8 +26,8 @@
                         </div>
                     </div>
                     <hr class="mb-4">
-                    <a class="btn btn-secondary" href="/orders/list" role="button">Back to Order's List</a>
-                    <button class="btn btn-primary" type="submit">Next Step</button>
+                    <a class="btn btn-secondary" href="/orders/adddriver" role="button">Back to Order's List</a>
+                    <button class="btn btn-primary" type="submit">Finish</button>
                 </form:form>
             </div>
         </div>

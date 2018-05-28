@@ -33,27 +33,10 @@ public class IndexController {
             final Driver driver = principal.getDriver();
             return "redirect:drivers/info/" + driver.getId();
         } else {
-            return "index";
+            return "redirect:orders/list";
         }
     }
 
-    @PostMapping("/orders/search")
-    public String searchOrder(@RequestParam("uniqueNumber") long uniqueNumber) {
-        return "redirect:/orders/search/" + uniqueNumber;
-    }
-
-    @GetMapping("/orders/search/{unique-number}")
-    public String searchOrderView(@PathVariable("unique-number") long id, Model model) {
-        Order order = orderService.findByUniqueNumber(id);
-        model.addAttribute("order", order);
-        return "orders/search";
-    }
-
-    @PostMapping("/cargo/search")
-    public String searchCargo(@RequestParam("number") long cargoNumber, Model model) {
-        model.addAttribute("cargo", this.cargoService.getCargoByNumber(cargoNumber));
-        return "cargo/search";
-    }
 
     @GetMapping(value = "/test")
     public String test() {

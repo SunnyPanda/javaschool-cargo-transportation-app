@@ -41,6 +41,7 @@ public class DriversService {
     }
 
     public Driver updateDriver(Driver driver) {
+        logger.error("driver: {}", driver);
         driver = driverRepository.save(driver);
         logger.info("driver was updated: {}", driver);
         return driver;
