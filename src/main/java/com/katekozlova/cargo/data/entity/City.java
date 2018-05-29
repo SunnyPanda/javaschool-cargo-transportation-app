@@ -1,12 +1,15 @@
 package com.katekozlova.cargo.data.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 //@Data
 @Table(name = "cities")
-public class City {
+public class City implements Serializable {
+
+    private static final long serialVersionUID = 8369985237829900115L;
 
     @Id
     @SequenceGenerator(name = "city_generator", sequenceName = "city_sequence", initialValue = 20)

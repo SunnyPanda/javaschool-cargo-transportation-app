@@ -55,7 +55,6 @@ public class DriverController {
 
     @PostMapping(value = "/id/confirm")
     public String confirmStatus(Driver driver, ModelMap model) {
-        System.out.println("driver " + driver);
         driversService.updateDriver(driver);
         List<Driver> coDrivers = driverService.findByTruck(driver.getId());
         List<Waypoint> waypoints = waypointService.getCargoByWaypoints(driver.getOrder().getId());

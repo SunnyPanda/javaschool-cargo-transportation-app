@@ -11,6 +11,8 @@ import java.util.Objects;
 @Table(name = "drivers", uniqueConstraints = @UniqueConstraint(columnNames = "personal_number"))
 public class Driver implements Serializable {
 
+    private static final long serialVersionUID = 4635706921404836842L;
+
     @Id
     @SequenceGenerator(name = "driver_generator", sequenceName = "driver_sequence", initialValue = 20)
     @GeneratedValue(generator = "driver_generator")

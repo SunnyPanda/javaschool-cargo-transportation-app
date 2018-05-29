@@ -7,12 +7,15 @@ import org.hibernate.annotations.NaturalId;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = 4312036864491429888L;
 
     @Id
     @SequenceGenerator(name = "order_generator", sequenceName = "order_sequence", initialValue = 20)

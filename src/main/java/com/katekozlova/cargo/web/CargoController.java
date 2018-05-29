@@ -33,7 +33,7 @@ public class CargoController {
     }
 
     @GetMapping(value = "/list")
-    public ModelAndView List() {
+    public ModelAndView list() {
         List<Cargo> cargo = cargoService.getAllCargo();
         return new ModelAndView("cargo/list", "cargo", cargo);
     }

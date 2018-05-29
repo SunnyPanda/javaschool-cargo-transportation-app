@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "trucks")
-public class Truck {
+public class Truck implements Serializable {
+
+    private static final long serialVersionUID = -8892347678785509325L;
 
     @Id
     @SequenceGenerator(name = "truck_generator", sequenceName = "truck_sequence", initialValue = 20)
