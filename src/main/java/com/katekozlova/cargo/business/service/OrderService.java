@@ -95,7 +95,8 @@ public class OrderService {
     }
 
     public List<Truck> getTrucks(Order order) {
-        return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, findMaxCargoWeight(order.getWaypoints()));
+        City city = order.getWaypoints().get(0).getCity();
+        return truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, findMaxCargoWeight(order.getWaypoints()), city);
     }
 
 

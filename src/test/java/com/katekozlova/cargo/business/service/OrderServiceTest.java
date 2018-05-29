@@ -54,7 +54,7 @@ public class OrderServiceTest extends MockitoJUnit {
         city2.setId(26);
         city2.setName("Moscow");
         city3.setId(27);
-        city3.setName("Ekaterinburg");
+        city3.setName("Irkutsk");
         cargo1.setId(21);
         cargo1.setWeight(3);
         cargo2.setId(22);
@@ -163,7 +163,7 @@ public class OrderServiceTest extends MockitoJUnit {
         order.setWaypoints(waypoints);
         List<Truck> trucks = ImmutableList.of(truck);
 
-        when(truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, 8)).thenReturn(trucks);
+        when(truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, 8, city3)).thenReturn(trucks);
         assertEquals(trucks, service.getTrucks(order));
     }
 

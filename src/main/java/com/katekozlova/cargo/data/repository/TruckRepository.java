@@ -1,6 +1,7 @@
 package com.katekozlova.cargo.data.repository;
 
 import com.katekozlova.cargo.data.entity.BookingStatus;
+import com.katekozlova.cargo.data.entity.City;
 import com.katekozlova.cargo.data.entity.Truck;
 import com.katekozlova.cargo.data.entity.TruckState;
 import org.springframework.stereotype.Repository;
@@ -62,12 +63,13 @@ public class TruckRepository {
         return query.getResultList();
     }
 
-    public List<Truck> findByOrderTruckStateCapacity(TruckState truckState, long weight) {
+    public List<Truck> findByOrderTruckStateCapacity(TruckState truckState, long weight, City city) {
         final TypedQuery<Truck> query = entityManager
                 .createQuery("select t from Truck t where t.order is null " +
-                        "and t.truckState = :state and t.capacity >= :weight", Truck.class);
+                        "and t.truckState = :state and t.capacity >= :weight and t.currentCity = :city", Truck.class);
         query.setParameter("state", truckState);
         query.setParameter("weight", weight);
+        query.setParameter("city", city);
         return query.getResultList();
     }
 }
