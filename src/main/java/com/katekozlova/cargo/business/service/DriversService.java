@@ -64,13 +64,13 @@ public class DriversService {
     }
 
 
-//    @Scheduled(fixedRate = 30000, initialDelay = 20000)
-//    //@Scheduled(cron = " 0,59 59 23 L * ? *")
-//    @Transactional
-//    public void scheduleTask() {
-//        driverRepository.updateHoursPerMonth();
-//        logger.error("Updated!");
-//    }
+    @Scheduled(fixedRate = 30000, initialDelay = 20000)
+    //@Scheduled(cron = " 0,59 59 23 L * ? *")
+    @Transactional
+    public void scheduleTask() {
+        driverRepository.updateHoursPerMonth();
+        logger.error("Updated!");
+    }
 }
 
 

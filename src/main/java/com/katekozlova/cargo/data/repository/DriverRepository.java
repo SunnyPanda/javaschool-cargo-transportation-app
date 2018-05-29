@@ -80,7 +80,7 @@ public class DriverRepository {
     }
 
     public void updateHoursPerMonth() {
-        entityManager.createQuery("update Driver d set d.hoursPerMonth = 0", Driver.class);
+        entityManager.createQuery("update Driver d set d.hoursPerMonth = 0");
     }
 
 //    public void updateOrder(Long newAmount) {

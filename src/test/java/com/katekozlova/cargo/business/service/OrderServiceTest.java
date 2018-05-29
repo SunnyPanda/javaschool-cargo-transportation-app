@@ -163,7 +163,7 @@ public class OrderServiceTest extends MockitoJUnit {
         order.setWaypoints(waypoints);
         List<Truck> trucks = ImmutableList.of(truck);
 
-        when(truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, 8, city3)).thenReturn(trucks);
+        when(truckRepository.findByOrderTruckStateCapacity(TruckState.SERVICEABLE, 8, city1)).thenReturn(trucks);
         assertEquals(trucks, service.getTrucks(order));
     }
 
