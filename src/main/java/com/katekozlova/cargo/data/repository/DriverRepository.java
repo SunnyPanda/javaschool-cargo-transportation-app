@@ -81,7 +81,10 @@ public class DriverRepository {
     public void updateHoursPerMonth() {
         final CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
         final CriteriaUpdate<Driver> update = cb.createCriteriaUpdate(Driver.class);
+
+        update.from(Driver.class);
         update.set("hoursPerMonth", 0);
+
         this.entityManager.createQuery(update).executeUpdate();
     }
 }
