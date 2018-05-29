@@ -26,7 +26,7 @@ import java.util.List;
 @SessionAttributes(names = {"order"})
 public class OrderCreateController {
 
-    static final Logger logger = LoggerFactory.getLogger(OrderCreateController.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderCreateController.class);
 
     private final OrderService orderService;
     private final WaypointService waypointService;
@@ -105,7 +105,6 @@ public class OrderCreateController {
             model.addAttribute("city", cities);
             model.addAttribute("cargo", cargo);
             model.addAttribute("waypointType", WaypointType.values());
-            logger.error("Error!");
             return "orders/create/waypoint";
         }
         List<Truck> trucks = orderService.getTrucks(order);
@@ -125,7 +124,6 @@ public class OrderCreateController {
     @GetMapping(value = "/adddriver")
     public String addDriver(@Validated Order order, Model model, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors("truck")) {
-            logger.error("error occurred");
             List<Truck> trucks = orderService.getTrucks(order);
             model.addAttribute("order", order);
             model.addAttribute("trucks", trucks);
@@ -138,13 +136,7 @@ public class OrderCreateController {
     }
 
     @PostMapping(value = "/savedriver")
-    public String saveDriver(@Validated Order order, Model model, BindingResult bindingResult) {
-//        List<Driver> drivers = orderService.getDrivers(order);
-//        if (bindingResult.hasFieldErrors("drivers")) {
-//            model.addAttribute("order", order);
-//            model.addAttribute("drivers", drivers);
-//            return "orders/create/driver";
-//        }
+    public String saveDriver(Order order, Model model, BindingResult bindingResult) {
         List<Driver> drivers = orderService.getDrivers(order);
         model.addAttribute("order", order);
         model.addAttribute("drivers", drivers);
@@ -175,5 +167,18 @@ public class OrderCreateController {
     @GetMapping(value = "/drivers")
     public ModelAndView getDrivers(Order order) {
         return new ModelAndView("orders/drivers", "drivers", order.getDrivers());
+    }
+
+    @PostMapping(value = "/testwaypoints")
+    public String testWayponts(Order order, Model model){
+        order.setWaypoints(orderService.getTestWaypoints());
+        final List<City> cities = citiesService.getAllCities();
+        final List<Cargo> cargo = cargoService.getFreeCargo();
+        model.addAttribute("waypoint", new Waypoint());
+        model.addAttribute("order", order);
+        model.addAttribute("city", cities);
+        model.addAttribute("cargo", cargo);
+        model.addAttribute("waypointType", WaypointType.values());
+        return "orders/create/waypoint";
     }
 }

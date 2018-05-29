@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional
 public class CargoService {
 
-    static final Logger logger = LoggerFactory.getLogger(CargoService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CargoService.class);
 
     private final CargoRepository cargoRepository;
 

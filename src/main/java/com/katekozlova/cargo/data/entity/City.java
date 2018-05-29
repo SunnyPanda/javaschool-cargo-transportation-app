@@ -19,7 +19,6 @@ public class City implements Serializable {
     @Column(name = "city_name")
     private String name;
 
-    //    @OneToMany(mappedBy = "currentCity", fetch = FetchType.LAZY)
     @OneToMany(mappedBy = "currentCity", cascade = CascadeType.REMOVE)
     private List<Driver> drivers;
 

@@ -14,16 +14,16 @@
                     <button class="btn btn-secondary" type="submit">Search</button>
                 </form:form>
             </div>
-            <div class="col-md-5 mb-3">
-                <form:form action="/manager/cargo/search" method="POST" modelAttribute="cargo">
-                    <label for="number">Searching for cargo status</label>
-                    <input class="form-control" type="number" path="number" id="number" name="number" placeholder="Enter the cargo number"/>
-                    <button class="btn btn-secondary" type="submit">Search</button>
-                    <p class="text-danger">
-                        <form:errors class="text-danger" path="number" cssClass="error"/>
-                    </p>
-                </form:form>
-            </div>
+            <%--<div class="col-md-5 mb-3">--%>
+                <%--<form:form action="/manager/cargo/search" method="POST" modelAttribute="cargo">--%>
+                    <%--<label for="number">Searching for cargo status</label>--%>
+                    <%--<input class="form-control" type="number" path="number" id="number" name="number" placeholder="Enter the cargo number"/>--%>
+                    <%--<button class="btn btn-secondary" type="submit">Search</button>--%>
+                    <%--<p class="text-danger">--%>
+                        <%--<form:errors class="text-danger" path="number" cssClass="error"/>--%>
+                    <%--</p>--%>
+                <%--</form:form>--%>
+            <%--</div>--%>
         </div>
         <div class="py-3 text-left">
             <h2>Order's List</h2>

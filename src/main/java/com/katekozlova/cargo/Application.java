@@ -8,7 +8,7 @@ import java.io.File;
 
 public class Application {
 
-    static final Logger logger = LoggerFactory.getLogger(Application.class);
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws Exception {
         logger.info("server is starting");

@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class JsonService {
 
-    static final Logger logger = LoggerFactory.getLogger(JsonService.class);
+    private static final Logger logger = LoggerFactory.getLogger(JsonService.class);
 
     private final OrderRepository orderRepository;
     private final DriverRepository driverRepository;

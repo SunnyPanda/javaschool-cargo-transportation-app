@@ -62,11 +62,6 @@ public class Driver implements Serializable {
     @JsonIgnore
     private DateTime shiftBegin;
 
-    @Column(name = "booking_status")
-    @JsonIgnore
-    @Enumerated
-    private BookingStatus bookingStatus;
-
     public long getId() {
         return id;
     }
@@ -106,11 +101,7 @@ public class Driver implements Serializable {
                 ", personalNumber=" + personalNumber +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-//                ", hoursPerMonth=" + hoursPerMonth +
                 ", driverStatus=" + driverStatus +
-//                ", currentCity=" + currentCity +
-//                ", currentTruck=" + currentTruck +
-//                ", order=" + order +
                 '}';
     }
 
@@ -168,14 +159,6 @@ public class Driver implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public BookingStatus getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public void setBookingStatus(BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
     }
 
     @Override

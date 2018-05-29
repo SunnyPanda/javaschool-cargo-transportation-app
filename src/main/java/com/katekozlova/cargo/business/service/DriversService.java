@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 public class DriversService {
 
-    static final Logger logger = LoggerFactory.getLogger(DriversService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DriversService.class);
 
     private final DriverRepository driverRepository;
 
@@ -38,7 +38,6 @@ public class DriversService {
     }
 
     public Driver updateDriver(Driver driver) {
-        logger.error("driver: {}", driver);
         driver = driverRepository.save(driver);
         logger.info("driver was updated: {}", driver);
         return driver;
@@ -60,12 +59,11 @@ public class DriversService {
     }
 
 
-    @Scheduled(fixedRate = 30000, initialDelay = 20000)
-    //@Scheduled(cron = " 0,59 59 23 L * ? *")
+    //@Scheduled(fixedRate = 30000, initialDelay = 20000)
+    //@Scheduled(cron = "0 0 0 1 * ?")
     @Transactional
     public void scheduleTask() {
         driverRepository.updateHoursPerMonth();
-        logger.error("Updated!");
     }
 }
 

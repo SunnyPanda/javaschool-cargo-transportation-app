@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-//@Data
 @Table(name = "cargo")
 public class Cargo {
     @Id
@@ -35,11 +34,6 @@ public class Cargo {
     @JoinColumn(name = "order_id")
     @JsonIgnore
     private Order order;
-
-    @Column(name = "booking_status")
-    @JsonIgnore
-    @Enumerated
-    private BookingStatus bookingStatus;
 
     public long getId() {
         return id;
@@ -97,14 +91,6 @@ public class Cargo {
         this.order = order;
     }
 
-    public BookingStatus getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public void setBookingStatus(BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -130,9 +116,7 @@ public class Cargo {
                 ", name='" + name + '\'' +
                 ", weight=" + weight +
                 ", cargoStatus=" + cargoStatus +
-//                ", waypoints=" + waypoints +
                 ", order=" + order +
-//                ", bookingStatus=" + bookingStatus +
                 '}';
 
     }

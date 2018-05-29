@@ -48,10 +48,6 @@ public class Order implements Serializable {
     @JsonIgnore
     private DateTime orderTime;
 
-    @Enumerated
-    @JsonIgnore
-    private OrderCreateStatus orderCreateStatus;
-
     @OneToMany(mappedBy = "order")
     @JsonIgnore
     private List<Cargo> cargo;

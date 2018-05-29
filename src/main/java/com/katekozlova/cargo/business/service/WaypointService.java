@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional
 public class WaypointService {
 
-    static final Logger logger = LoggerFactory.getLogger(WaypointService.class);
+    private static final Logger logger = LoggerFactory.getLogger(WaypointService.class);
 
     private final WaypointRepository waypointRepository;
 

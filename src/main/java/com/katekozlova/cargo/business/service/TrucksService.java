@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 public class TrucksService {
 
-    static final Logger logger = LoggerFactory.getLogger(TrucksService.class);
+    private static final Logger logger = LoggerFactory.getLogger(TrucksService.class);
 
     private final TruckRepository truckRepository;
     private final DriverRepository driverRepository;

@@ -43,12 +43,6 @@ public class WaypointRepository {
         return query.getResultList();
     }
 
-    public List<Waypoint> findWaypointsByNullOrder() {
-        final TypedQuery<Waypoint> query = entityManager
-                .createQuery("select w from Waypoint w where w.order is null", Waypoint.class);
-        return query.getResultList();
-    }
-
     public List<Waypoint> findWaypointsByOrderWaypointType(long orderId, WaypointType waypointType) {
         final TypedQuery<Waypoint> query = entityManager
                 .createQuery("select w from Waypoint w where w.order.id = :orderId and w.waypointType = :waypointType", Waypoint.class);

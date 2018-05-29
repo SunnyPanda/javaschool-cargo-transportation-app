@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Waypoint {
 
     @Id
-    @SequenceGenerator(name = "waypoint_generator", sequenceName = "waypoint_sequence", initialValue = 21)
+    @SequenceGenerator(name = "waypoint_generator", sequenceName = "waypoint_sequence", initialValue = 23)
     @GeneratedValue(generator = "waypoint_generator")
     private long id;
 

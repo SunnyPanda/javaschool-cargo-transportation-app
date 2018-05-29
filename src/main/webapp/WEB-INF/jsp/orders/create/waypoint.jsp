@@ -49,7 +49,6 @@
                         <div class="col-md-3 mb-3">
                             <button class="btn btn-success" type="submit">Add Waypoint</button>
                         </div>
-
                     </div>
                     <%--<div class="alert alert-danger" role="alert">--%>
                         <%--<form:errors path="${order.waypoints}" cssClass="error"/>--%>
@@ -58,6 +57,11 @@
                         <%--<form:errors path="" cssClass="error"/>--%>
                     <%--</p>--%>
 
+                </form:form>
+
+                <form:form action="/manager/orders/testwaypoints" method="POST" modelAttribute="order">
+                    <hr class="mb-4">
+                    <button class="btn btn-primary" type="submit">Test</button>
                 </form:form>
 
             </div>

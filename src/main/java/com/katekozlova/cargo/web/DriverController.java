@@ -78,9 +78,10 @@ public class DriverController {
     @PostMapping(value = "/id/shiftend")
     public String shiftEnd(Driver driver, ModelMap model) {
         driverService.setShiftEnd(driver);
-        amqpTemplate.convertAndSend("queue", "order");
-        amqpTemplate.convertAndSend("queue", "driver");
-        amqpTemplate.convertAndSend("queue", "truck");
+        final String routingKey = "queue";
+        amqpTemplate.convertAndSend(routingKey, "order");
+        amqpTemplate.convertAndSend(routingKey, "driver");
+        amqpTemplate.convertAndSend(routingKey, "truck");
         model.addAttribute("driver", driver);
         return "drivers/id";
     }

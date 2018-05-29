@@ -50,11 +50,6 @@ public class Truck implements Serializable {
     @JsonIgnore
     private Order order;
 
-    @Column(name = "booking_status")
-    @JsonIgnore
-    @Enumerated
-    private BookingStatus bookingStatus;
-
     public long getId() {
         return id;
     }
@@ -117,14 +112,6 @@ public class Truck implements Serializable {
 
     public void setDrivers(List<Driver> drivers) {
         this.drivers = drivers;
-    }
-
-    public BookingStatus getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public void setBookingStatus(BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
     }
 
     @Override

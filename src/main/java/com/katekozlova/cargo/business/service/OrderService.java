@@ -29,7 +29,7 @@ import java.util.List;
 @Transactional
 public class OrderService {
 
-    static final Logger logger = LoggerFactory.getLogger(OrderService.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     private static final long TRUCK_SPEED = 70;
     private static final String API_KEY = "AIzaSyADJkrdtuvmf2VbH6Ruj0Y_Ftse3fyg3x4";
@@ -70,7 +70,6 @@ public class OrderService {
 
     public static long getDriveDist(String addrOne, String addrTwo) throws ApiException, InterruptedException, IOException {
 
-        //set up key
         GeoApiContext distCalcer = new GeoApiContext.Builder()
                 .apiKey(API_KEY)
                 .build();
@@ -81,11 +80,9 @@ public class OrderService {
                 .mode(TravelMode.DRIVING)
                 .avoid(DirectionsApi.RouteRestriction.TOLLS)
                 .language("en-US")
-                //.units(Unit.METRIC)
                 .await();
 
         long distApart = result.rows[0].elements[0].distance.inMeters;
-        //long timeApart = result.rows[0].elements[0].duration.
 
         return distApart / 1000;
     }
@@ -123,7 +120,6 @@ public class OrderService {
         final long hoursBetween = Hours.hoursBetween(now, endOfMonth).getHours();
 
         order.setTravelTime(getTravelTime(order.getWaypoints()));
-        logger.error("TravelTame: {}", order.getTravelTime());
         for (Driver driver : drivers) {
             if (driver.getHoursPerMonth() + Math.min(hoursBetween, order.getTravelTime()) <= 176) {
                 appropriateDrivers.add(driver);
@@ -132,7 +128,7 @@ public class OrderService {
         return appropriateDrivers;
     }
 
-    public Order saveWaipoints(Order order, Waypoint waypoint) {
+    public void saveWaipoints(Order order, Waypoint waypoint) {
         try {
             order.getWaypoints().add(waypoint);
         } catch (NullPointerException e) {
@@ -141,7 +137,6 @@ public class OrderService {
             order.setWaypoints(waypoints);
         }
         logger.info("order was changed(set waypoints): {}", order);
-        return order;
     }
 
     private long findMaxCargoWeight(List<Waypoint> waypoints) {
@@ -213,7 +208,6 @@ public class OrderService {
         getOrderIdToWaypoint(order);
         saveTruckToOrder(order);
         saveDriversToOrder(order);
-//        orderRepository.save(order);
     }
 
     public void setExistingOrdersTravelTime() {
@@ -223,4 +217,14 @@ public class OrderService {
             logger.info("order was changed(setTravelTime): {}", order);
         }
     }
+
+    public List<Waypoint> getTestWaypoints() {
+        List<Waypoint> waypoints = waypointRepository.findAll();
+        List<Waypoint> testWaypoints = new ArrayList<>();
+        for(int i = 10; i < waypoints.size(); i++) {
+            testWaypoints.add(waypoints.get(i));
+        }
+        return testWaypoints;
+    }
+
 }

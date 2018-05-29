@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class DriverService {
 
-    static final Logger logger = LoggerFactory.getLogger(DriverService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DriverService.class);
 
     private final DriverRepository driverRepository;
     private final OrderRepository orderRepository;
@@ -48,18 +48,13 @@ public class DriverService {
         DateTime firstDayOfMonth = shiftEnd.dayOfMonth().withMinimumValue();
         final long hoursBetween;
         if (DateTimeComparator.getDateOnlyInstance().compare(firstDayOfMonth, driver.getShiftBegin()) < 0) {
-            logger.error("Driver {}", driver.getHoursPerMonth());
             hoursBetween = Hours.hoursBetween(driver.getShiftBegin(), shiftEnd).getHours();
-            logger.error("1 {}", hoursBetween);
             driver.setHoursPerMonth(driver.getHoursPerMonth() + hoursBetween);
             logger.error("Hours per month: {}", driver.getHoursPerMonth());
         } else {
-            //driver.setHoursPerMonth(0);
             hoursBetween = Hours.hoursBetween(firstDayOfMonth, shiftEnd).getHours();
-            logger.error("2 {}", hoursBetween);
             driver.setHoursPerMonth(hoursBetween);
         }
-//        driver.setHoursPerMonth(driver.getHoursPerMonth() + 50);
         driver.setDriverStatus(DriverStatus.REST);
         driver.getOrder().setOrderStatus(OrderStatus.YES);
         orderRepository.save(driver.getOrder());
