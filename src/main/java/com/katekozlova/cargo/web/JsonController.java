@@ -1,6 +1,5 @@
 package com.katekozlova.cargo.web;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.katekozlova.cargo.business.service.JsonService;
 import com.katekozlova.cargo.data.entity.DriversInfo;
 import com.katekozlova.cargo.data.entity.Order;
@@ -23,7 +22,7 @@ public class JsonController {
 
     @GetMapping(value = "api/orders", produces = "application/json")
     @ResponseBody
-    public List<Order> generateOrdersJson() throws JsonProcessingException {
+    public List<Order> generateOrdersJson() {
         return jsonService.generateOrdersJson();
     }
 

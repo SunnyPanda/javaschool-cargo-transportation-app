@@ -153,10 +153,11 @@ public class OrderCreateController {
 
     @PostMapping(value = "/save")
     public String saveOrder(Order order) {
+        final String routingKey = "queue";
         orderService.saveOrder(order);
-        amqpTemplate.convertAndSend("queue", "order");
-        amqpTemplate.convertAndSend("queue", "driver");
-        amqpTemplate.convertAndSend("queue", "truck");
+        amqpTemplate.convertAndSend(routingKey, "order");
+        amqpTemplate.convertAndSend(routingKey, "driver");
+        amqpTemplate.convertAndSend(routingKey, "truck");
         return "redirect:/manager/orders/list";
     }
 
