@@ -1,8 +1,8 @@
 package com.katekozlova.cargo.business.service;
 
-import com.katekozlova.cargo.data.entity.*;
+import com.katekozlova.cargo.data.entity.Cargo;
+import com.katekozlova.cargo.data.entity.CargoStatus;
 import com.katekozlova.cargo.data.repository.CargoRepository;
-import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

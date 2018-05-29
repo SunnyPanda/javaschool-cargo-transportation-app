@@ -2,12 +2,9 @@ package com.katekozlova.cargo.business.service;
 
 
 import com.google.common.collect.Lists;
-import com.katekozlova.cargo.data.entity.*;
+import com.katekozlova.cargo.data.entity.Driver;
+import com.katekozlova.cargo.data.entity.DriverStatus;
 import com.katekozlova.cargo.data.repository.DriverRepository;
-import com.katekozlova.cargo.data.repository.WaypointRepository;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeComparator;
-import org.joda.time.Hours;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional

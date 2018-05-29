@@ -5,7 +5,6 @@ import com.katekozlova.cargo.data.entity.Cargo;
 import com.katekozlova.cargo.data.entity.CargoStatus;
 import com.katekozlova.cargo.data.entity.Order;
 import com.katekozlova.cargo.data.repository.CargoRepository;
-import com.katekozlova.cargo.data.repository.WaypointRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +14,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CargoServiceTest extends MockitoJUnit {

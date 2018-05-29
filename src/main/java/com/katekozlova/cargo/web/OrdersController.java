@@ -1,8 +1,6 @@
 package com.katekozlova.cargo.web;
 
 import com.katekozlova.cargo.business.service.OrderService;
-import com.katekozlova.cargo.business.service.WaypointService;
-import com.katekozlova.cargo.business.validation.OrderValidator;
 import com.katekozlova.cargo.data.entity.Driver;
 import com.katekozlova.cargo.data.entity.Order;
 import com.katekozlova.cargo.data.entity.Truck;
@@ -10,7 +8,6 @@ import com.katekozlova.cargo.data.entity.Waypoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 

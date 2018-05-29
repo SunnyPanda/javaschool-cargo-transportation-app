@@ -1,7 +1,6 @@
 package com.katekozlova.cargo.web;
 
 import com.katekozlova.cargo.business.service.CitiesService;
-import com.katekozlova.cargo.business.service.DriversService;
 import com.katekozlova.cargo.business.service.TrucksService;
 import com.katekozlova.cargo.business.validation.TruckValidator;
 import com.katekozlova.cargo.data.entity.City;

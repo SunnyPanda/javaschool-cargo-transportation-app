@@ -1,6 +1,5 @@
 package com.katekozlova.cargo.data.repository;
 
-import com.katekozlova.cargo.data.entity.BookingStatus;
 import com.katekozlova.cargo.data.entity.Cargo;
 import org.springframework.stereotype.Repository;
 

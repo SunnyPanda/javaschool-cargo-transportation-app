@@ -1,6 +1,8 @@
 package com.katekozlova.cargo.business.service;
 
-import com.katekozlova.cargo.data.entity.*;
+import com.katekozlova.cargo.data.entity.Driver;
+import com.katekozlova.cargo.data.entity.DriverStatus;
+import com.katekozlova.cargo.data.entity.OrderStatus;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.OrderRepository;
 import com.katekozlova.cargo.data.repository.TruckRepository;
@@ -38,7 +40,7 @@ public class DriverService {
         driver.setShiftBegin(new DateTime());
         driver.setDriverStatus(DriverStatus.IN_SHIFT);
         driverRepository.save(driver);
-        logger.info("driver was changed(set driverStatus): {}" + driver);
+        logger.info("driver was changed(set driverStatus): {}", driver);
     }
 
     public void setShiftEnd(Driver driver) {
@@ -62,15 +64,15 @@ public class DriverService {
         driver.getOrder().setOrderStatus(OrderStatus.YES);
         orderRepository.save(driver.getOrder());
         driver.setOrder(null);
-        logger.info("driver was changed(set driverStatus): {}", driver.getOrder());
+        logger.info("driver was changed(set driverStatus), order: {}", driver.getOrder());
         driver.getCurrentTruck().setOrder(null);
         driver.getCurrentTruck().setDrivers(null);
         truckRepository.save(driver.getCurrentTruck());
-        logger.info("driver was changed(set driverStatus): {}", driver.getCurrentTruck());
+        logger.info("driver was changed(set driverStatus), truck: {}", driver.getCurrentTruck());
         driver.setCurrentTruck(null);
         driverRepository.save(driver);
 
-        logger.info("driver was changed(set driverStatus): {}", driver);
+        logger.info("driver was changed(set driverStatus), driver: {}", driver);
     }
 
     public List<Driver> findByTruck(long id) {

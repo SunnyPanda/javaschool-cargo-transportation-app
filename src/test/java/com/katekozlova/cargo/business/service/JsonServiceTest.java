@@ -2,7 +2,6 @@ package com.katekozlova.cargo.business.service;
 
 import com.google.common.collect.ImmutableList;
 import com.katekozlova.cargo.data.entity.*;
-import com.katekozlova.cargo.data.repository.CargoRepository;
 import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.OrderRepository;
 import com.katekozlova.cargo.data.repository.TruckRepository;
@@ -14,8 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)

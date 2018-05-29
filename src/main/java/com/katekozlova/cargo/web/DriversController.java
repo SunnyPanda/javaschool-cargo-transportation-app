@@ -7,7 +7,6 @@ import com.katekozlova.cargo.data.entity.City;
 import com.katekozlova.cargo.data.entity.Driver;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;

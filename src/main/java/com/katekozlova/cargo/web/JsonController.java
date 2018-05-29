@@ -1,9 +1,10 @@
 package com.katekozlova.cargo.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.maps.model.DirectionsResult;
-import com.katekozlova.cargo.business.service.*;
-import com.katekozlova.cargo.data.entity.*;
+import com.katekozlova.cargo.business.service.JsonService;
+import com.katekozlova.cargo.data.entity.DriversInfo;
+import com.katekozlova.cargo.data.entity.Order;
+import com.katekozlova.cargo.data.entity.TrucksInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

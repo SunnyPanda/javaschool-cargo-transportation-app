@@ -1,15 +1,11 @@
 package com.katekozlova.cargo.web;
 
-import com.katekozlova.cargo.business.service.CargoService;
-import com.katekozlova.cargo.business.service.OrderService;
 import com.katekozlova.cargo.data.entity.Driver;
-import com.katekozlova.cargo.data.entity.Order;
 import com.katekozlova.cargo.security.AppUserPrincipal;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
