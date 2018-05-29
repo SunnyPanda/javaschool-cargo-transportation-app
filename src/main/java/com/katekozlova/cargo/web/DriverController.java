@@ -37,8 +37,8 @@ public class DriverController {
     }
 
     @GetMapping(value = "/info/{id}")
-    public String driversInfo(@PathVariable("id") long id, Driver driver, ModelMap model) {
-        driver = driversService.findDriverById(id);
+    public String driversInfo(@PathVariable("id") long id, ModelMap model) {
+        final Driver driver = driversService.findDriverById(id);
         String message;
         if (driver.getOrder() == null) {
             return "drivers/id";

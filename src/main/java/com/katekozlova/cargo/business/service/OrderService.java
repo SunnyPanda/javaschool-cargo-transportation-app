@@ -192,12 +192,11 @@ public class OrderService {
         for (int i = 0; i < waypoints.size() - 1; i++) {
             try {
                 tempDistance = getDriveDist(waypoints.get(i).getCity().getName(), waypoints.get(i + 1).getCity().getName());
-            } catch (ApiException e) {
-                e.printStackTrace();
+            } catch (ApiException | IOException e) {
+                logger.error("Exception", e);
             } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Exception", e);
+                Thread.currentThread().interrupt();
             }
             travelDistance += tempDistance;
         }
