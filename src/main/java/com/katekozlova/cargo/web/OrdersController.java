@@ -32,7 +32,7 @@ public class OrdersController {
     @GetMapping(value = "/list")
     public ModelAndView list() {
         List<Order> orders = orderService.getAllOrders();
-        orderService.setExistingOrdersTravelTime();
+//        orderService.setExistingOrdersTravelTime();
         return new ModelAndView("orders/list", "orders", orders);
     }
 

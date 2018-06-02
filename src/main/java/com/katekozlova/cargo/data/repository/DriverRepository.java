@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -79,4 +82,22 @@ public class DriverRepository {
     public void updateHoursPerMonth() {
         entityManager.createQuery("update Driver d set d.hoursPerMonth = 0", Driver.class);
     }
+
+//    public void updateOrder(Long newAmount) {
+//        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+//
+//        // create update
+//        CriteriaUpdate<Driver> update = cb.
+//                createCriteriaUpdate(Driver.class);
+//
+//        // set the root class
+//        Root e = update.from(Driver.class);
+//
+//        // set update and where clause
+//        update.set("hoursPerMonth", newAmount);
+//        update.where(cb.all())
+//
+//        // perform update
+//        this.entityManager.createQuery(update).executeUpdate();
+//    }
 }

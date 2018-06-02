@@ -119,6 +119,7 @@ public class OrderService {
         final long hoursBetween = Hours.hoursBetween(now, endOfMonth).getHours();
 
         order.setTravelTime(getTravelTime(order.getWaypoints()));
+        logger.error("TravelTame: {}", order.getTravelTime());
         for (Driver driver : drivers) {
             if (driver.getHoursPerMonth() + Math.min(hoursBetween, order.getTravelTime()) <= 176) {
                 appropriateDrivers.add(driver);

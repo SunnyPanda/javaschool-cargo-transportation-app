@@ -139,13 +139,13 @@ public class OrderCreateController {
 
     @PostMapping(value = "/savedriver")
     public String saveDriver(@Validated Order order, Model model, BindingResult bindingResult) {
-        List<Driver> drivers = orderService.getDrivers(order);
-        if (bindingResult.hasFieldErrors("drivers")) {
-            model.addAttribute("order", order);
-            model.addAttribute("drivers", drivers);
-            return "orders/create/driver";
-        }
 //        List<Driver> drivers = orderService.getDrivers(order);
+//        if (bindingResult.hasFieldErrors("drivers")) {
+//            model.addAttribute("order", order);
+//            model.addAttribute("drivers", drivers);
+//            return "orders/create/driver";
+//        }
+        List<Driver> drivers = orderService.getDrivers(order);
         model.addAttribute("order", order);
         model.addAttribute("drivers", drivers);
         return "orders/create/driver";

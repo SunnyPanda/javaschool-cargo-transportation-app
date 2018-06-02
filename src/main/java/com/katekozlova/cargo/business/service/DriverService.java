@@ -5,6 +5,8 @@ import com.katekozlova.cargo.data.repository.DriverRepository;
 import com.katekozlova.cargo.data.repository.OrderRepository;
 import com.katekozlova.cargo.data.repository.TruckRepository;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
+import org.joda.time.Hours;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +42,19 @@ public class DriverService {
     }
 
     public void setShiftEnd(Driver driver) {
-//        final DateTime shiftEnd = new DateTime();
-//        DateTime firstDayOfMonth = shiftEnd.dayOfMonth().withMinimumValue();
-//        if (DateTimeComparator.getDateOnlyInstance().compare(firstDayOfMonth, driver.getShiftBegin()) < 0) {
-//            driver.setHoursPerMonth(driver.getHoursPerMonth() + driver.getOrder().getTravelTime());
-//        } else {
-//            driver.setHoursPerMonth(0);
-//            final long hoursBetween = Hours.hoursBetween(firstDayOfMonth, shiftEnd).getHours();
-//            driver.setHoursPerMonth(hoursBetween);
-//        }
-        driver.setHoursPerMonth(driver.getHoursPerMonth() + 50);
+        final DateTime shiftEnd = new DateTime();
+        DateTime firstDayOfMonth = shiftEnd.dayOfMonth().withMinimumValue();
+        if (DateTimeComparator.getDateOnlyInstance().compare(firstDayOfMonth, driver.getShiftBegin()) < 0) {
+            logger.error("Driver {}", driver.getHoursPerMonth());
+            logger.error("{}", driver.getOrder().getTravelTime());
+            driver.setHoursPerMonth(driver.getHoursPerMonth() + driver.getOrder().getTravelTime());
+            logger.error("Hours per month: {}", driver.getHoursPerMonth());
+        } else {
+            driver.setHoursPerMonth(0);
+            final long hoursBetween = Hours.hoursBetween(firstDayOfMonth, shiftEnd).getHours();
+            driver.setHoursPerMonth(hoursBetween);
+        }
+//        driver.setHoursPerMonth(driver.getHoursPerMonth() + 50);
         driver.setDriverStatus(DriverStatus.REST);
         driver.getOrder().setOrderStatus(OrderStatus.YES);
         orderRepository.save(driver.getOrder());
